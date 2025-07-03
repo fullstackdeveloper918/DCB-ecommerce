@@ -1,0 +1,1 @@
+export const apiUrl = 'https://sellmac.cybersify.tech/Dcb/wp-json/custom/v1'

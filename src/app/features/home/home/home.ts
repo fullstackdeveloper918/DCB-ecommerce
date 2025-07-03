@@ -15,6 +15,9 @@ export class Home {
 
   ngOnInit(): void {
     console.log('home workd')
-    this.products = this.productService.getProducts();
+    this.productService.getProducts().subscribe((res:any)=>{
+      this.products = res
+      console.log('products', res)
+    });
   }
 }
