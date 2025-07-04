@@ -3,13 +3,42 @@
   <div class="flex flex-col lg:flex-row gap-6">
     <!-- Product Image -->
     <div class="w-full lg:w-1/2 bg-white rounded-2xl shadow p-4">
-      <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600" [alt]="product.name" class="w-full h-96 object-cover rounded-xl" />
-      <div class="flex space-x-2 mt-4">
-        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
-        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
-        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
-      </div>
-    </div>
+  <!-- Main Image with Arrows -->
+  <div class="relative">
+    <img
+      [src]="selectedImage"
+      [alt]="product.name"
+      class="w-full h-96 object-cover rounded-xl"
+    />
+    <!-- Left Arrow -->
+    <button
+      (click)="prevImage()"
+      class="absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 p-2 rounded-full shadow"
+    >
+      &#8592;
+    </button>
+    <!-- Right Arrow -->
+    <button
+      (click)="nextImage()"
+      class="absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 p-2 rounded-full shadow"
+    >
+      &#8594;
+    </button>
+  </div>
+
+  <!-- Thumbnails -->
+  <div class="flex space-x-2 mt-4">
+    <img
+      *ngFor="let img of productImages"
+      [src]="img"
+      [alt]="product.name"
+      class="w-20 h-20 object-cover rounded border-2 cursor-pointer"
+      [ngClass]="{ 'border-blue-500': img === selectedImage }"
+      (click)="selectImage(img)"
+    />
+  </div>
+</div>
+
 
     <!-- Product Details -->
     <div class="w-full lg:w-1/2 bg-white rounded-2xl shadow p-6">
@@ -72,13 +101,56 @@
 
 
    <!-- Product Tabs -->
-  <div class="flex space-x-4 mb-6">
-    <button class="text-blue-600 border-b-2 border-blue-600 pb-2">Detail</button>
-    <button class="text-gray-600 pb-2">Specifications</button>
-    <button class="text-gray-600 pb-2">Vendor</button>
-    <button class="text-gray-600 pb-2">Reviews</button>
-  </div>
+<!-- Tab Buttons -->
+<div class="flex space-x-4 mb-6">
+  <button
+    class="pb-2"
+    [ngClass]="{
+      'text-blue-600 border-b-2 border-blue-600': activeTab === 'detail',
+      'text-gray-600': activeTab !== 'detail'
+    }"
+    (click)="selectTab('detail')"
+  >
+    Detail
+  </button>
 
+  <button
+    class="pb-2"
+    [ngClass]="{
+      'text-blue-600 border-b-2 border-blue-600': activeTab === 'specs',
+      'text-gray-600': activeTab !== 'specs'
+    }"
+    (click)="selectTab('specs')"
+  >
+    Specifications
+  </button>
+
+  <button
+    class="pb-2"
+    [ngClass]="{
+      'text-blue-600 border-b-2 border-blue-600': activeTab === 'vendor',
+      'text-gray-600': activeTab !== 'vendor'
+    }"
+    (click)="selectTab('vendor')"
+  >
+    Vendor
+  </button>
+
+  <button
+    class="pb-2"
+    [ngClass]="{
+      'text-blue-600 border-b-2 border-blue-600': activeTab === 'reviews',
+      'text-gray-600': activeTab !== 'reviews'
+    }"
+    (click)="selectTab('reviews')"
+  >
+    Reviews
+  </button>
+</div>
+
+<!-- Tab Content -->
+<div *ngIf="activeTab === 'detail'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
+  <!-- Insert your Detail tab content -->
 
   <div class=" p-6 bg-white rounded-lg shadow-md text-gray-800">
   <p class="text-base leading-relaxed">
@@ -96,6 +168,100 @@
   <p class="text-base leading-relaxed mt-4">
     There are many variations of passages of Lorem ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem ipsum which looks reasonable. The generated Lorem ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
   </p>
+</div>
+</div>
+
+<div *ngIf="activeTab === 'specs'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
+  <!-- Insert your Specifications content -->
+   <p class="text-base leading-relaxed">
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+    type specimen book. It has survived not only five centuries.
+  </p>
+
+  <ul class="list-disc pl-5 mt-4 space-y-2">
+    <li><strong>Model</strong>: SKU140</li>
+    <li><strong>Weight</strong>: 500 g</li>
+    <li><strong>Dimensions</strong>: 35 × 30 × 7 cm</li>
+    <li><strong>Color</strong>: Black, Pink, Red, White</li>
+    <li><strong>Size</strong>: 10 × 20</li>
+  </ul>
+</div>
+
+<div *ngIf="activeTab === 'vendor'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
+  <!-- Insert your Vendor content -->
+  <div class="flex items-center space-x-4 mb-4">
+    <img src="https://maraviyainfotech.com/projects/mantu-html/assets/img/vendor/1.jpg" alt="Vendor Image" class="w-16 h-16 rounded-full object-cover">
+    <div>
+      <h2 class="text-lg font-semibold">Ocean Crate</h2>
+      <p class="text-sm text-gray-500">Products: 358 | Sales: 5587</p>
+    </div>
+  </div>
+
+  <ul class="space-y-2 text-sm">
+    <li><strong>Phone No.:</strong> +00 987654321</li>
+    <li><strong>Email:</strong> Example&#64;gmail.com</li>
+    <li><strong>Address:</strong> 2548 Broaddus Maple Court, Madisonville KY 4783, USA</li>
+  </ul>
+
+  <p class="text-base leading-relaxed mt-4">
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+    type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+    remaining essentially unchanged.
+  </p>
+</div>
+
+<div *ngIf="activeTab === 'reviews'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
+  <!-- Insert your Reviews content -->
+   <div class="mb-6">
+    <div class="flex items-center space-x-4">
+      <img src="https://maraviyainfotech.com/projects/mantu-html/assets/img/user/1.jpg" alt="Reviewer" class="w-12 h-12 rounded-full object-cover">
+      <div>
+        <h4 class="font-semibold">Mariya Lykra</h4>
+        <p class="text-yellow-500">★★★★☆</p>
+      </div>
+    </div>
+    <p class="mt-2 text-sm">
+      Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s.
+    </p>
+  </div>
+
+  <!-- Review 2 -->
+  <div class="mb-6">
+    <div class="flex items-center space-x-4">
+      <img src="https://maraviyainfotech.com/projects/mantu-html/assets/img/user/1.jpg" alt="Reviewer" class="w-12 h-12 rounded-full object-cover">
+      <div>
+        <h4 class="font-semibold">Moris Willson</h4>
+        <p class="text-yellow-500">★★★★★</p>
+      </div>
+    </div>
+    <p class="mt-2 text-sm">
+      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+    </p>
+  </div>
+
+  <!-- Add a Review Form -->
+  <h3 class="text-lg font-semibold mb-2">Add a Review</h3>
+  <form>
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-1">Your rating:</label>
+      <p class="text-yellow-500">★★★☆☆</p>
+    </div>
+    <div class="mb-4">
+      <input type="text" placeholder="Name" class="w-full p-2 border border-gray-300 rounded" />
+    </div>
+    <div class="mb-4">
+      <input type="email" placeholder="Email*" class="w-full p-2 border border-gray-300 rounded" />
+    </div>
+    <div class="mb-4">
+      <textarea placeholder="Enter Your Comment" rows="4" class="w-full p-2 border border-gray-300 rounded"></textarea>
+    </div>
+    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+      Submit
+    </button>
+  </form>
 </div>
 
   <!-- Related Products Section -->

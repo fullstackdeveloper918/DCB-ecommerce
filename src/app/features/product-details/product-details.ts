@@ -12,6 +12,12 @@ import { SharedModule } from '../../shared/shared-module';
 export class ProductDetails implements OnInit {
   productId!: number;
   products:any
+
+   activeTab: string = 'detail';
+
+  selectTab(tab: string): void {
+    this.activeTab = tab;
+  }
   
   product = {
     image: 'https://via.placeholder.com/400',
@@ -76,4 +82,29 @@ export class ProductDetails implements OnInit {
     console.log('productid', productId)
 
   }
+
+  productImages: string[] = [
+  'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600',
+  'https://images.pexels.com/photos/51383/photo-camera-subject-photographer-51383.jpeg',
+  'https://images.pexels.com/photos/821749/pexels-photo-821749.jpeg',
+];
+
+selectedImage: string = this.productImages[0];
+
+selectImage(img: string) {
+  this.selectedImage = img;
+}
+
+nextImage() {
+  const index = this.productImages.indexOf(this.selectedImage);
+  this.selectedImage = this.productImages[(index + 1) % this.productImages.length];
+}
+
+prevImage() {
+  const index = this.productImages.indexOf(this.selectedImage);
+  this.selectedImage =
+    this.productImages[
+      (index - 1 + this.productImages.length) % this.productImages.length
+    ];
+}
 }
