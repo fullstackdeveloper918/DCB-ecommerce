@@ -1,2 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+
+
+/* Proxima Nova - Regular */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proximanova_regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/ProximaNova-Regular.woff') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Proxima Nova - Bold */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proximanova_bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+/* Proxima Nova - Black */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proximanova_black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Proxima Nova - Black Italic */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proximanova_blackit.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* Proxima Nova - Extra Bold */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proximanova_extrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* Proxima Nova - Light */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proximanova_light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Proxima Nova - Italic */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proximanova_black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
