@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
-
+:root{
+  --primary-font:"Proxima Nova", Sans-serif;
+}
 
 /* Proxima Nova - Regular */
 @font-face {
@@ -63,4 +65,7 @@
   font-weight: 900;
   font-style: normal;
   font-display: swap;
+}
+body, h1, h2, h3, h4, h5, h6, span, li, a, p{
+  font-family: var(--primary-font);
 }

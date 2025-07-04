@@ -1,26 +1,27 @@
-<header class="py-4 bg-white text-black sticky top-0 z-50 border-b border-gray-200">
+<header class="py-4 bg-white text-black sticky top-0 z-50 border-b border-gray-200 z-[99]">
   <div class="px-4 max-w-[1300px] mx-auto flex justify-between items-center">
     <div class="text-4xl font-black cursor-pointer">
       <img routerLink="/" src="https://dcb-porfolio.vercel.app/DCB-logo.png" alt="logoimage" width="120" height="70" />
     </div>
     <nav class="md:flex gap-6 text-sm font-normal hidden md:block">
-      <a href="#" class="block md:inline-block">Home</a>
-      <a href="#" class="block md:inline-block">Categories</a>
-      <a href="#" class="block md:inline-block">Products</a>
-      <a href="#" class="block md:inline-block">Pages</a>
+      <a href="#" class="block md:inline-block hover:underline hover:font-semibold transition activeteb">Home</a>
+      <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Categories</a>
+      <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Products</a>
+      <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Pages</a>
     </nav>
-    <div class="socilLinks flex gap-4 text-lg font-normal">
+    <div class="socilLinks flex md:gap-4 gap-3 text-lg font-normal items-center">
       <i class="fa-solid fa-magnifying-glass cursor-pointer"></i>
       <i class="fa-regular fa-user cursor-pointer"></i>
       <i class="fa-regular fa-heart hover:text-black cursor-pointer"></i>
       <i class="fa-solid fa-cart-shopping cursor-pointer"></i>
-    </div>
-    <!-- Mobile Menu Toggle Button -->
-    <div class="md:hidden">
+          <div class="md:hidden">
       <button id="menu-toggle" (click)="toggleMobileMenu()" class="text-2xl focus:outline-none">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
+    </div>
+    <!-- Mobile Menu Toggle Button -->
+
   </div>
   <!-- Mobile Menu -->
   <div id="mobile-menu" *ngIf="isMobileMenuOpen" class="md:hidden bg-white border-t border-gray-200">
