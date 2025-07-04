@@ -1,20 +1,32 @@
-<!-- navbar.component.html -->
-<header class="py-4 bg-white text-black sticky top-0 z-50  border-b border-gray-200 ">
+<header class="py-4 bg-white text-black sticky top-0 z-50 border-b border-gray-200">
   <div class="px-4 max-w-[1300px] mx-auto flex justify-between items-center">
     <div class="text-4xl font-black cursor-pointer">
-      <img src="https://dcb-porfolio.vercel.app/DCB-logo.png" alt="logoimage" width="120" height="70" />
+      <img routerLink="/" src="https://dcb-porfolio.vercel.app/DCB-logo.png" alt="logoimage" width="120" height="70" />
     </div>
-    <nav class="md:flex gap-6 text-sm font-normal hidden">
-      <a href="#">Home</a>
-      <a href="#">Categories</a>
-      <a href="#">Products</a>
-      <a href="#">Pages</a>
+    <nav class="md:flex gap-6 text-sm font-normal hidden md:block">
+      <a href="#" class="block md:inline-block">Home</a>
+      <a href="#" class="block md:inline-block">Categories</a>
+      <a href="#" class="block md:inline-block">Products</a>
+      <a href="#" class="block md:inline-block">Pages</a>
     </nav>
-    <div class="socilLinks flex gap-4 text-lg font-normal"> 
-      <i class="fa-solid fa-magnifying-glass cursor-pointer cursor-pointer"></i>
+    <div class="socilLinks flex gap-4 text-lg font-normal">
+      <i class="fa-solid fa-magnifying-glass cursor-pointer"></i>
       <i class="fa-regular fa-user cursor-pointer"></i>
       <i class="fa-regular fa-heart hover:text-black cursor-pointer"></i>
       <i class="fa-solid fa-cart-shopping cursor-pointer"></i>
     </div>
+    <!-- Mobile Menu Toggle Button -->
+    <div class="md:hidden">
+      <button id="menu-toggle" (click)="toggleMobileMenu()" class="text-2xl focus:outline-none">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" *ngIf="isMobileMenuOpen" class="md:hidden bg-white border-t border-gray-200">
+    <a href="#" class="block px-4 py-2 text-sm font-normal">Home</a>
+    <a href="#" class="block px-4 py-2 text-sm font-normal">Categories</a>
+    <a href="#" class="block px-4 py-2 text-sm font-normal">Products</a>
+    <a href="#" class="block px-4 py-2 text-sm font-normal">Pages</a>
   </div>
 </header>

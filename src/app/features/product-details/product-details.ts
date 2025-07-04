@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../core/services/products.service';
+import { SharedModule } from '../../shared/shared-module';
 
 @Component({
   selector: 'app-product-details',
-  imports: [],
+  imports: [SharedModule],
   templateUrl: './product-details.html',
   styleUrl: './product-details.scss'
 })
 export class ProductDetails implements OnInit {
   productId!: number;
+  products:any
   
   product = {
     image: 'https://via.placeholder.com/400',
@@ -58,6 +60,11 @@ export class ProductDetails implements OnInit {
 
   ngOnInit() {
     this.getProductById(this.productId)
+       console.log('home workd')
+    this.productService.getProducts().subscribe((res:any)=>{
+      this.products = res
+      console.log('products', res)
+    });
     // Fetch product by ID here (call API or service)
   }
 

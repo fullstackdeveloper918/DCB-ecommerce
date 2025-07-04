@@ -1,21 +1,13 @@
 <div class="max-w-7xl mx-auto p-6 bg-gray-50 min-h-screen">
-  <!-- Product Tabs -->
-  <div class="flex space-x-4 mb-6">
-    <button class="text-blue-600 border-b-2 border-blue-600 pb-2">Detail</button>
-    <button class="text-gray-600 pb-2">Specifications</button>
-    <button class="text-gray-600 pb-2">Vendor</button>
-    <button class="text-gray-600 pb-2">Reviews</button>
-  </div>
-
   <!-- Product Content -->
   <div class="flex flex-col lg:flex-row gap-6">
     <!-- Product Image -->
     <div class="w-full lg:w-1/2 bg-white rounded-2xl shadow p-4">
-      <img [src]="product.image" [alt]="product.name" class="w-full h-96 object-cover rounded-xl" />
+      <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600" [alt]="product.name" class="w-full h-96 object-cover rounded-xl" />
       <div class="flex space-x-2 mt-4">
-        <img [src]="product.image" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
-        <img [src]="product.image" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
-        <img [src]="product.image" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
+        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
+        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
+        <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
       </div>
     </div>
 
@@ -78,18 +70,41 @@
     </div>
   </div>
 
+
+   <!-- Product Tabs -->
+  <div class="flex space-x-4 mb-6">
+    <button class="text-blue-600 border-b-2 border-blue-600 pb-2">Detail</button>
+    <button class="text-gray-600 pb-2">Specifications</button>
+    <button class="text-gray-600 pb-2">Vendor</button>
+    <button class="text-gray-600 pb-2">Reviews</button>
+  </div>
+
+
+  <div class=" p-6 bg-white rounded-lg shadow-md text-gray-800">
+  <p class="text-base leading-relaxed">
+    Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+  </p>
+  <ul class="list-disc pl-5 mt-4 space-y-2">
+    <li>Any Product types that You want - Simple, Configurable</li>
+    <li>Downloadable/Digital Products, Virtual Products</li>
+    <li>Inventory Management with Backordered items</li>
+    <li>Flatlock seams throughout.</li>
+  </ul>
+  <p class="text-base leading-relaxed mt-4">
+    Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+  </p>
+  <p class="text-base leading-relaxed mt-4">
+    There are many variations of passages of Lorem ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem ipsum which looks reasonable. The generated Lorem ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+  </p>
+</div>
+
   <!-- Related Products Section -->
   <div class="mt-8">
     <h2 class="text-xl font-bold text-blue-600 mb-4">Related Products</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      @for (relatedProduct of relatedProducts; track relatedProduct) {
-        <div class="bg-white rounded-2xl shadow p-4">
-          <img [src]="relatedProduct.image" [alt]="relatedProduct.name" class="w-full h-32 object-cover rounded-xl mb-2" />
-          <h3 class="text-sm font-semibold">{{ relatedProduct.name }}</h3>
-          <p class="text-xs text-gray-500">{{ relatedProduct.description }}</p>
-          <p class="text-sm font-bold text-blue-600">${{ relatedProduct.price }}</p>
-        </div>
-      }
-    </div>
+      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
+      @for (product of products; track product) {
+      <app-product-card [product]="product"></app-product-card>
+    }
+  </div>
   </div>
 </div>
