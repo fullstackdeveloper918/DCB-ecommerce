@@ -1,14 +1,20 @@
 <!-- navbar.component.html -->
-<header class="flex justify-between items-center p-4 bg-white text-black shadow-md fixed top-0 left-0 w-full z-50">
-  <div class="text-4xl font-black">DCB</div>
-  <nav class="flex gap-6 text-sm font-semibold">
-    <a href="#">Home</a>
-    <a href="#">Categories</a>
-    <a href="#">Products</a>
-    <a href="#">Pages</a>
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <i class="fa-solid fa-user"></i>
-    <i class="fa-solid fa-heart"></i>
-    <i class="fa-solid fa-cart-shopping"></i>
-  </nav>
+<header class="py-4 bg-white text-black sticky top-0 z-50  border-b border-gray-200 ">
+  <div class="px-4 max-w-[1300px] mx-auto flex justify-between items-center">
+    <div class="text-4xl font-black cursor-pointer">
+      <img src="https://dcb-porfolio.vercel.app/DCB-logo.png" alt="logoimage" width="120" height="70" />
+    </div>
+    <nav class="md:flex gap-6 text-sm font-normal hidden">
+      <a href="#">Home</a>
+      <a href="#">Categories</a>
+      <a href="#">Products</a>
+      <a href="#">Pages</a>
+    </nav>
+    <div class="socilLinks flex gap-4 text-lg font-normal"> 
+      <i class="fa-solid fa-magnifying-glass cursor-pointer cursor-pointer"></i>
+      <i class="fa-regular fa-user cursor-pointer"></i>
+      <i class="fa-regular fa-heart hover:text-black cursor-pointer"></i>
+      <i class="fa-solid fa-cart-shopping cursor-pointer"></i>
+    </div>
+  </div>
 </header>

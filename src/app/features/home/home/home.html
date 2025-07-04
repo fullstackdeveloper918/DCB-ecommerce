@@ -1,4 +1,14 @@
-<div class="bg-gray-50 p-4 shadow-md mt-20">
+
+
+<!-- Product Grid -->
+<div class="py-6 px-4 max-w-[1300px] mx-auto">
+
+  <div class="bg-[#f8f8f8] rounded-2xl min-h-auto md:min-h-[270px] md:p-4 px-4 py-6 flex flex-col gap-1 items-center justify-center">
+      <p class="text-sm font-normal mb-0 text-center text-black">Home > Our Products</p>
+
+      <h2 class="text-2xl md:text-4xl font-bold text-center text-black">Our Products</h2>
+  </div>
+  <div class="bg-gray-50 p-4  mt-6 rounded-2xl">
   <!-- Breadcrumb -->
 
 
@@ -57,10 +67,7 @@
   </div> -->
 </div>
 
-<!-- Product Grid -->
-<div class="p-6 max-w-7xl mx-auto">
-  <h2 class="text-3xl font-bold mb-6 text-center">Our Products</h2>
-  <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
     @for (product of products; track product) {
       <app-product-card [product]="product"></app-product-card>
     }
