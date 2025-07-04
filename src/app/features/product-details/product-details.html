@@ -1,40 +1,95 @@
- <div class="max-w-7xl mx-auto p-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Product Image -->
-      <div class="bg-white p-4 rounded shadow">
-        <img src="https://media.istockphoto.com/id/2195461294/photo/laptop-with-an-empty-blank-screen-cgi-render.jpg?s=1024x1024&w=is&k=20&c=_Mjfbm7HjFOPxJ6J4TPFsU8VvokDCnmw3LXWkH8YZoU=" alt="TDW Hand Mixer" class="w-full object-contain">
+<div class="max-w-7xl mx-auto p-6 bg-gray-50 min-h-screen">
+  <!-- Product Tabs -->
+  <div class="flex space-x-4 mb-6">
+    <button class="text-blue-600 border-b-2 border-blue-600 pb-2">Detail</button>
+    <button class="text-gray-600 pb-2">Specifications</button>
+    <button class="text-gray-600 pb-2">Vendor</button>
+    <button class="text-gray-600 pb-2">Reviews</button>
+  </div>
+
+  <!-- Product Content -->
+  <div class="flex flex-col lg:flex-row gap-6">
+    <!-- Product Image -->
+    <div class="w-full lg:w-1/2 bg-white rounded-2xl shadow p-4">
+      <img [src]="product.image" [alt]="product.name" class="w-full h-96 object-cover rounded-xl" />
+      <div class="flex space-x-2 mt-4">
+        <img [src]="product.image" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
+        <img [src]="product.image" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
+        <img [src]="product.image" [alt]="product.name" class="w-20 h-20 object-cover rounded" />
       </div>
+    </div>
 
-      <!-- Product Details -->
-      <div class="bg-white p-6 rounded shadow space-y-4">
-        <h1 class="text-2xl font-bold">TDW Hand Mixer Easy Mix</h1>
-        <p class="text-sm text-gray-600">Variable 7 Speed Handheld Processor | 260 Watt Motor | Electric Scarlett Beater Hand Held | High Speeds | Cream Cake Egg Mixer</p>
-
-        <div class="flex items-center space-x-2">
-          <span class="text-yellow-400 text-lg">★ ★ ★ ☆ ☆</span>
-          <span class="text-sm text-gray-600">(57 ratings)</span>
+    <!-- Product Details -->
+    <div class="w-full lg:w-1/2 bg-white rounded-2xl shadow p-6">
+      <h1 class="text-2xl font-bold text-gray-800">{{ product.name }}</h1>
+      <div class="flex items-center mt-2">
+        <div class="flex text-yellow-400">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
         </div>
-
-        <div class="text-xl font-semibold text-green-600">
-          ₹499 <span class="text-sm text-gray-500">(₹99.80 / count)</span>
+        <span class="ml-2 text-gray-600">| {{ product.ratings }} Ratings</span>
+      </div>
+      <div class="mt-4">
+        <span class="text-3xl font-bold text-blue-600">${{ product.discountedPrice }} <span class="text-gray-400 line-through ml-2">${{ product.originalPrice }}</span></span>
+        <span class="text-green-600 ml-2">{{ product.discount }}% Off</span>
+      </div>
+      <div class="mt-2 text-gray-600">SKU#: {{ product.sku }}</div>
+      <div class="mt-2 text-blue-600">IN STOCK</div>
+      <div class="mt-4 bg-yellow-100 p-2 rounded text-yellow-800 text-sm flex justify-between">
+        <span>Real time {{ product.visitors }} visitor right now!</span>
+        <span class="text-red-600">{{ product.timeRemaining }}</span>
+      </div>
+      <p class="mt-4 text-gray-600">{{ product.description }}</p>
+      <div class="mt-4">
+        <h3 class="font-semibold">SIZE</h3>
+        <div class="flex space-x-2 mt-2">
+          @for (size of product.sizes; track size) {
+            <button class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300" [class.bg-blue-500]="selectedSize === size" [class.text-white]="selectedSize === size" (click)="selectSize(size)">
+              {{ size }}
+            </button>
+          }
         </div>
-        <div class="text-sm line-through text-gray-500">M.R.P.: ₹1,499</div>
-        <div class="text-sm text-gray-600">Inclusive of all taxes</div>
-
-        <div class="bg-gray-100 p-3 rounded">
-          <p class="text-sm font-medium text-gray-700">Offers</p>
-          <ul class="list-disc list-inside text-sm text-gray-600">
-            <li>Cashback: Upto ₹14.00</li>
-            <li>Bank Offer: Upto ₹1,000.00 off</li>
-            <li>Partner Offers: GST invoice available</li>
-          </ul>
+      </div>
+      <div class="mt-4">
+        <h3 class="font-semibold">COLORS</h3>
+        <div class="flex space-x-2 mt-2">
+          @for (color of product.colors; track color) {
+            <span class="w-6 h-6 rounded-full" [style.backgroundColor]="color" [class.border-2]="selectedColor === color" [class.border-blue-500]="selectedColor === color" (click)="selectColor(color)"></span>
+          }
         </div>
-
-        <div class="text-sm mt-2 text-green-700 font-semibold">In stock</div>
-        <div class="text-sm text-gray-700">Delivered by <span class="font-medium">Amazon</span></div>
-        <div class="text-sm text-gray-700">Sold by <span class="font-medium">MISHKAT ENTERPRISES</span></div>
-
-        <button class="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded font-semibold">Add to Cart</button>
+      </div>
+      <div class="mt-6 flex space-x-2">
+        <button class="flex-1 bg-gray-200 text-gray-700 px-4 py-2 rounded flex items-center justify-center">
+          <i class="fas fa-minus mr-2"></i> 1 <i class="fas fa-plus ml-2"></i>
+        </button>
+        <button class="flex-1 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" (click)="addToCart()">
+          ADD TO CART
+        </button>
+        <button class="bg-white border border-gray-300 p-2 rounded">
+          <i class="fas fa-heart text-yellow-500"></i>
+        </button>
+        <button class="bg-white border border-gray-300 p-2 rounded">
+          <i class="fas fa-sync-alt"></i>
+        </button>
       </div>
     </div>
   </div>
+
+  <!-- Related Products Section -->
+  <div class="mt-8">
+    <h2 class="text-xl font-bold text-blue-600 mb-4">Related Products</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      @for (relatedProduct of relatedProducts; track relatedProduct) {
+        <div class="bg-white rounded-2xl shadow p-4">
+          <img [src]="relatedProduct.image" [alt]="relatedProduct.name" class="w-full h-32 object-cover rounded-xl mb-2" />
+          <h3 class="text-sm font-semibold">{{ relatedProduct.name }}</h3>
+          <p class="text-xs text-gray-500">{{ relatedProduct.description }}</p>
+          <p class="text-sm font-bold text-blue-600">${{ relatedProduct.price }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>

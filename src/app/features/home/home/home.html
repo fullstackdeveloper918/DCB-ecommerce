@@ -1,11 +1,68 @@
+<div class="bg-gray-50 p-4 shadow-md mt-20">
+  <!-- Breadcrumb -->
+
+
+  <!-- Search and Filters -->
+  <div class="flex flex-col md:flex-row justify-between items-center gap-4 w-full">
+    <!-- Search Input -->
+    <div class="flex items-center w-full md:w-auto">
+      <button class="bg-gray-200 p-2 rounded-l-md">
+        <i class="fas fa-search text-gray-600"></i>
+      </button>
+      <input
+        type="text"
+        placeholder="Shop Page"
+        class="w-full md:w-64 p-2 border-t border-b border-gray-200 focus:outline-none"
+      />
+      <button class="bg-gray-200 p-2 rounded-r-md">
+        <i class="fas fa-filter text-gray-600"></i>
+      </button>
+    </div>
+
+    <!-- Sort Dropdown -->
+    <div class="w-full md:w-auto">
+      <select
+        class="w-full md:w-32 p-2 border border-gray-200 rounded-md focus:outline-none"
+      >
+        <option>Sort by</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Category Filters -->
+  <!-- <div class="flex flex-wrap gap-2 mt-4">
+    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
+      Clothes <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
+    </button>
+    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
+      Fruits <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
+    </button>
+    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
+      Snacks <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
+    </button>
+    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
+      Dairy <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
+    </button>
+    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
+      Perfume <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
+    </button>
+    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
+      Jewelry <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
+    </button>
+    <button class="bg-blue-500 text-white px-4 py-1 rounded-full">
+      Clear All
+    </button>
+  </div> -->
+</div>
+
+<!-- Product Grid -->
 <div class="p-6 max-w-7xl mx-auto">
   <h2 class="text-3xl font-bold mb-6 text-center">Our Products</h2>
-
   <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-    @for(product of products;track product){
-    <app-product-card
-      [product]="product"
-    ></app-product-card>
+    @for (product of products; track product) {
+      <app-product-card [product]="product"></app-product-card>
     }
   </div>
 </div>

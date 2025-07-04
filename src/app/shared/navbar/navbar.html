@@ -1,8 +1,14 @@
-<nav class="bg-white shadow-md p-4 flex justify-between items-center">
-  <a routerLink="/" class="text-xl font-bold text-gray-800 hover:text-blue-500 transition">E-Shop</a>
-  <ul class="flex space-x-6 text-gray-700">
-    <li><a routerLink="/" routerLinkActive="text-blue-500" class="hover:text-blue-500">Home</a></li>
-    <li><a routerLink="/cart" routerLinkActive="text-blue-500" class="hover:text-blue-500">Cart</a></li>
-    <li ><a routerLink="auth" routerLinkActive="text-blue-500" class="hover:text-blue-500">Login</a></li>
-  </ul>
-</nav>
+<!-- navbar.component.html -->
+<header class="flex justify-between items-center p-4 bg-white text-black shadow-md fixed top-0 left-0 w-full z-50">
+  <div class="text-4xl font-black">DCB</div>
+  <nav class="flex gap-6 text-sm font-semibold">
+    <a href="#">Home</a>
+    <a href="#">Categories</a>
+    <a href="#">Products</a>
+    <a href="#">Pages</a>
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-user"></i>
+    <i class="fa-solid fa-heart"></i>
+    <i class="fa-solid fa-cart-shopping"></i>
+  </nav>
+</header>
