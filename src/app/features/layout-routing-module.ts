@@ -10,15 +10,19 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-        import('../home/home-module').then((m) => m.HomeModule)
+        import('./home/home-module').then((m) => m.HomeModule)
       },
       {
         path : 'product/:id',
-        loadChildren: () => import('../product-details/product-details-module').then((m)=>m.ProductDetailsModule)
+        loadChildren: () => import('./product-details/product-details-module').then((m)=>m.ProductDetailsModule)
       }, 
       {
         path : 'cart',
-        loadChildren : () => import('../cart/cart-module').then((m)=>m.CartModule)
+        loadChildren : () => import('./cart/cart-module').then((m)=>m.CartModule)
+      },
+      {
+        path : 'checkout',
+        loadChildren : () => import('./checkout/checkout-module').then((m)=>m.CheckoutModule)
       }
     ]
   }

@@ -1,0 +1,139 @@
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-gray-50">
+  <!-- Left Section -->
+  <div class="lg:col-span-2 space-y-6">
+
+    <!-- New / Returning Customer -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h2 class="text-lg font-semibold mb-4">New Customer</h2>
+      <div class="mb-4">
+        <label class="mr-4">
+          <input type="radio" name="customerType" checked />
+          Register Account
+        </label>
+        <label>
+          <input type="radio" name="customerType" />
+          Guest Account
+        </label>
+      </div>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded">Continue</button>
+
+      <div class="mt-6 border-t pt-4">
+        <h2 class="text-lg font-semibold mb-4">Returning Customer</h2>
+        <input type="email" placeholder="Email" class="w-full mb-2 p-2 border rounded" />
+        <input type="password" placeholder="Password" class="w-full mb-2 p-2 border rounded" />
+        <button class="bg-gray-800 text-white px-4 py-2 rounded">Login</button>
+        <a href="#" class="ml-4 text-blue-500">Forgot Password?</a>
+      </div>
+    </div>
+
+    <!-- Billing Details -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h2 class="text-lg font-semibold mb-4">Billing Details</h2>
+      <div class="mb-4">
+        <label class="mr-4">
+          <input type="radio" name="billingAddress" checked />
+          I want to use existing address
+        </label>
+        <label>
+          <input type="radio" name="billingAddress" />
+          I want to use new address
+        </label>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <input type="text" placeholder="First Name" class="p-2 border rounded" />
+        <input type="text" placeholder="Last Name" class="p-2 border rounded" />
+        <input type="text" placeholder="Address" class="col-span-2 p-2 border rounded" />
+        <input type="text" placeholder="City" class="p-2 border rounded" />
+        <input type="text" placeholder="Post Code" class="p-2 border rounded" />
+        <select class="p-2 border rounded">
+          <option>Country</option>
+        </select>
+        <select class="p-2 border rounded">
+          <option>Region / State</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="bg-blue-600 text-white px-4 py-2 rounded mt-4">Place Order</button>
+  </div>
+
+  <!-- Right Section -->
+  <div class="space-y-6">
+    <!-- Summary -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h2 class="text-lg font-semibold mb-4">Summary</h2>
+      <div class="space-y-2">
+        <div class="flex justify-between text-sm">
+          <span>Sub-Total</span>
+          <span>$185.00</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span>Delivery Charges</span>
+          <span>$10.00</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span>Coupon Discount</span>
+          <a href="#" class="text-blue-500">Apply Coupon</a>
+        </div>
+        <hr />
+        <div class="flex justify-between font-semibold">
+          <span>Total Amount</span>
+          <span>$195.00</span>
+        </div>
+      </div>
+
+      <!-- Products -->
+      <div class="mt-4 space-y-2 text-sm">
+        <div class="flex items-center space-x-4">
+          <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover" />
+          <div>
+            <p>Round neck cotton t-shirt</p>
+            <p>$45.00</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover" />
+          <div>
+            <p>Digital smart watch</p>
+            <p>$140.00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delivery Method -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h2 class="text-lg font-semibold mb-4">Delivery Method</h2>
+      <div class="space-y-2">
+        <label class="block">
+          <input type="radio" name="delivery" />
+          Free Shipping — $0.00
+        </label>
+        <label class="block">
+          <input type="radio" name="delivery" />
+          Flat Rate — $10.00
+        </label>
+      </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h2 class="text-lg font-semibold mb-4">Payment Method</h2>
+      <label class="block mb-2">
+        <input type="radio" name="payment" checked />
+        Cash on Delivery
+      </label>
+      <textarea class="w-full p-2 border rounded mb-2" rows="2" placeholder="Add extra notes..."></textarea>
+      <label class="block mb-2">
+        <input type="checkbox" />
+        I have read and agree with <a href="#" class="text-blue-500">Terms & Conditions</a>.
+      </label>
+      <div class="flex items-center gap-2 mt-2">
+        <img src="https://img.icons8.com/color/32/visa.png" />
+        <img src="https://img.icons8.com/color/32/mastercard-logo.png" />
+        <img src="https://img.icons8.com/color/32/paypal.png" />
+      </div>
+    </div>
+  </div>
+</div>

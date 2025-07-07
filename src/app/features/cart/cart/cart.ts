@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../../core/services/products.service';
+import { SharedModule } from '../../../shared/shared-module';
 
 @Component({
   selector: 'app-cart',
-  imports: [],
+  imports: [SharedModule],
   templateUrl: './cart.html',
   styleUrl: './cart.scss'
 })
-export class Cart {
+export class Cart implements OnInit{
+
+  constructor(private productService : ProductService){}
  cartItems = [
     {
       name: 'TDW Hand Mixer Easy Mix',
@@ -23,6 +27,19 @@ export class Cart {
       quantity: 2,
     },
   ];
+
+  ngOnInit(): void {
+    this.getCart();
+  }
+
+  getCart(){
+    this.productService.getCartProducts().subscribe((res:any)=>{
+      if(res){
+        this.cartItems = res.cart
+      }
+      console.log('crts', res)
+    })
+  }
 
   getTotal() {
     return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);

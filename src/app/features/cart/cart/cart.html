@@ -8,7 +8,7 @@
         <img [src]="item.image" alt="Product" class="w-20 h-20 object-contain border p-2">
         <div>
           <h2 class="font-semibold text-lg">{{ item.name }}</h2>
-          <p class="text-sm text-gray-500">{{ item.description }}</p>
+          <p class="text-sm text-gray-500">260 Watt Motor | 7 Speed | Handheld</p>
         </div>
       </div>
 
@@ -34,7 +34,7 @@
       <span>Total</span>
       <span>₹{{ getTotal() }}</span>
     </div>
-    <button class="mt-4 w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600">
+    <button routerLink="/checkout" class="mt-4 w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600">
       Proceed to Checkout
     </button>
   </div>

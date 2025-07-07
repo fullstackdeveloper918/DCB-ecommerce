@@ -17,4 +17,15 @@ export class ProductService {
   getProductById(productId: number) {
     return this.apiService.get(`${apiRoutes.products}/${productId}`);
   }
+
+  // ADD TO CART
+  addToCart(payload :any){
+    return this.apiService.post(apiRoutes.addToCart, payload)
+  }
+
+  // GET CART PRODUCTS
+getCartProducts() {
+  return this.apiService.get(`${apiRoutes.getCart}?user_id=2`);
+}
+
 }

@@ -1,3 +1,5 @@
 export const apiRoutes = {
-    products : 'products'
-}
+    products : 'products',
+    addToCart : 'add_to_cart',
+    getCart : 'get-cart'
+}   
