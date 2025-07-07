@@ -1,41 +1,49 @@
+<section class="bg-gray-50 pt-5">
 <div class="max-w-6xl mx-auto p-4">
-  <h1 class="text-2xl font-bold mb-4">Shopping Cart</h1>
+  <div class="bg-white xl:rounded-xl rounded-md md:p-4 p-2 border border-[#e5e5e5] flex flex-wrap md:flex-nowrap gap-1 items-center justify-between mb-4">
+    <h2 class="text-[16px] md:text-xl font-bold text-center text-[#333333]">Shopping Cart</h2>
+  <p class="md:text-sm text-[10px] font-normal mb-0 text-center text-[#313b50]">Home &gt; Shopping Cart</p>
+  </div>
+        
 
   <!-- Cart Items -->
   <div class="space-y-4">
-  @for ( item of cartItems; track $index) {  <div class="flex items-center justify-between bg-white p-4 rounded shadow">
-      <div class="flex items-center space-x-4">
-        <img [src]="item.image" alt="Product" class="w-20 h-20 object-contain border p-2">
+  @for ( item of cartItems; track $index) {  <div class="flex md:items-center items-start justify-between bg-white xl:rounded-xl rounded-md md:p-4 p-2 border border-[#e5e5e5] md:flex-row flex-col md:gap-0 gap-4">
+      <div class="flex items-center md:space-x-4 space-x-2">
+        <img [src]="item.image" alt="Product" class="md:w-18 w-10 md:h-20 h-10 object-contain border border-[#e1e5e8] rounded-md md:rounded-lg bg-[#e1e5e8]">
         <div>
-          <h2 class="font-semibold text-lg">{{ item.name }}</h2>
-          <p class="text-sm text-gray-500">260 Watt Motor | 7 Speed | Handheld</p>
+          <h2 class="font-semibold md:text-lg text-sm">{{ item.name }}</h2>
+          <p class="md:text-sm  text-[10px] text-gray-500">260 Watt Motor | 7 Speed | Handheld</p>
         </div>
       </div>
 
-      <div class="flex items-center space-x-4">
-        <div class="flex items-center border rounded">
-          <button class="px-3 py-1" (click)="decreaseQty(item)">-</button>
-          <span class="px-3">{{ item.quantity }}</span>
-          <button class="px-3 py-1" (click)="increaseQty(item)">+</button>
+      <div class="flex items-center md:space-x-4 space-x-2 justify-between md:w-auto w-full">
+        <div class="flex items-center border rounded-md border-[#e1e5e8]">
+          <button class="md:px-3 px-2 md:py-1  cursor-pointer" (click)="decreaseQty(item)">-</button>
+          <span class="px-3 md:text-sm text-[12px]">{{ item.quantity }}</span>
+          <button class="md:px-3 px-2 md:py-1 cursor-pointer" (click)="increaseQty(item)">+</button>
         </div>
-        <div class="font-semibold text-right">
-          ₹{{ item.price * item.quantity }}
+        <div class="md:space-x-4 space-x-2 flex">
+        <div class="font-semibold md:text-sm text-[12px] text-right">
+          ${{ item.price * item.quantity }}
         </div>
-        <button (click)="removeItem(item)" class="text-red-500 hover:underline text-sm">Remove</button>
+        <button (click)="removeItem(item)" class="text-red-500 hover:underline md:text-sm text-[10px] cursor-pointer">Remove</button>
+        </div>
       </div>
     </div>
 }
   </div>
 
   <!-- Summary -->
-  <div class="mt-8 bg-white p-6 rounded shadow">
-    <h2 class="text-xl font-semibold mb-4">Cart Summary</h2>
+  <div class="mt-8 bg-white md:p-6 p-3 bg-white xl:rounded-xl rounded-md md:p-4 p-2 border border-[#e5e5e5] ">
+    <h2 class="md:text-xl text-sm font-semibold mb-2">Cart Summary</h2>
     <div class="flex justify-between text-lg font-medium">
-      <span>Total</span>
-      <span>₹{{ getTotal() }}</span>
+      <span class="md:text-lg text-sm">Total</span>
+      <span class="font-semibold md:text-xl text-md">₹{{ getTotal() }}</span>
     </div>
-    <button routerLink="/checkout" class="mt-4 w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600">
+    <button routerLink="/checkout" class="mt-2 w-full bg-black text-white py-2 rounded-md hover:bg-transparent cursor-pointer border border-transparent hover:border-black hover:text-black transition duration-300 ease-in-out">
       Proceed to Checkout
     </button>
   </div>
 </div>
+</section>

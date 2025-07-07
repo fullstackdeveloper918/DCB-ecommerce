@@ -1,68 +1,85 @@
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-gray-50">
+<section class="bg-gray-50 pt-5">
+    <div class="max-w-7xl mx-auto 2xl:px-0  px-4 py-6">
+  <div class="bg-white xl:rounded-xl rounded-md md:p-4 p-2 border border-[#e5e5e5] flex flex-wrap md:flex-nowrap gap-1 items-center justify-between mb-4 ">
+    <h2 class="text-[16px] md:text-xl font-bold text-center text-[#333333]">Checkout Page</h2>
+  <p class="md:text-sm text-[10px] font-normal mb-0 text-center text-[#313b50]">Home &gt; Checkout Page</p>
+  </div>
+        
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
   <!-- Left Section -->
-  <div class="lg:col-span-2 space-y-6">
+  <div class="lg:col-span-2 md:space-y-6 space-y-4">
 
     <!-- New / Returning Customer -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <h2 class="text-lg font-semibold mb-4">New Customer</h2>
+    <div class="bg-white md:p-6 p-4 md:rounded-xl rounded-lg shadow">
+      <h2 class="text-[18px] md:text-xl font-bold text-[#333333] mb-2">New Customer</h2>
       <div class="mb-4">
-        <label class="mr-4">
-          <input type="radio" name="customerType" checked />
+        <label class="mr-4 cursor-pointer">
+          <input type="radio" name="customerType" class="checkbox" checked/>
           Register Account
         </label>
-        <label>
-          <input type="radio" name="customerType" />
+        <label class="cursor-pointer">
+          <input type="radio" name="customerType" class="checkbox" />
           Guest Account
         </label>
       </div>
-      <button class="bg-blue-600 text-white px-4 py-2 rounded">Continue</button>
+      <button class="bg-black text-white px-4 py-2 rounded cursor-pointer hover:bg-transparent hover:text-black border border-transparent hover:border-black transition duration-300 ease-in-out">Continue</button>
 
-      <div class="mt-6 border-t pt-4">
-        <h2 class="text-lg font-semibold mb-4">Returning Customer</h2>
-        <input type="email" placeholder="Email" class="w-full mb-2 p-2 border rounded" />
-        <input type="password" placeholder="Password" class="w-full mb-2 p-2 border rounded" />
-        <button class="bg-gray-800 text-white px-4 py-2 rounded">Login</button>
-        <a href="#" class="ml-4 text-blue-500">Forgot Password?</a>
+      <div class="mt-6 border-t pt-4 border-[#ddd]">
+        <h2 class="text-[13px] md:text-xl font-bold text-[#333333] mb-4">Returning Customer</h2>
+        <input type="email" placeholder="Email" class="w-full mb-3 md:py-3 p-2 md:px-4 border rounded border-[#ddd] placeholdertext " />
+        <input type="password" placeholder="Password" class="w-full mb-3 md:py-3 p-2 md:px-4 border rounded border-[#ddd] placeholdertext" />
+        <button class="bg-black text-white px-4 py-2 rounded hover:bg-transparent hover:text-black border border-transparent hover:border-black transition duration-300 ease-in-out cursor-pointer">Login</button>
+        <a href="#" class="ml-4 text-black">Forgot Password?</a>
       </div>
     </div>
 
     <!-- Billing Details -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <h2 class="text-lg font-semibold mb-4">Billing Details</h2>
+    <div class="bg-white md:p-6 p-4 md:rounded-xl rounded-lg shadow">
+      <h2 class="text-[18px] md:text-xl font-bold text-[#333333] mb-2">Billing Details</h2>
       <div class="mb-4">
-        <label class="mr-4">
-          <input type="radio" name="billingAddress" checked />
+        <label class="mr-4 cursor-pointer">
+          <input type="radio" name="customerType" class="checkbox cursor-pointer" name="billingAddress" checked />
           I want to use existing address
         </label>
-        <label>
-          <input type="radio" name="billingAddress" />
+        <label class="cursor-pointer">
+          <input type="radio" name="customerType" class="checkbox " name="billingAddress" />
           I want to use new address
         </label>
       </div>
 
-      <div class="grid grid-cols-2 gap-4">
-        <input type="text" placeholder="First Name" class="p-2 border rounded" />
-        <input type="text" placeholder="Last Name" class="p-2 border rounded" />
-        <input type="text" placeholder="Address" class="col-span-2 p-2 border rounded" />
-        <input type="text" placeholder="City" class="p-2 border rounded" />
-        <input type="text" placeholder="Post Code" class="p-2 border rounded" />
-        <select class="p-2 border rounded">
+      <div class="md:grid flex flex-col md:grid-cols-2 gap-4">
+        <input type="text" placeholder="First Name" class="md:py-3 p-2 md:px-4 border rounded border-[#ddd] placeholdertext" />
+        <input type="text" placeholder="Last Name" class="md:py-3 p-2 md:px-4 border rounded border-[#ddd] placeholdertext" />
+        <input type="text" placeholder="Address" class="col-span-2 md:py-3 p-2 md:px-4 border rounded border-[#ddd] placeholdertext" />
+        <input type="text" placeholder="City" class="md:py-3 p-2 md:px-4 border rounded border-[#ddd] placeholdertext" />
+        <input type="text" placeholder="Post Code" class="md:py-3 p-2 md:px-4 border rounded border-[#ddd] placeholdertext" />
+        
+        <div class="selectIput cursor-pointer w-full relative cursor-pointer">
+          <select class="md:py-3 p-2 md:px-4 border rounded border-[#ddd] placeholdertext w-full cursor-pointer">
           <option>Country</option>
+        
         </select>
-        <select class="p-2 border rounded">
+        <span class="dropdownIcon absolute right-2 md:top-[14px] top-[9px]"><i class="fa-solid fa-angle-down"></i></span>
+        </div>
+
+        <div class="selectIput cursor-pointer w-full relative cursor-pointer">
+          <select class="md:py-3 p-2 md:px-4 border rounded border-[#ddd] placeholdertext w-full cursor-pointer">
           <option>Region / State</option>
+        
         </select>
+        <span class="dropdownIcon absolute right-2 md:top-[14px] top-[9px]"><i class="fa-solid fa-angle-down"></i></span>
+        </div>
       </div>
     </div>
 
-    <button class="bg-blue-600 text-white px-4 py-2 rounded mt-4">Place Order</button>
+    <button class="w-full bg-black text-white px-4 py-2 rounded hover:bg-transparent hover:text-black border border-transparent hover:border-black transition duration-300 ease-in-out cursor-pointer">Place Order</button>
   </div>
 
   <!-- Right Section -->
-  <div class="space-y-6">
+  <div class="space-y-4">
     <!-- Summary -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <h2 class="text-lg font-semibold mb-4">Summary</h2>
+    <div class="bg-white md:p-6 p-4 md:rounded-xl rounded-lg shadow">
+      <h2 class="text-[18px] md:text-xl font-bold text-[#333333] mb-2">Summary</h2>
       <div class="space-y-2">
         <div class="flex justify-between text-sm">
           <span>Sub-Total</span>
@@ -72,12 +89,12 @@
           <span>Delivery Charges</span>
           <span>$10.00</span>
         </div>
-        <div class="flex justify-between text-sm">
+        <div class="flex justify-between text-sm items-center pb-2">
           <span>Coupon Discount</span>
-          <a href="#" class="text-blue-500">Apply Coupon</a>
+          <a href="#" class="text-blue-500 bg-blue-100 px-2  py-1 rounded-xl text-[12px]">Apply Coupon</a>
         </div>
-        <hr />
-        <div class="flex justify-between font-semibold">
+        <hr class="bg-[#ddd] text-[#ddd]"/>
+        <div class="flex justify-between font-semibold pt-2">
           <span>Total Amount</span>
           <span>$195.00</span>
         </div>
@@ -103,31 +120,31 @@
     </div>
 
     <!-- Delivery Method -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <h2 class="text-lg font-semibold mb-4">Delivery Method</h2>
+    <div class="bg-white md:p-6 p-4 md:rounded-xl rounded-lg shadow">
+      <h2 class="text-[18px] md:text-xl font-bold text-[#333333] mb-2">Delivery Method</h2>
       <div class="space-y-2">
-        <label class="block">
-          <input type="radio" name="delivery" />
+        <label class="block cursor-pointer">
+          <input type="radio" name="customerType" class="checkbox" name="delivery" />
           Free Shipping — $0.00
         </label>
-        <label class="block">
-          <input type="radio" name="delivery" />
+        <label class="block cursor-pointer">
+          <input type="radio" name="customerType" class="checkbox" name="delivery" />
           Flat Rate — $10.00
         </label>
       </div>
     </div>
 
     <!-- Payment Method -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <h2 class="text-lg font-semibold mb-4">Payment Method</h2>
-      <label class="block mb-2">
-        <input type="radio" name="payment" checked />
+    <div class="bg-white md:p-6 p-4 md:rounded-xl rounded-lg shadow">
+      <h2 class="text-[18px] md:text-xl font-bold text-[#333333] mb-2">Payment Method</h2>
+      <label class="block cursor-pointer mb-2">
+        <input type="radio" name="customerType" class="checkbox" name="payment" checked />
         Cash on Delivery
       </label>
-      <textarea class="w-full p-2 border rounded mb-2" rows="2" placeholder="Add extra notes..."></textarea>
-      <label class="block mb-2">
+      <textarea class="w-full md:py-3 p-2 md:px-4 border rounded border-[#ddd] placeholdertext mb-2" rows="2" placeholder="Add extra notes..."></textarea>
+      <label class="block cursor-pointer mb-2 cursor-pointer checkbox">
         <input type="checkbox" />
-        I have read and agree with <a href="#" class="text-blue-500">Terms & Conditions</a>.
+        I have read and agree with <a href="#" class="text-black underline font-semibold ">Terms & Conditions</a>.
       </label>
       <div class="flex items-center gap-2 mt-2">
         <img src="https://img.icons8.com/color/32/visa.png" />
@@ -137,3 +154,5 @@
     </div>
   </div>
 </div>
+</div>
+</section>

@@ -1,0 +1,14 @@
+.checkbox{
+    accent-color: #000;
+    cursor: pointer;
+}
+.placeholdertext::placeholder{
+color: #585858;
+}
+.placeholdertext:focus{
+    outline: none;
+    offset: none;
+}
+.selectIput select{
+    appearance: none;
+}
