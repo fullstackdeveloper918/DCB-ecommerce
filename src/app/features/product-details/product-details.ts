@@ -60,27 +60,26 @@ export class ProductDetails implements OnInit {
   }
 
   addToCart() {
-    console.log('Added to cart:', this.product);
     // Implement cart logic here
   }
 
   ngOnInit() {
     this.getProductById(this.productId)
-       console.log('home workd')
-    this.productService.getProducts().subscribe((res:any)=>{
-      this.products = res
-      console.log('products', res)
-    });
+     this.getProducts();
     // Fetch product by ID here (call API or service)
   }
 
   // GET PRODUCT BY ID
   getProductById(productId:number){
     this.productService.getProductById(productId).subscribe((res:any)=>{
-      console.log('res', res)
+      console.log('individualproudcts', res)
     })
-    console.log('productid', productId)
+  }
 
+  getProducts(){
+     this.productService.getProducts().subscribe((res:any)=>{
+      this.products = res
+    });
   }
 
   productImages: string[] = [

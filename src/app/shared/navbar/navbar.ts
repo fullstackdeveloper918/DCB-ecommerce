@@ -1,6 +1,8 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SharedModule } from '../shared-module';
+import { GuestCartService } from '../../core/services/guest-cart.service';
+import { Cart } from '../../core/services/cart';
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +10,24 @@ import { SharedModule } from '../shared-module';
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss'
 })
-export class Navbar {
+export class Navbar implements OnInit{
  isMobileMenuOpen = false;
+ cartCount: number = 0;
 
+  constructor(private cartService : Cart){}
+  ngOnInit(): void {
+    this.getCartCount();
+  }
+
+  // GET CART COUNT
+  getCartCount(){
+    this.cartService.cartCount$.subscribe(count => {
+    this.cartCount = count;
+  });
+  }
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
+
+  
 }

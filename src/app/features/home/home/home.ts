@@ -15,10 +15,8 @@ export class Home {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    console.log('home workd')
     this.productService.getProducts().subscribe((res:any)=>{
       this.products = res
-      console.log('products', res)
     });
   }
 }

@@ -37,7 +37,6 @@ export class Cart implements OnInit{
       if(res){
         this.cartItems = res.cart
       }
-      console.log('crts', res)
     })
   }
 

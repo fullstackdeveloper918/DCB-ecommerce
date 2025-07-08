@@ -22,8 +22,7 @@ signupForm: FormGroup;
 
   onSubmit(): void {
     if (this.signupForm.valid) {
-      console.log('Form submitted:', this.signupForm.value);
-      // TODO: Handle API call here
+            // TODO: Handle API call here
     }
   }
 }

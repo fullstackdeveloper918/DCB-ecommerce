@@ -15,9 +15,6 @@ export class App {
 
   constructor(private spinnerService: SpinnerService) {
     this.loading$ = this.spinnerService.loading$;
-    this.loading$.subscribe(res =>{
-      console.log('res', res)
-    })
   }
 
 }

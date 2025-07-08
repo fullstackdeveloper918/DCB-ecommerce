@@ -13,7 +13,14 @@
       <i class="fa-solid fa-magnifying-glass cursor-pointer"></i>
       <i class="fa-regular fa-user cursor-pointer"></i>
       <i class="fa-regular fa-heart hover:text-black cursor-pointer"></i>
-      <i routerLink="cart" class="fa-solid fa-cart-shopping cursor-pointer"></i>
+        <!-- Cart Icon with Item Count Badge -->
+        <div class="relative">
+          <i routerLink="cart" class="fa-solid fa-cart-shopping cursor-pointer text-xl"></i>
+          <span *ngIf="cartCount > 0"
+                class="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+            {{ cartCount }}
+          </span>
+        </div>
           <div class="md:hidden">
       <button id="menu-toggle" (click)="toggleMobileMenu()" class="text-2xl focus:outline-none">
         <i class="fa-solid fa-bars"></i>

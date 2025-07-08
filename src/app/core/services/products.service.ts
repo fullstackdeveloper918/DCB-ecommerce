@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api/api.service';
 import { apiRoutes } from '../utils/api.routes';
+import { Auth } from './auth';
+import { GuestCartService } from './guest-cart.service';
+import { buildHttpParams } from '../utils/http-params.util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   
-  constructor(private apiService : ApiService){}
+  constructor(
+  private apiService : ApiService,
+  private auth : Auth,
+  private guestCart : GuestCartService){}
 
   getProducts(): any {
     return this.apiService.get(apiRoutes.products);
@@ -25,7 +31,20 @@ export class ProductService {
 
   // GET CART PRODUCTS
 getCartProducts() {
-  return this.apiService.get(`${apiRoutes.getCart}?user_id=2`);
+  let queryParams: any = {};
+
+  if (this.auth.isLoggedIn()) {
+    const userId = this.auth.getUserId();
+    if (userId) {
+      queryParams.user_id = userId;
+    }
+  } else {
+    queryParams.guest_id = this.guestCart.getGuestId();
+  }
+
+  const params = buildHttpParams(queryParams);
+  return this.apiService.get(`${apiRoutes.getCart}`, params );
 }
+
 
 }
