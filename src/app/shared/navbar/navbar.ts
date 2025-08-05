@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { SharedModule } from '../shared-module';
 import { GuestCartService } from '../../core/services/guest-cart.service';
 import { Cart } from '../../core/services/cart';
+import { Auth } from '../../core/services/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ export class Navbar implements OnInit{
  isMobileMenuOpen = false;
  cartCount: number = 0;
 
-  constructor(private cartService : Cart){}
+  constructor(private cartService : Cart, private authService : Auth){}
   ngOnInit(): void {
     this.getCartCount();
   }
@@ -27,6 +28,10 @@ export class Navbar implements OnInit{
   }
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+   logout() {
+    this.authService.logout();
   }
 
   

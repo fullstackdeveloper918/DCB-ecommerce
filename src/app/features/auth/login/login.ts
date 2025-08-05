@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Auth } from '../../../core/services/auth';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared-module';
@@ -84,6 +83,6 @@ accountFirebase : string = 'diary'
 }
 
  doClaimsNavigation() {
-   this.router.navigate(['/'])
+   this.router.navigate(['/home'])
   }
 }

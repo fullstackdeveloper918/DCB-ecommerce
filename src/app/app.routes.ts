@@ -2,7 +2,12 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path : '',
+     path : '',
+     redirectTo : 'auth',
+     pathMatch : 'full'
+    },
+    {
+        path : 'home',
         loadChildren: () => import('./features/layout-module').then(m => m.LayoutModule)
     },
     {
