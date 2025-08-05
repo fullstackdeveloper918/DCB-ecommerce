@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject, EnvironmentInjector, runInInjectionContext } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { take } from 'rxjs';
 
@@ -6,13 +6,21 @@ import { take } from 'rxjs';
   providedIn: 'root'
 })
 export class Firebase {
+  constructor(private injector: EnvironmentInjector) {
+  }
 
-  constructor(
-  private afs: AngularFirestore,
-  ) { }
+  getFBUser(id: string) {
+    if (!id) {
+      console.error('User ID is undefined or null');
+      throw new Error('User ID is required');
+    }
 
-   getFBUser(id:string): any {
-    let itemDoc = this.afs.collection('/users').doc(id);
-    return itemDoc.valueChanges({ idField: 'id' }).pipe(take(1));
+    console.log('Fetching user with ID:', id);
+
+    return runInInjectionContext(this.injector, () => {
+      const afs = inject(AngularFirestore);
+      const itemDoc = afs.collection('users').doc(id);
+      return itemDoc.valueChanges({ idField: 'id' }).pipe(take(1));
+    });
   }
 }
