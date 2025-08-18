@@ -4,35 +4,47 @@
       <img routerLink="/" src="https://dcb-porfolio.vercel.app/DCB-logo.png" alt="logoimage" width="120" height="70" />
     </div>
     <nav class="md:flex gap-6 text-sm font-normal hidden md:block">
-      <a href="#" class="block md:inline-block hover:underline hover:font-semibold transition activeteb">Home</a>
-      <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Categories</a>
+      <!-- <a routerLink="/home" class="block md:inline-block hover:underline hover:font-semibold transition activeteb">Home</a> -->
+      <!-- <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Categories</a>
       <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Products</a>
-      <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Pages</a>
+      <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Pages</a> -->
     </nav>
     <div class="socilLinks flex md:gap-4 gap-3 text-lg font-normal items-center">
-      <i class="fa-solid fa-magnifying-glass cursor-pointer"></i>
-      <i class="fa-regular fa-user cursor-pointer"></i>
-      <i class="fa-regular fa-heart hover:text-black cursor-pointer"></i>
-        <!-- Cart Icon with Item Count Badge -->
-        <div class="relative">
-          <i routerLink="cart" class="fa-solid fa-cart-shopping cursor-pointer text-xl"></i>
-          <span *ngIf="cartCount > 0"
-                class="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-            {{ cartCount }}
-          </span>
-        </div>
-          <div class="md:hidden">
-      <button id="menu-toggle" (click)="toggleMobileMenu()" class="text-2xl focus:outline-none">
-        <i class="fa-solid fa-bars"></i>
+
+  <i class="fa-regular fa-heart hover:text-black cursor-pointer"></i>
+
+  <!-- Cart Icon with Item Count Badge -->
+  <div class="relative">
+    <i routerLink="cart" class="fa-solid fa-cart-shopping cursor-pointer text-xl"></i>
+    <span *ngIf="cartCount > 0"
+          class="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+      {{ cartCount }}
+    </span>
+  </div>
+
+    <!-- Profile Icon -->
+  <div class="relative">
+    <i class="fa-regular fa-user cursor-pointer" (click)="toggleProfileMenu()"></i>
+
+    <!-- Dropdown (Logout) -->
+    <div *ngIf="showProfileMenu"
+         class="absolute right-0 mt-2 w-28 bg-white border rounded shadow-md z-50">
+      <button
+        (click)="logout()"
+        class="block w-full text-left text-sm px-4 py-2 hover:bg-gray-100">
+        Logout
       </button>
     </div>
-     <button
-          (click)="logout()"
-          class="text-sm border border-gray-300 rounded px-3 py-1 hover:bg-gray-100 transition">
-    Logout
-  </button>
+  </div>
 
-    </div>
+  <!-- Mobile Menu -->
+  <div class="md:hidden">
+    <button id="menu-toggle" (click)="toggleMobileMenu()" class="text-2xl focus:outline-none">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+</div>
+
     <!-- Mobile Menu Toggle Button -->
 
   </div>

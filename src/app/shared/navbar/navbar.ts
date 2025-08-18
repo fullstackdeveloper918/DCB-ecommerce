@@ -14,6 +14,8 @@ import { Auth } from '../../core/services/auth';
 export class Navbar implements OnInit{
  isMobileMenuOpen = false;
  cartCount: number = 0;
+ showProfileMenu = false;
+
 
   constructor(private cartService : Cart, private authService : Auth){}
   ngOnInit(): void {
@@ -33,6 +35,11 @@ export class Navbar implements OnInit{
    logout() {
     this.authService.logout();
   }
+
+  
+toggleProfileMenu() {
+  this.showProfileMenu = !this.showProfileMenu;
+}
 
   
 }
