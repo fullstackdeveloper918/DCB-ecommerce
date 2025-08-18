@@ -10,7 +10,7 @@ export class Cart {
   constructor() { }
 
 
-    updateCartCount(count: number): void {
+  updateCartCount(count: number): void {
   this.cartCountSubject.next(count);
 }
 }

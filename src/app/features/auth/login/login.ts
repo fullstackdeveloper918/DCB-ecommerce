@@ -14,6 +14,8 @@ import { Firebase } from '../../../core/services/firebase';
 export class Login {
 loginForm: FormGroup;
 accountFirebase : string = 'diary'
+showPassword: boolean = false;
+
 
   constructor(
   private fb: FormBuilder, 
@@ -85,4 +87,7 @@ accountFirebase : string = 'diary'
  doClaimsNavigation() {
    this.router.navigate(['/home'])
   }
+togglePasswordVisibility(): void {
+  this.showPassword = !this.showPassword;
+}
 }
