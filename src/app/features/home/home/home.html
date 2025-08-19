@@ -21,8 +21,9 @@
       </button>
       <input
         type="text"
-        placeholder="Shop Page"
+        placeholder="Search"
         class="w-full md:w-64 p-2 border-t border-b border-gray-200 focus:outline-none"
+        (input)="searchProducts($event)"
       />
       <button class="bg-gray-200 p-2 rounded-r-md">
         <i class="fas fa-filter text-gray-600"></i>
@@ -33,10 +34,11 @@
     <div class="w-full md:w-auto">
       <select
         class="w-full md:w-32 p-2 border border-gray-200 rounded-md focus:outline-none"
+         (change)="onSortChange($event)"
       >
         <option>Sort by</option>
-        <option>Price: Low to High</option>
-        <option>Price: High to Low</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
       </select>
     </div>
   </div>

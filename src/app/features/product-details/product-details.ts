@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../core/services/products.service';
 import { SharedModule } from '../../shared/shared-module';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-product-details',
@@ -13,7 +14,7 @@ export class ProductDetails implements OnInit {
   productId!: number;
   products:any
 
-   activeTab: string = 'detail';
+  activeTab: string = 'detail';
 
   selectTab(tab: string): void {
     this.activeTab = tab;
@@ -46,8 +47,12 @@ export class ProductDetails implements OnInit {
   selectedSize: string = '';
   selectedColor: string = '';
 
-  constructor(private route: ActivatedRoute, private productService : ProductService) {
-     this.productId = Number(this.route.snapshot.paramMap.get('id'));
+  constructor(
+  private route: ActivatedRoute, 
+  private productService : ProductService, 
+  private userService : UserService) 
+  {
+  this.productId = Number(this.route.snapshot.paramMap.get('id'));
   }
 
 
@@ -63,6 +68,7 @@ export class ProductDetails implements OnInit {
     // Implement cart logic here
   }
 
+
   ngOnInit() {
     this.getProductById(this.productId)
      this.getProducts();
@@ -71,7 +77,7 @@ export class ProductDetails implements OnInit {
 
   // GET PRODUCT BY ID
   getProductById(productId:number){
-    this.productService.getProductById(productId).subscribe((res:any)=>{
+    this.productService.getProductById(productId, this.userService?.user?.userRole).subscribe((res:any)=>{
       console.log('individualproudcts', res)
     })
   }

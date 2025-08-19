@@ -21,25 +21,29 @@ export class ProductCard {
   private guestCart : GuestCartService
   ){}
 
-addToCart(productId: number) {
-  const quantity = 1;
-  let payload: any = {
-    product_id: productId,
-    quantity,
-  };
+// addToCart(productId: number) {
+//   const quantity = 1;
+//   let payload: any = {
+//     product_id: productId,
+//     quantity,
+//   };
 
-  if (this.auth.isLoggedIn()) {
-    payload.user_id = this.auth.getUserId(); 
-  } else {
-    payload.guest_id = this.guestCart.getGuestId();
-  }
+//   if (this.auth.isLoggedIn()) {
+//     payload.user_id = this.auth.getUserId(); 
+//   } else {
+//     payload.guest_id = this.guestCart.getGuestId();
+//   }
 
-  this.productService.addToCart(payload).subscribe((res: any) => {
-    if (res) {
-      console.log('res', res)
-      this.toastr.success(messages.toastrSuccessMessage);
-    }
-  });
+//   this.productService.addToCart(payload).subscribe((res: any) => {
+//     if (res) {
+//       console.log('res', res)
+//       this.toastr.success(messages.toastrSuccessMessage);
+//     }
+//   });
 
+// }
+
+likeProduct(productID:any){
+  // this.productService.likeProduct(productID)
 }
 }

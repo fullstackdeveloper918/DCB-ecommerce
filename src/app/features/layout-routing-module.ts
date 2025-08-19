@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path : 'checkout',
         loadChildren : () => import('./checkout/checkout-module').then((m)=>m.CheckoutModule)
+      },
+      {
+        path : 'liked-products',
+        loadChildren : () => import('./liked-products/liked-products-module').then((m)=> m.LikedProductsModule)
       }
     ]
   }

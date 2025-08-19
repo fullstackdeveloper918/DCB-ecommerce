@@ -10,6 +10,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const afAuth = inject(AngularFireAuth);
 
+  console.log('afauth', afAuth);
+
   spinnerService.show();
 
   return from(afAuth.currentUser).pipe(

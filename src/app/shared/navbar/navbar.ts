@@ -4,6 +4,7 @@ import { SharedModule } from '../shared-module';
 import { GuestCartService } from '../../core/services/guest-cart.service';
 import { Cart } from '../../core/services/cart';
 import { Auth } from '../../core/services/auth';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,10 @@ export class Navbar implements OnInit{
  showProfileMenu = false;
 
 
-  constructor(private cartService : Cart, private authService : Auth){}
+  constructor(
+  private cartService : Cart, 
+  private authService : Auth,
+  public userService : UserService){}
   ngOnInit(): void {
     this.getCartCount();
   }
@@ -28,6 +32,7 @@ export class Navbar implements OnInit{
     this.cartCount = count;
   });
   }
+
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
@@ -36,10 +41,10 @@ export class Navbar implements OnInit{
     this.authService.logout();
   }
 
-  
-toggleProfileMenu() {
-  this.showProfileMenu = !this.showProfileMenu;
-}
+    
+  toggleProfileMenu() {
+    this.showProfileMenu = !this.showProfileMenu;
+  }
 
   
 }
