@@ -27,12 +27,11 @@ export class Home implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.subscription.add(
       this.searchSubject
-        .pipe(debounceTime(400), distinctUntilChanged())
+        .pipe(distinctUntilChanged())
         .subscribe(searchText => {
           this.loadProducts(searchText, this.sortValue);
         })
     );
-
     this.loadProducts();
   }
 

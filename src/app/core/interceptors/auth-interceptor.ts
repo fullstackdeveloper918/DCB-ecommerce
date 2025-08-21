@@ -20,6 +20,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   return next(req).pipe(
-    finalize(() => spinnerService.hide())
+    finalize(
+      () => 
+      spinnerService.hide()
+  )
   );
 };
