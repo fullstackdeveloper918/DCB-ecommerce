@@ -71,3 +71,24 @@
 body, h1, h2, h3, h4, h5, h6, span, li, a, p{
   font-family: var(--primary-font);
 }
+
+.btn {
+  font-size: 12px;
+  padding: 4px 8px;
+  height: 28px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer !important;
+  text-align: center;
+  justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  background-color: #000000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: auto;
+  white-space: nowrap;
+}
+
+.big-btn {
+  width: 500px;
+}
