@@ -6,7 +6,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environment'; 
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { authInterceptor } from './core/interceptors/auth-interceptor';
+// import { authInterceptor } from './core/interceptors/auth-interceptor';
 import { loaderInterceptor } from './core/interceptors/loader-interceptor';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 
@@ -16,7 +16,9 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideBrowserGlobalErrorListeners(),
     provideHttpClient( 
-      withInterceptors([loaderInterceptor, errorInterceptor, authInterceptor])
+      withInterceptors([loaderInterceptor, errorInterceptor, 
+        // authInterceptor
+      ])
     ),
     importProvidersFrom(
       AngularFireModule.initializeApp(environment.firebase),

@@ -16,5 +16,4 @@ export class App {
   constructor(private spinnerService: SpinnerService) {
     this.loading$ = this.spinnerService.loading$;
   }
-
 }
