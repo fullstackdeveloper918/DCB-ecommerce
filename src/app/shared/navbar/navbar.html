@@ -43,9 +43,9 @@
 
       <!-- Logout -->
       <button
-        (click)="logout()"
+        (click)="logOutOrLogin()"
         class="block w-full text-left text-sm px-4 py-2 hover:bg-gray-100 cursor-pointer">
-        Logout
+        {{ isUserLoggedIn ? 'Logout' : 'Login' }}
       </button>
     </div>
   </div>
