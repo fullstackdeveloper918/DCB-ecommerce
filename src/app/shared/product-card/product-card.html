@@ -8,8 +8,8 @@
   <p class="text-gray-500 text-sm flex-grow">{{ product.description }}</p>
   <div class="mt-1 flex justify-between items-center">
     <div>
-      <span class="font-bold text-black">${{ product.price }}</span>
-      <span class="text-gray-400 line-through ml-2">${{ product.discountPrice }}</span>
+      <span class="font-bold text-black">${{ product.regular_price || '--' }}</span>
+      <!-- <span class="text-gray-400 line-through ml-2">${{ product.discountPrice }}</span> -->
     </div>
   </div>
 
