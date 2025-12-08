@@ -1,11 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from '../../../core/services/products.service';
-import { ProductCard } from "../../../shared/product-card/product-card";
 import { SharedModule } from '../../../shared/shared-module';
 import { UserService } from '../../../core/services/user.service';
-import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
+import { distinctUntilChanged, Subject, Subscription } from 'rxjs';
 import { Product } from '../../../core/interfaces/Product.interface';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -43,9 +41,15 @@ export class Home implements OnInit, OnDestroy{
     this.subscription.add(
       this.productService
         .getProducts(this.userService.user?.userRole, searchedText, sort)
-        .subscribe((res: Product[]) => {
-          this.products = res || [];
-          console.log('products', this.products);
+        .subscribe({
+          next: (res: Product[]) => {
+            this.products = res || [];
+            console.log('products', this.products);
+          },
+          error: (error) => {
+            console.error('Error loading products:', error);
+            this.products = [];
+          }
         })
     );
   }

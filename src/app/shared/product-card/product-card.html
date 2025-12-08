@@ -1,6 +1,6 @@
 <div class="bg-white border border-solid border-[#8080804a] shadow hover:shadow-lg transition p-3 flex flex-col relative single-product h-full justify-between">
   <div class="relative overflow-hidden inline-block">
-    <img [src]="product.image" [alt]="product.name" class="w-full h-full object-cover mb-4 transition-transform duration-500 hover:scale-110" />
+    <img [routerLink]="['/home/product', product.id]" [src]="product.image" [alt]="product.name" class="w-full cursor-pointer h-full object-cover mb-4 transition-transform duration-500 hover:scale-110" />
     <span class="absolute top-3 left-3 bg-red-500 text-white text-[10px] leading-[8px] font-semibold px-[7px] py-[4px] rounded-full">NEW</span>
   </div>
   <div class="productContent mt-2">

@@ -23,7 +23,7 @@ showPassword: boolean = false;
   private firebaseService : Firebase,
   public firebaseAuth : AngularFireAuth) {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
@@ -31,6 +31,14 @@ showPassword: boolean = false;
   ngOnInit(): void {}
 
   onSubmit() :any {
+    // Mark all fields as touched to show validation errors
+    if (this.loginForm.invalid) {
+      Object.keys(this.loginForm.controls).forEach(key => {
+        this.loginForm.get(key)?.markAsTouched();
+      });
+      return;
+    }
+    
     if (this.loginForm.valid) {
     return this.firebaseAuth.signInWithEmailAndPassword(this.loginForm.value.email,this.loginForm.value.password)
     .then((result) => {
@@ -89,5 +97,21 @@ showPassword: boolean = false;
   }
 togglePasswordVisibility(): void {
   this.showPassword = !this.showPassword;
+}
+
+getFieldError(fieldName: string): string {
+  const field = this.loginForm.get(fieldName);
+  if (field?.hasError('required') && field?.touched) {
+    return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
+  }
+  if (field?.hasError('email') && field?.touched) {
+    return 'Please enter a valid email address';
+  }
+  return '';
+}
+
+isFieldInvalid(fieldName: string): boolean {
+  const field = this.loginForm.get(fieldName);
+  return !!(field && field.invalid && field.touched);
 }
 }
