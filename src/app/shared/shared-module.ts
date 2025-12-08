@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ProductCard } from './product-card/product-card';
 import { Spinner } from './components/spinner/spinner';
@@ -19,7 +19,8 @@ import { Spinner } from './components/spinner/spinner';
     RouterModule,
     ProductCard,
     CommonModule,
-    Spinner
+    Spinner,
+    FormsModule
   ]
 })
 export class SharedModule { }

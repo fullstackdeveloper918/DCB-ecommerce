@@ -1,281 +1,370 @@
 <section class="bg-gray-50 min-h-screen">
-<div class="max-w-[1300px] mx-auto px-4 py-10 bg-gray-50 ">
-  <!-- Product Content -->
-  <div class="flex flex-col lg:flex-row gap-6">
-    <!-- Product Image -->
-    <div class="w-full lg:w-1/2 bg-white xl:rounded-2xl rounded-md shadow md:p-4 p-2">
-  <!-- Main Image with Arrows -->
-  <div class="relative">
-    <img
-      [src]="selectedImage"
-      [alt]="product.name"
-      class="w-full 2xl:h-140 xl:h-100 h-80 object-cover md:rounded-xl rounded-md"
-    />
-    <!-- Left Arrow -->
+  <div class="max-w-[1300px] mx-auto px-4 py-10 bg-gray-50 ">
+    <div class="flex items-center gap-2 mb-4">
+      <button
+        class="flex items-center gap-2 text-sm text-gray-700 hover:text-black transition cursor-pointer"
+        (click)="goBack()"
+      >
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Back</span>
+      </button>
+    </div>
+    <!-- Product Content -->
+    <div class="flex flex-col lg:flex-row gap-6">
+      <!-- Product Image -->
+      <div class="w-full lg:w-1/2 bg-white xl:rounded-2xl rounded-md shadow md:p-4 p-2">
+    <!-- Main Image with Arrows -->
+    <div class="relative">
+      <img
+        [src]="selectedImage"
+        [alt]="product.name"
+        class="w-full 2xl:h-140 xl:h-100 h-80 object-cover md:rounded-xl rounded-md"
+      />
+      <!-- Left Arrow -->
+      <button
+        (click)="prevImage()"
+        class="absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 md:px-2 md:py-1 md:w-10 md:h-10 h-6 w-6 cursor-pointer rounded-full shadow hover:bg-gray-200 border border-transparent border-gray-200 ease-in-out duration-300"
+      >
+  <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <!-- Right Arrow -->
+      <button
+        (click)="nextImage()"
+        class="absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 md:px-2 md:py-1 md:w-10 md:h-10 h-6 w-6 cursor-pointer rounded-full shadow hover:bg-gray-200 border border-gray-200 hover:border-black ease-in-out duration-300"
+      >
+  <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  
+    <!-- Thumbnails -->
+    <div class="flex space-x-2 md:mt-4 mt-2 overflow-y-auto">
+      <img
+        *ngFor="let img of productImages"
+        [src]="img"
+        [alt]="product.name"
+        class="md:w-20 w-14 h-14 min-w-15 md:h-20 md:min-w-20 object-cover rounded-lg border-2 cursor-pointer border-transparent"
+        [ngClass]="{ 'border-black': img === selectedImage }"
+        (click)="selectImage(img)"
+      />
+    </div>
+  </div>
+  
+  
+      <!-- Product Details -->
+      <div class="w-full lg:w-1/2">
+        <h1 class="text-lg md:text-2xl font-medium text-gray-800">{{ product.name }}</h1>
+        <!-- <div class="flex items-center mt-4">
+          <div class="flex text-yellow-400">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+          <span class="ml-1 text-[#777]"><span class="mx-2">|</span>  {{ product.ratings }} Ratings</span>
+        </div> -->
+        <div class="mt-4 flex justify-start items-center gap-2">
+          <span class="text-2xl font-bold text-[#313b58]">${{ product.sale_price }} <span class="text-gray-400 line-through ml-1 font-medium text-lg">${{ product.regular_price }}</span></span>
+          <!-- <span class="text-green-900 ml-3 font-medium bg-green-200 px-2 py-1 rounded">{{ product.discount }}% Off</span> -->
+        </div>
+        <div class="mt-4 text-lg font-bold text-[#313b58]">SKU#: {{ product.sku }}</div>
+        <!-- <div class="mt-2 text-blue-600">IN STOCK</div> -->
+        <!-- <div class="mt-4 bg-white rounded-lg shadow p-4 text-sm flex justify-between flex-col gap-3">
+          <span class="text-[#212529] font-medium">Real time <span class="bg-[#ffdb56] rounded text-sm p-1 font-semibold">{{ product.visitors }}</span> visitor right now!</span>
+          <div class="flex justify-between  md:gap-2 items-center flex-wrap gap-0">
+            <span class="text-[#313850] text-xl font-semibold">{{ product.timeRemaining }}</span>
+            <span class="text-red-600 text-sm font-light">Time is Running Out!</span>
+          </div>
+        </div> -->
+        <!-- <p class="mt-4 text-gray-600">{{ product.description }}</p> -->
+        <!-- <div class="mt-6">
+          <h3 class="font-semibold">SIZE</h3>
+          <div class="flex space-x-2 mt-2">
+            @for (size of product.sizes; track size) {
+              <button class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-black hover:text-white transition cursor-pointer" [class.bg-blue-500]="selectedSize === size" [class.text-white]="selectedSize === size" (click)="selectSize(size)">
+                {{ size }}
+              </button>
+            }
+          </div>
+        </div>
+        <div class="mt-6">
+          <h3 class="font-semibold">COLORS</h3>
+          <div class="flex space-x-2 mt-2">
+            @for (color of product.colors; track color) {
+              <span class="w-6 h-6 rounded-full cursor-pointer border border-gray-200 hover:border-black" [style.backgroundColor]="color" [class.border-2]="selectedColor === color" [class.border-blue-500]="selectedColor === color" (click)="selectColor(color)"></span>
+            }
+          </div>
+        </div> -->
+        <!-- <div class="mt-6 flex space-x-2 flex-wrap md:flex-nowrap gap-y-3 md:gap-y-0">
+          <button class="bg-white rounded-lg shadow text-gray-700 px-4 py-2 rounded flex items-center max-w-[120px] w-full justify-between gap-1">
+            <i class="fas fa-minus mr-2 cursor-pointer"></i> 1 <i class="fas fa-plus ml-2 cursor-pointer"></i>
+          </button>
+          <button class="max-w-[260px] bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-200 hover:text-black cursor-pointer transition ease-in-out duration-300" (click)="addToCart()">
+            ADD TO CART
+          </button>
+          <button class="bg-white rounded-lg shadow px-3 py-1 cursor-pointer" >
+             <i class="fa-regular fa-heart hover:text-black cursor-pointer"></i>
+          </button>
+          <button class="bg-white rounded-lg shadow px-3 py-1 cursor-pointer">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+        </div> -->
+      </div>
+    </div>
+  
+  
+     <!-- Product Tabs -->
+  <!-- Tab Buttons -->
+  <div class="flex space-x-4 mt-8">
     <button
-      (click)="prevImage()"
-      class="absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 md:px-2 md:py-1 md:w-10 md:h-10 h-6 w-6 cursor-pointer rounded-full shadow hover:bg-gray-200 border border-transparent border-gray-200 ease-in-out duration-300"
+      class="pb-2 cursor-pointer hover:font-semibold hover:text-black  md:text-sm text-[14px]"
+      [ngClass]="{
+        'text-black border-b-2 border-black font-semibold': activeTab === 'detail',
+        'text-gray-600': activeTab !== 'detail'
+      }"
+      (click)="selectTab('detail')"
     >
-<i class="fa-solid fa-arrow-left"></i>
+      Detail
     </button>
-    <!-- Right Arrow -->
+  
+    <!-- <button
+      class="pb-2 cursor-pointer hover:font-semibold hover:text-black  md:text-sm text-[14px]"
+      [ngClass]="{
+        'text-black border-b-2 border-black font-semibold': activeTab === 'specs',
+        'text-gray-600': activeTab !== 'specs'
+      }"
+      (click)="selectTab('specs')"
+    >
+      Specifications
+    </button>
+  
     <button
-      (click)="nextImage()"
-      class="absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 md:px-2 md:py-1 md:w-10 md:h-10 h-6 w-6 cursor-pointer rounded-full shadow hover:bg-gray-200 border border-gray-200 hover:border-black ease-in-out duration-300"
+      class="pb-2 cursor-pointer hover:font-semibold hover:text-black  md:text-sm text-[14px]"
+      [ngClass]="{
+        'text-black border-b-2 border-black font-semibold': activeTab === 'vendor',
+        'text-gray-600': activeTab !== 'vendor'
+      }"
+      (click)="selectTab('vendor')"
     >
-<i class="fa-solid fa-arrow-right"></i>
+      Vendor
     </button>
+  
+    <button
+      class="pb-2 cursor-pointer hover:font-semibold hover:text-black  md:text-sm text-[14px]"
+      [ngClass]="{
+        'text-black border-b-2 border-black font-semibold': activeTab === 'reviews',
+        'text-gray-600': activeTab !== 'reviews'
+      }"
+      (click)="selectTab('reviews')"
+    >
+      Reviews
+    </button> -->
   </div>
-
-  <!-- Thumbnails -->
-  <div class="flex space-x-2 md:mt-4 mt-2 overflow-y-auto">
-    <img
-      *ngFor="let img of productImages"
-      [src]="img"
-      [alt]="product.name"
-      class="md:w-20 w-14 h-14 min-w-15 md:h-20 md:min-w-20 object-cover rounded-lg border-2 cursor-pointer border-transparent"
-      [ngClass]="{ 'border-black': img === selectedImage }"
-      (click)="selectImage(img)"
-    />
-  </div>
-</div>
-
-
-    <!-- Product Details -->
-    <div class="w-full lg:w-1/2">
-      <h1 class="text-lg md:text-2xl font-medium text-gray-800">{{ product.name }}</h1>
-      <div class="flex items-center mt-4">
-        <div class="flex text-yellow-400">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star-half-alt"></i>
-        </div>
-        <span class="ml-1 text-[#777]"><span class="mx-2">|</span>  {{ product.ratings }} Ratings</span>
-      </div>
-      <div class="mt-4 flex justify-start items-center gap-2">
-        <span class="text-2xl font-bold text-[#313b58]">${{ product.discountedPrice }} <span class="text-gray-400 line-through ml-1 font-medium text-lg">${{ product.originalPrice }}</span></span>
-        <span class="text-green-900 ml-3 font-medium bg-green-200 px-2 py-1 rounded">{{ product.discount }}% Off</span>
-      </div>
-      <div class="mt-4 text-lg font-bold text-[#313b58]">SKU#: {{ product.sku }}</div>
-      <div class="mt-2 text-blue-600">IN STOCK</div>
-      <div class="mt-4 bg-white rounded-lg shadow p-4 text-sm flex justify-between flex-col gap-3">
-        <span class="text-[#212529] font-medium">Real time <span class="bg-[#ffdb56] rounded text-sm p-1 font-semibold">{{ product.visitors }}</span> visitor right now!</span>
-        <div class="flex justify-between  md:gap-2 items-center flex-wrap gap-0">
-          <span class="text-[#313850] text-xl font-semibold">{{ product.timeRemaining }}</span>
-          <span class="text-red-600 text-sm font-light">Time is Running Out!</span>
-        </div>
-      </div>
-      <!-- <p class="mt-4 text-gray-600">{{ product.description }}</p> -->
-      <div class="mt-6">
-        <h3 class="font-semibold">SIZE</h3>
-        <div class="flex space-x-2 mt-2">
-          @for (size of product.sizes; track size) {
-            <button class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-black hover:text-white transition cursor-pointer" [class.bg-blue-500]="selectedSize === size" [class.text-white]="selectedSize === size" (click)="selectSize(size)">
-              {{ size }}
-            </button>
-          }
-        </div>
-      </div>
-      <div class="mt-6">
-        <h3 class="font-semibold">COLORS</h3>
-        <div class="flex space-x-2 mt-2">
-          @for (color of product.colors; track color) {
-            <span class="w-6 h-6 rounded-full cursor-pointer border border-gray-200 hover:border-black" [style.backgroundColor]="color" [class.border-2]="selectedColor === color" [class.border-blue-500]="selectedColor === color" (click)="selectColor(color)"></span>
-          }
-        </div>
-      </div>
-      <!-- <div class="mt-6 flex space-x-2 flex-wrap md:flex-nowrap gap-y-3 md:gap-y-0">
-        <button class="bg-white rounded-lg shadow text-gray-700 px-4 py-2 rounded flex items-center max-w-[120px] w-full justify-between gap-1">
-          <i class="fas fa-minus mr-2 cursor-pointer"></i> 1 <i class="fas fa-plus ml-2 cursor-pointer"></i>
-        </button>
-        <button class="max-w-[260px] bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-200 hover:text-black cursor-pointer transition ease-in-out duration-300" (click)="addToCart()">
-          ADD TO CART
-        </button>
-        <button class="bg-white rounded-lg shadow px-3 py-1 cursor-pointer" >
-           <i class="fa-regular fa-heart hover:text-black cursor-pointer"></i>
-        </button>
-        <button class="bg-white rounded-lg shadow px-3 py-1 cursor-pointer">
-          <i class="fas fa-sync-alt"></i>
-        </button>
-      </div> -->
-    </div>
-  </div>
-
-
-   <!-- Product Tabs -->
-<!-- Tab Buttons -->
-<div class="flex space-x-4 mt-8">
-  <button
-    class="pb-2 cursor-pointer hover:font-semibold hover:text-black  md:text-sm text-[14px]"
-    [ngClass]="{
-      'text-black border-b-2 border-black font-semibold': activeTab === 'detail',
-      'text-gray-600': activeTab !== 'detail'
-    }"
-    (click)="selectTab('detail')"
-  >
-    Detail
-  </button>
-
-  <button
-    class="pb-2 cursor-pointer hover:font-semibold hover:text-black  md:text-sm text-[14px]"
-    [ngClass]="{
-      'text-black border-b-2 border-black font-semibold': activeTab === 'specs',
-      'text-gray-600': activeTab !== 'specs'
-    }"
-    (click)="selectTab('specs')"
-  >
-    Specifications
-  </button>
-
-  <button
-    class="pb-2 cursor-pointer hover:font-semibold hover:text-black  md:text-sm text-[14px]"
-    [ngClass]="{
-      'text-black border-b-2 border-black font-semibold': activeTab === 'vendor',
-      'text-gray-600': activeTab !== 'vendor'
-    }"
-    (click)="selectTab('vendor')"
-  >
-    Vendor
-  </button>
-
-  <button
-    class="pb-2 cursor-pointer hover:font-semibold hover:text-black  md:text-sm text-[14px]"
-    [ngClass]="{
-      'text-black border-b-2 border-black font-semibold': activeTab === 'reviews',
-      'text-gray-600': activeTab !== 'reviews'
-    }"
-    (click)="selectTab('reviews')"
-  >
-    Reviews
-  </button>
-</div>
-
-<!-- Tab Content -->
-<div *ngIf="activeTab === 'detail'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
-  <!-- Insert your Detail tab content -->
-
-  <div class="text-gray-800">
-  <p class="text-base leading-relaxed">
-    Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-  </p>
-  <ul class="list-disc pl-5 mt-4 space-y-2">
-    <li>Any Product types that You want - Simple, Configurable</li>
-    <li>Downloadable/Digital Products, Virtual Products</li>
-    <li>Inventory Management with Backordered items</li>
-    <li>Flatlock seams throughout.</li>
-  </ul>
-  <p class="text-base leading-relaxed mt-4">
-    Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-  </p>
-  <p class="text-base leading-relaxed mt-4">
-    There are many variations of passages of Lorem ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem ipsum which looks reasonable. The generated Lorem ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-  </p>
-</div>
-</div>
-
-<div *ngIf="activeTab === 'specs'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
-  <!-- Insert your Specifications content -->
-   <p class="text-base leading-relaxed">
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-    type specimen book. It has survived not only five centuries.
-  </p>
-
-  <ul class="list-disc pl-5 mt-4 space-y-2">
-    <li><strong>Model</strong>: SKU140</li>
-    <li><strong>Weight</strong>: 500 g</li>
-    <li><strong>Dimensions</strong>: 35 × 30 × 7 cm</li>
-    <li><strong>Color</strong>: Black, Pink, Red, White</li>
-    <li><strong>Size</strong>: 10 × 20</li>
-  </ul>
-</div>
-
-<div *ngIf="activeTab === 'vendor'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
-  <!-- Insert your Vendor content -->
-  <div class="flex items-center space-x-4 mb-4">
-    <img src="https://maraviyainfotech.com/projects/mantu-html/assets/img/vendor/1.jpg" alt="Vendor Image" class="w-16 h-16 rounded-full object-cover">
-    <div>
-      <h2 class="text-lg font-semibold">Ocean Crate</h2>
-      <p class="text-sm text-gray-500">Products: 358 | Sales: 5587</p>
-    </div>
-  </div>
-
-  <ul class="space-y-2 text-sm">
-    <li><strong>Phone No.:</strong> +00 987654321</li>
-    <li><strong>Email:</strong> Example&#64;gmail.com</li>
-    <li><strong>Address:</strong> 2548 Broaddus Maple Court, Madisonville KY 4783, USA</li>
-  </ul>
-
-  <p class="text-base leading-relaxed mt-4">
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-    type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-    remaining essentially unchanged.
-  </p>
-</div>
-
-<div *ngIf="activeTab === 'reviews'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
-  <!-- Insert your Reviews content -->
-   <div class="mb-6">
-    <div class="flex items-center space-x-4">
-      <img src="https://maraviyainfotech.com/projects/mantu-html/assets/img/user/1.jpg" alt="Reviewer" class="w-12 h-12 rounded-full object-cover">
-      <div>
-        <h4 class="font-semibold">Mariya Lykra</h4>
-        <p class="text-yellow-500">★★★★☆</p>
-      </div>
-    </div>
-    <p class="mt-2 text-sm">
-      Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-      standard dummy text ever since the 1500s.
+  
+  <!-- Tab Content -->
+  <div *ngIf="activeTab === 'detail'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
+    <!-- Insert your Detail tab content -->
+  
+    <div class="text-gray-800">
+    <p class="text-base leading-relaxed">
+      Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+    </p>
+    <ul class="list-disc pl-5 mt-4 space-y-2">
+      <li>Any Product types that You want - Simple, Configurable</li>
+      <li>Downloadable/Digital Products, Virtual Products</li>
+      <li>Inventory Management with Backordered items</li>
+      <li>Flatlock seams throughout.</li>
+    </ul>
+    <p class="text-base leading-relaxed mt-4">
+      Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+    </p>
+    <p class="text-base leading-relaxed mt-4">
+      There are many variations of passages of Lorem ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem ipsum which looks reasonable. The generated Lorem ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
     </p>
   </div>
-
-  <!-- Review 2 -->
-  <div class="mb-6">
-    <div class="flex items-center space-x-4">
-      <img src="https://maraviyainfotech.com/projects/mantu-html/assets/img/user/1.jpg" alt="Reviewer" class="w-12 h-12 rounded-full object-cover">
+  </div>
+  
+  <div *ngIf="activeTab === 'specs'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
+    <!-- Insert your Specifications content -->
+     <p class="text-base leading-relaxed">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries.
+    </p>
+  
+    <ul class="list-disc pl-5 mt-4 space-y-2">
+      <li><strong>Model</strong>: SKU140</li>
+      <li><strong>Weight</strong>: 500 g</li>
+      <li><strong>Dimensions</strong>: 35 × 30 × 7 cm</li>
+      <li><strong>Color</strong>: Black, Pink, Red, White</li>
+      <li><strong>Size</strong>: 10 × 20</li>
+    </ul>
+  </div>
+  
+  <div *ngIf="activeTab === 'vendor'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
+    <!-- Insert your Vendor content -->
+    <div class="flex items-center space-x-4 mb-4">
+      <img src="https://maraviyainfotech.com/projects/mantu-html/assets/img/vendor/1.jpg" alt="Vendor Image" class="w-16 h-16 rounded-full object-cover">
       <div>
-        <h4 class="font-semibold">Moris Willson</h4>
-        <p class="text-yellow-500">★★★★★</p>
+        <h2 class="text-lg font-semibold">Ocean Crate</h2>
+        <p class="text-sm text-gray-500">Products: 358 | Sales: 5587</p>
       </div>
     </div>
-    <p class="mt-2 text-sm">
-      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+  
+    <ul class="space-y-2 text-sm">
+      <li><strong>Phone No.:</strong> +00 987654321</li>
+      <li><strong>Email:</strong> Example&#64;gmail.com</li>
+      <li><strong>Address:</strong> 2548 Broaddus Maple Court, Madisonville KY 4783, USA</li>
+    </ul>
+  
+    <p class="text-base leading-relaxed mt-4">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged.
     </p>
   </div>
-
-  <!-- Add a Review Form -->
-  <h3 class="text-lg font-semibold mb-2">Add a Review</h3>
-  <form>
-    <div class="mb-4">
-      <label class="block text-sm font-medium mb-1">Your rating:</label>
-      <p class="text-yellow-500">★★★☆☆</p>
+  
+  <div *ngIf="activeTab === 'reviews'" class="p-6 bg-white rounded-lg shadow-md text-gray-800">
+    <!-- Insert your Reviews content -->
+     <div class="mb-6">
+      <div class="flex items-center space-x-4">
+        <img src="https://maraviyainfotech.com/projects/mantu-html/assets/img/user/1.jpg" alt="Reviewer" class="w-12 h-12 rounded-full object-cover">
+        <div>
+          <h4 class="font-semibold">Mariya Lykra</h4>
+          <p class="text-yellow-500">★★★★☆</p>
+        </div>
+      </div>
+      <p class="mt-2 text-sm">
+        Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard dummy text ever since the 1500s.
+      </p>
     </div>
-    <div class="mb-4">
-      <input type="text" placeholder="Name" class="w-full p-2 border border-gray-300 rounded" />
+  
+    <!-- Review 2 -->
+    <div class="mb-6">
+      <div class="flex items-center space-x-4">
+        <img src="https://maraviyainfotech.com/projects/mantu-html/assets/img/user/1.jpg" alt="Reviewer" class="w-12 h-12 rounded-full object-cover">
+        <div>
+          <h4 class="font-semibold">Moris Willson</h4>
+          <p class="text-yellow-500">★★★★★</p>
+        </div>
+      </div>
+      <p class="mt-2 text-sm">
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+      </p>
     </div>
-    <div class="mb-4">
-      <input type="email" placeholder="Email*" class="w-full p-2 border border-gray-300 rounded" />
-    </div>
-    <div class="mb-4">
-      <textarea placeholder="Enter Your Comment" rows="4" class="w-full p-2 border border-gray-300 rounded"></textarea>
-    </div>
-    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-      Submit
-    </button>
-  </form>
-</div>
-
-  <!-- Related Products Section -->
-  <div class="mt-8 lg:mt-15">
-    <h2 class="text-2xl md:text-4xl font-bold text-black md:mb-8 mt-4 text-center">Related Products</h2>
-      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
-      @for (product of products; track product) {
-      <app-product-card [product]="product"></app-product-card>
-    }
+  
+    <!-- Add a Review Form -->
+    <h3 class="text-lg font-semibold mb-2">Add a Review</h3>
+    <form>
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">Your rating:</label>
+        <p class="text-yellow-500">★★★☆☆</p>
+      </div>
+      <div class="mb-4">
+        <input type="text" placeholder="Name" class="w-full p-2 border border-gray-300 rounded" />
+      </div>
+      <div class="mb-4">
+        <input type="email" placeholder="Email*" class="w-full p-2 border border-gray-300 rounded" />
+      </div>
+      <div class="mb-4">
+        <textarea placeholder="Enter Your Comment" rows="4" class="w-full p-2 border border-gray-300 rounded"></textarea>
+      </div>
+      <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+        Submit
+      </button>
+    </form>
   </div>
+  
+  <!-- Bulk BuyBack Form -->
+  <div class="w-full mt-2 mb-2"> <!-- keep same column sizing as product details -->
+    <div class="bg-white rounded-2xl shadow-md p-6">
+      <!-- <h2 class="text-2xl font-semibold text-center mb-6">Bulk BuyBack Program</h2> -->
+  
+      <form [formGroup]="bulkForm" (ngSubmit)="onSubmit()" novalidate>
+        <!-- Name / Email -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm font-medium text-gray-700">Your Name</label>
+            <input formControlName="name" type="text" placeholder="Enter your name"
+                   class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300" />
+            <div *ngIf="bulkForm.get('name')?.touched && bulkForm.get('name')?.invalid" class="text-xs text-red-500 mt-1">
+              Name is required.
+            </div>
+          </div>
+  
+          <div>
+            <label class="text-sm font-medium text-gray-700">Email</label>
+            <input formControlName="email" type="email" placeholder="Enter your email"
+                   class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300" />
+            <div *ngIf="bulkForm.get('email')?.touched && bulkForm.get('email')?.invalid" class="text-xs text-red-500 mt-1">
+              Enter a valid email.
+            </div>
+          </div>
+        </div>
+  
+        <!-- Quantity -->
+        <div class="mt-4">
+          <label class="text-sm font-medium text-gray-700">Quantity</label>
+          <input formControlName="quantity" type="number" min="1" placeholder="Enter quantity"
+                 class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300" />
+        </div>
+  
+        <!-- Models & Condition -->
+        <!-- <div class="mt-4">
+          <label class="text-sm font-medium text-gray-700">Models & Condition</label>
+          <textarea formControlName="models" rows="3" placeholder="Describe the models and condition of your Macs"
+                    class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300"></textarea>
+        </div> -->
+  
+        <!-- Company / Phone -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div>
+            <label class="text-sm font-medium text-gray-700">Company</label>
+            <input formControlName="company" type="text" placeholder="Enter your company name (optional)"
+                   class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300" />
+          </div>
+          <div>
+            <label class="text-sm font-medium text-gray-700">Phone</label>
+            <input formControlName="phone" type="tel" placeholder="Enter your phone number"
+                   class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300" />
+          </div>
+        </div>
+  
+        <!-- Comments -->
+        <div class="mt-4">
+          <label class="text-sm font-medium text-gray-700">Comments</label>
+          <textarea formControlName="comments" rows="3" placeholder="Enter any additional comments"
+                    class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300"></textarea>
+        </div>
+  
+        <!-- Submit -->
+        <div class="mt-6">
+          <button type="submit"
+                  [disabled]="bulkForm.invalid || submitting"
+                  class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg shadow disabled:opacity-60">
+            <span *ngIf="!submitting">Send Now</span>
+            <span *ngIf="submitting">Sending...</span>
+          </button>
+        </div>
+  
+        <!-- success / error -->
+        <div *ngIf="submitSuccess" class="mt-4 text-center text-sm text-green-600">Thanks — we will contact you soon.</div>
+        <div *ngIf="submitError" class="mt-4 text-center text-sm text-red-600">Something went wrong. Try again later.</div>
+      </form>
+    </div>
   </div>
-</div>
-</section>
+  
+  
+    <!-- Related Products Section -->
+    <div class="mt-8 lg:mt-15">
+      <h2 class="text-2xl md:text-4xl font-bold text-black md:mb-8 mt-4 text-center">Related Products</h2>
+        <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
+        @for (product of products; track product) {
+        <app-product-card [product]="product"></app-product-card>
+      }
+    </div>
+    </div>
+  </div>
+  </section>

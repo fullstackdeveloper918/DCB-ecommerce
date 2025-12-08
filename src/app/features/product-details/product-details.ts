@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../core/services/products.service';
 import { SharedModule } from '../../shared/shared-module';
 import { UserService } from '../../core/services/user.service';
+import { Location } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-details',
@@ -13,14 +15,19 @@ import { UserService } from '../../core/services/user.service';
 export class ProductDetails implements OnInit {
   productId!: number;
   products:any
-
+  isFavorite:any
   activeTab: string = 'detail';
+  formData:any
+  bulkForm!: FormGroup;
+  submitting = false;
+  submitSuccess = false;
+  submitError = false;
 
   selectTab(tab: string): void {
     this.activeTab = tab;
   }
   
-  product = {
+  product :any = {
     image: 'https://via.placeholder.com/400',
     name: "Manttu Women's Solid Slim Fit Classic Round Neck Cotton Fabric T-Shirt",
     ratings: 992,
@@ -50,12 +57,14 @@ export class ProductDetails implements OnInit {
   constructor(
   private route: ActivatedRoute, 
   private productService : ProductService, 
-  private userService : UserService) 
+  private userService : UserService,
+  private location: Location,
+  private fb :FormBuilder) 
   {
   this.productId = Number(this.route.snapshot.paramMap.get('id'));
   }
 
-
+  
   selectSize(size: string) {
     this.selectedSize = size;
   }
@@ -72,13 +81,26 @@ export class ProductDetails implements OnInit {
   ngOnInit() {
     this.getProductById(this.productId)
      this.getProducts();
+     this.bulkForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      quantity: [1, [Validators.required, Validators.min(1)]],
+      models: ['', Validators.required],
+      company: [''],
+      phone: [''],
+      comments: [''],
+      // If using reCAPTCHA you may add a control for token:
+      // recaptchaToken: ['', Validators.required]
+    });
     // Fetch product by ID here (call API or service)
   }
 
   // GET PRODUCT BY ID
   getProductById(productId:number){
     this.productService.getProductById(productId, this.userService?.user?.userRole).subscribe((res:any)=>{
-      console.log('individualproudcts', res)
+      if(res){
+      this.product = res;
+      }
     })
   }
 
@@ -92,11 +114,11 @@ export class ProductDetails implements OnInit {
   'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600',
   'https://images.pexels.com/photos/51383/photo-camera-subject-photographer-51383.jpeg',
   'https://images.pexels.com/photos/821749/pexels-photo-821749.jpeg',
-];
+  ];
 
-selectedImage: string = this.productImages[0];
+selectedImage: any = this.productImages[0];
 
-selectImage(img: string) {
+selectImage(img: any) {
   this.selectedImage = img;
 }
 
@@ -112,4 +134,26 @@ prevImage() {
       (index - 1 + this.productImages.length) % this.productImages.length
     ];
 }
+
+isStarFilled(star:any, productRating:any){
+return true
+}
+
+getStars(rating :any){
+
+}
+
+goBack(){
+  this.location.back();
+}
+
+toggleFavorite(){
+
+}
+
+onSubmit(){
+  
+}
+
+
 }
