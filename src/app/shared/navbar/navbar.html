@@ -1,5 +1,5 @@
-<header class="py-4 bg-white text-black sticky top-0 z-50 border-b border-gray-200 z-[99]">
-  <div class="px-4 max-w-[1300px] mx-auto flex justify-between items-center">
+<header class="bg-white text-black sticky top-0 z-50 border-b border-gray-200 z-[99] relative">
+  <div class="px-4 max-w-[1300px] mx-auto flex justify-between items-center py-4">
     <div class="text-4xl font-black cursor-pointer">
       <img routerLink="/home" src="https://dcb-porfolio.vercel.app/DCB-logo.png" alt="logoimage" width="120" height="70" />
     </div>
@@ -9,7 +9,7 @@
       <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Products</a>
       <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Pages</a> -->
     </nav>
-    <div class="socilLinks flex md:gap-4 gap-3 text-lg font-normal items-center">
+    <div class="socilLinks flex md:gap-4 gap-4 text-lg font-normal items-center">
     @if(userService.user){
   <i routerLink="/home/liked-products" class="fa-regular fa-heart hover:text-black cursor-pointer"></i>
     }
@@ -24,15 +24,15 @@
   </div> -->
 
   <!-- Mobile Menu -->
-  <div class="md:hidden">
-    <button id="menu-toggle" (click)="toggleMobileMenu()" class="text-2xl focus:outline-none">
-      <i class="fa-solid fa-bars"></i>
+  <div class="md:hidden order-3">
+    <button id="menu-toggle" (click)="toggleMobileMenu()" class="text-xl focus:outline-none">
+      <i class="fa-solid fa-bars "></i>
     </button>
   </div>
 
   <!-- Profile (moved to the end) -->
     <div class="relative">
-    <i class="fa-regular fa-user cursor-pointer" (click)="toggleProfileMenu()"></i>
+    <i class="fa-regular fa-user cursor-pointer " (click)="toggleProfileMenu()"></i>
 
     <!-- Dropdown (Profile Menu) -->
     <div
@@ -60,7 +60,7 @@
 
   </div>
   <!-- Mobile Menu -->
-  <div id="mobile-menu" *ngIf="isMobileMenuOpen" class="md:hidden bg-white border-t border-gray-200">
+  <div id="mobile-menu" *ngIf="isMobileMenuOpen" class="md:hidden bg-white border-t border-gray-200 py-2 absolute w-full">
     <a href="#" class="block px-4 py-2 text-sm font-normal">Home</a>
     <a href="#" class="block px-4 py-2 text-sm font-normal">Categories</a>
     <a href="#" class="block px-4 py-2 text-sm font-normal">Products</a>

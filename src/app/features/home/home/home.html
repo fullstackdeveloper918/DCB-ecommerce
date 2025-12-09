@@ -1,59 +1,78 @@
-
-
 <!-- Product Grid -->
 <div class=" max-w-full mx-auto">
 
-  <div class="home-banner bg-[#f9fafb]  h-[250px] md:min-h-[270px] md:p-4 px-4 py-6 flex flex-col gap-1 items-center justify-center border border-solid border-[#cccccc29] bg-cover" style="background-image: url('/home-banner.png');">
-      <p class="text-sm font-normal mb-0 text-center text-black">Home > Our Products</p>
+  <div
+    class="home-banner bg-[#f9fafb]  h-[250px] md:min-h-[400px] md:p-4 px-4 py-6 flex flex-col gap-1 items-center justify-center border border-solid border-[#cccccc29] bg-cover bg-no-repeat bg-bottom"
+    style="background-image: url('/merchandise-banner.png');">
+    <p class="text-sm font-normal mb-0 text-center text-black z-1">Home > Our Products</p>
 
-      <h2 class="text-2xl md:text-4xl font-bold text-center text-black">Our Products</h2>
+    <h2 class="text-2xl md:text-4xl font-bold text-center text-black z-1">Our Products</h2>
   </div>
 
   <!-- Breadcrumb -->
 
 </div>
 <div class="py-6 px-4 max-w-[1300px] mx-auto">
-    <div class="bg-[#f9fafb] p-4 rounded-2xl border border-solid border-[#cccccc29] ">
+  <div class="bg-[#f9fafb] p-4 rounded-2xl border border-solid border-[#cccccc29] ">
 
-  <!-- Search and Filters -->
-  <div class="flex flex-col md:flex-row justify-between items-center gap-4 w-full ">
-    <!-- Search Input -->
-    <div class="flex items-center w-full md:w-auto border border-gray-200 bg-white rounded-[20px] focus:outline-none">
-      <button class=" p-2 pl-[15px]">
-        <i class="fas fa-search text-gray-600"></i>
-      </button>
-      <input
-        type="text"
-        placeholder="Search"
-        class="w-full md:w-64 focus:outline-none text-sm"
-        (input)="searchProducts($event)"
-      />
-      <button class="p-2 pr-[15px]">
-        <i class="fas fa-filter text-gray-600"></i>
-      </button>
+    <!-- Search and Filters -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 w-full ">
+      <!-- Search Input -->
+      <div class="flex items-center w-full md:w-auto border border-gray-200 bg-white rounded-[20px] focus:outline-none">
+        <button class=" p-2 pl-[15px]">
+          <i class="fas fa-search text-gray-600"></i>
+        </button>
+        <input type="text" placeholder="Search" class="w-full md:w-64 focus:outline-none text-sm"
+          (input)="searchProducts($event)" />
+        <button class="p-2 pr-[15px]">
+          <i class="fas fa-filter text-gray-600"></i>
+        </button>
+      </div>
+
+      <!-- Sort Dropdown -->
+      <!-- <div class="relative w-full md:w-auto">
+        <select
+          class="w-full md:w-40 p-2 pr-10 border border-gray-200 rounded-[20px] bg-white focus:outline-none text-sm appearance-none pl-[15px]">
+          <option>Sort by</option>
+          <option value="price_asc">Price: Low to High</option>
+          <option value="price_desc">Price: High to Low</option>
+        </select>
+
+
+        <span class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9L12 15L18 9" stroke="#1A2A49" stroke-width="3" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </span>
+      </div>  -->
+<div class="relative w-full md:w-40">
+  <details class="group relative w-full">
+    <summary
+      class="w-full p-2 pl-4 pr-[12px] border border-gray-200 rounded-[20px] bg-white text-sm cursor-pointer list-none flex items-center justify-between focus:outline-none"
+    >
+      <span>Sort by</span>
+      <svg
+        class="w-5 h-5 ml-2 transition-transform duration-200 group-open:rotate-180"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path d="M6 9L12 15L18 9" stroke="#1A2A49" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </summary>
+
+    <ul
+      class="absolute z-50 w-full bg-white border border-gray-200 rounded shadow mt-1 max-h-60 overflow-auto"
+    >
+      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer">Sort by</li>
+      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer">Price: Low to High</li>
+      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer">Price: High to Low</li>
+    </ul>
+  </details>
+</div>
+
     </div>
-
-    <!-- Sort Dropdown -->
-    <div class="relative w-full md:w-auto">
-  <select
-    class="w-full md:w-40 p-2 pr-10 border border-gray-200 rounded-[20px] bg-white focus:outline-none text-sm appearance-none pl-[15px]"
-  >
-    <option>Sort by</option>
-    <option value="price_asc">Price: Low to High</option>
-    <option value="price_desc">Price: High to Low</option>
-  </select>
-
-  <span class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <path d="M6 9L12 15L18 9"
-            stroke="#1A2A49" stroke-width="3" 
-            stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </span>
-</div>
-
   </div>
-</div>
   <!-- Category Filters -->
   <!-- <div class="flex flex-wrap gap-2 mt-4">
     <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
@@ -81,7 +100,7 @@
 
   <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 ">
     @for (product of products; track product) {
-      <app-product-card [product]="product" class="overflow-hidden"></app-product-card>
+    <app-product-card [product]="product" class="overflow-hidden"></app-product-card>
     }
   </div>
 </div>
