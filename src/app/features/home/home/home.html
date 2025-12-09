@@ -1,9 +1,9 @@
 
 
 <!-- Product Grid -->
-<div class="py-6 px-4 max-w-full mx-auto">
+<div class=" max-w-full mx-auto">
 
-  <div class="home-banner bg-[#f9fafb] rounded-2xl min-h-auto md:min-h-[270px] md:p-4 px-4 py-6 flex flex-col gap-1 items-center justify-center border border-solid border-[#cccccc29] bg-cover" style="background-image: url('/home-banner.png');">
+  <div class="home-banner bg-[#f9fafb]  h-[250pxq] md:min-h-[270px] md:p-4 px-4 py-6 flex flex-col gap-1 items-center justify-center border border-solid border-[#cccccc29] bg-cover" style="background-image: url('/home-banner.png');">
       <p class="text-sm font-normal mb-0 text-center text-black">Home > Our Products</p>
 
       <h2 class="text-2xl md:text-4xl font-bold text-center text-black">Our Products</h2>
@@ -13,12 +13,12 @@
 
 </div>
 <div class="py-6 px-4 max-w-[1300px] mx-auto">
-    <div class="bg-[#f9fafb] p-4  mt-6 rounded-2xl border border-solid border-[#cccccc29] ">
+    <div class="bg-[#f9fafb] p-4 rounded-2xl border border-solid border-[#cccccc29] ">
 
   <!-- Search and Filters -->
   <div class="flex flex-col md:flex-row justify-between items-center gap-4 w-full ">
     <!-- Search Input -->
-    <div class="flex items-center w-full md:w-auto border border-gray-200 rounded-[20px] focus:outline-none">
+    <div class="flex items-center w-full md:w-auto border border-gray-200 bg-white rounded-[20px] focus:outline-none">
       <button class=" p-2 pl-[15px]">
         <i class="fas fa-search text-gray-600"></i>
       </button>
@@ -36,7 +36,7 @@
     <!-- Sort Dropdown -->
     <div class="relative w-full md:w-auto">
   <select
-    class="w-full md:w-32 p-2 pr-10 border border-gray-200 rounded-[20px] focus:outline-none text-sm appearance-none pl-[15px]"
+    class="w-full md:w-40 p-2 pr-10 border border-gray-200 rounded-[20px] bg-white focus:outline-none text-sm appearance-none pl-[15px]"
   >
     <option>Sort by</option>
     <option value="price_asc">Price: Low to High</option>
@@ -79,9 +79,9 @@
     </button>
   </div> -->
 
-  <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
+  <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 ">
     @for (product of products; track product) {
-      <app-product-card [product]="product"></app-product-card>
+      <app-product-card [product]="product" class="overflow-hidden"></app-product-card>
     }
   </div>
 </div>

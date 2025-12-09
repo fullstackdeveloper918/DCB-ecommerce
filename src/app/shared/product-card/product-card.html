@@ -1,10 +1,11 @@
-<div class="bg-white border border-solid border-[#8080804a] shadow hover:shadow-lg transition p-3 flex flex-col relative single-product h-full justify-between">
+<div style="overflow: hidden;">
+<div class="bg-white border border-solid border-[#8080804a] shadow hover:shadow-lg transition p-3 flex flex-col relative single-product h-auto gap-2">
   <div class="relative overflow-hidden inline-block">
-    <img [routerLink]="['/home/product', product.id]" [src]="product.image" [alt]="product.name" class="w-full cursor-pointer h-full object-cover mb-4 transition-transform duration-500 hover:scale-110" />
+    <img [routerLink]="['/home/product', product.id]" [src]="product.image" [alt]="product.name" class="productImage w-full cursor-pointer h-full object-cover  transition-transform duration-500 hover:scale-110" />
     <span class="absolute top-3 left-3 bg-red-500 text-white text-[10px] leading-[8px] font-semibold px-[7px] py-[4px] rounded-full">NEW</span>
   </div>
-  <div class="productContent mt-2">
-  <h3 class="text-lg font-semibold">{{ product.name }}</h3>
+  <div class="productContent">
+  <h3 class="text-lg font-semibold productName">{{ product.name }}</h3>
   <!-- <p class="text-gray-500 text-sm flex-grow">{{ product.description }}</p> -->
   <div class="mt-1 flex items-center justify-between gap[10px]">
     <div>
@@ -18,10 +19,12 @@
         }
       </div>
       <div class="flex space-x-2 justify-between w-full ml-[15px] mt-[-11px]">
+        @if(userService.user){
         <button (click)="likeProduct(product.id)" class="absolute top-5 right-4 text-gray-400 z-50 whishlist cursor-pointer">
           <!-- <i class="fas fa-heart"></i> -->
            <i class="fa-regular fa-heart hover:text-black"></i>
         </button>
+      }
         <!-- <button (click)="addToCart(product.id)" class="px-3 py-1 border border-black text-black hover:text-white hover:bg-black transition cursor-pointer rounded-md">
           Add to Cart
         </button> -->
@@ -34,4 +37,5 @@
   </div>
 
     </div>
+</div>
 </div>
