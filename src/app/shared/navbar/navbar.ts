@@ -13,6 +13,22 @@ import { UserService } from '../../core/services/user.service';
   styleUrl: './navbar.scss'
 })
 export class Navbar implements OnInit{
+  // Close profile menu on outside click
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    // Only close if menu is open and click is outside the profile icon or dropdown
+    if (this.showProfileMenu) {
+      const profileIcon = document.querySelector('.fa-user');
+      const dropdown = document.querySelector('.absolute.right-0');
+      if (
+        profileIcon && !profileIcon.contains(target) &&
+        dropdown && !dropdown.contains(target)
+      ) {
+        this.showProfileMenu = false;
+      }
+    }
+  }
  isMobileMenuOpen = false;
  cartCount: number = 0;
  showProfileMenu = false;

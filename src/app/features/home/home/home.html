@@ -47,11 +47,11 @@
         </span>
       </div>  -->
 <div class="relative w-full md:w-40">
-  <details class="group relative w-full">
+  <details class="group relative w-full" #sortDropdown>
     <summary
       class="w-full p-2 pl-4 pr-[12px] border border-gray-200 rounded-[20px] bg-white text-sm cursor-pointer list-none flex items-center justify-between focus:outline-none"
     >
-      <span>Sort by</span>
+      <span>{{ sortLabel }}</span>
       <svg
         class="w-5 h-5 ml-2 transition-transform duration-200 group-open:rotate-180"
         viewBox="0 0 24 24"
@@ -64,14 +64,37 @@
     <ul
       class="absolute z-50 w-full bg-white border border-gray-200 rounded shadow mt-1 max-h-60 overflow-auto"
     >
-      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer">Sort by</li>
-      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer">Price: Low to High</li>
-      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer">Price: High to Low</li>
+      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer" (click)="selectSort('')">Sort by</li>
+      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer" (click)="selectSort('price_asc')">Price: Low to High</li>
+      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer" (click)="selectSort('price_desc')">Price: High to Low</li>
     </ul>
   </details>
 </div>
 
     </div>
+
+    <!-- Sort Dropdown -->
+    <!-- <div class="relative w-full md:w-auto">
+  <select
+    class="w-full md:w-40 p-2 pr-10 border border-gray-200 rounded-[20px] bg-white focus:outline-none text-sm appearance-none pl-[15px]"
+    [(ngModel)]="sortValue"
+    name="sortValue"
+    (change)="onSortChange($event)"
+  >
+    <option value="">Sort by</option>
+    <option value="price_asc">Price: Low to High</option>
+    <option value="price_desc">Price: High to Low</option>
+  </select>
+
+  <span class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M6 9L12 15L18 9"
+            stroke="#1A2A49" stroke-width="3" 
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+</div> -->
+
   </div>
   <!-- Category Filters -->
   <!-- <div class="flex flex-wrap gap-2 mt-4">
@@ -98,9 +121,20 @@
     </button>
   </div> -->
 
-  <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 ">
-    @for (product of products; track product) {
-    <app-product-card [product]="product" class="overflow-hidden"></app-product-card>
-    }
+  <div class="mt-10">
+    <ng-container *ngIf="products && products.length > 0; else noProducts">
+      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        @for (product of products; track product) {
+          <app-product-card [product]="product" class="overflow-hidden"></app-product-card>
+        }
+      </div>
+    </ng-container>
+    <ng-template #noProducts>
+      <div class="flex flex-col items-center justify-center py-20 bg-white rounded-xl shadow-md border border-gray-200">
+        <img src="/no-products.webp" alt="No Products" class="w-32 h-32 mb-4 opacity-80" />
+        <h3 class="text-2xl font-bold text-gray-700 mb-2">No Products Found</h3>
+        <p class="text-gray-500 text-base mb-4">We couldn't find any products matching your search or filters.</p>
+      </div>
+    </ng-template>
   </div>
 </div>

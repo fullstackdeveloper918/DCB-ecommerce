@@ -62,8 +62,9 @@ getLikedProducts(userId: string) {
 }
 
 // LIKE THE PRODUCTS
-// likeProduct(productId:number){
-//   return this.apiService.
-// }
+likeProduct(productId:number){
+  console.log('productId', productId)
+  // return this.apiService.
+}
 
 }

@@ -295,7 +295,7 @@
               <label class="text-md font-medium text-gray-700">Your Name</label>
               <input formControlName="name" type="text" placeholder="Enter your name"
                 class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300" />
-              <div *ngIf="bulkForm.get('name')?.touched && bulkForm.get('name')?.invalid"
+              <div *ngIf="(bulkForm.get('name')?.invalid && (bulkForm.get('name')?.touched || submitAttempted))"
                 class="text-xs text-red-500 mt-1">
                 Name is required.
               </div>
@@ -305,7 +305,7 @@
               <label class="text-md font-medium text-gray-700">Email</label>
               <input formControlName="email" type="email" placeholder="Enter your email"
                 class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-100" />
-              <div *ngIf="bulkForm.get('email')?.touched && bulkForm.get('email')?.invalid"
+              <div *ngIf="(bulkForm.get('email')?.invalid && (bulkForm.get('email')?.touched || submitAttempted))"
                 class="text-xs text-red-500 mt-1">
                 Enter a valid email.
               </div>
@@ -317,6 +317,10 @@
             <label class="text-md font-medium text-gray-700">Quantity</label>
             <input formControlName="quantity" type="number" min="1" placeholder="Enter quantity"
               class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300" />
+            <div *ngIf="(bulkForm.get('quantity')?.invalid && (bulkForm.get('quantity')?.touched || submitAttempted))"
+              class="text-xs text-red-500 mt-1">
+              Quantity is required and must be at least 1.
+            </div>
           </div>
 
           <!-- Models & Condition -->
@@ -332,11 +336,16 @@
               <label class="text-md font-medium text-gray-700">Company</label>
               <input formControlName="company" type="text" placeholder="Enter your company name (optional)"
                 class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300" />
+              <!-- Optional, no validation message -->
             </div>
             <div>
               <label class="text-md font-medium text-gray-700">Phone</label>
               <input formControlName="phone" type="tel" placeholder="Enter your phone number"
                 class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300" />
+              <div *ngIf="(bulkForm.get('phone')?.invalid && (bulkForm.get('phone')?.touched || submitAttempted))"
+                class="text-xs text-red-500 mt-1">
+                Enter a valid phone number.
+              </div>
             </div>
           </div>
 
@@ -345,12 +354,16 @@
             <label class="text-md font-medium text-gray-700">Comments</label>
             <textarea formControlName="comments" rows="3" placeholder="Enter any additional comments"
               class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"></textarea>
+            <div *ngIf="(bulkForm.get('comments')?.invalid && (bulkForm.get('comments')?.touched || submitAttempted))"
+              class="text-xs text-red-500 mt-1">
+              Comments are required.
+            </div>
           </div>
 
           <!-- Submit -->
           <div class="mt-6">
-            <button type="submit" [disabled]="bulkForm.invalid || submitting"
-              class="w-full bg-[#FB2C36] text-white font-medium py-3 rounded-lg shadow disabled:opacity-60">
+            <button type="submit"
+              class="w-full bg-[#FB2C36] text-white font-medium py-3 rounded-lg shadow disabled:opacity-60 cursor-pointer">
               <span *ngIf="!submitting">Send Now</span>
               <span *ngIf="submitting">Sending...</span>
             </button>

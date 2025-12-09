@@ -12,10 +12,11 @@ import { Product } from '../../../core/interfaces/Product.interface';
   styleUrl: './home.scss'
 })
 export class Home implements OnInit, OnDestroy{
- products: Product[] = [];
+  products: Product[] = [];
   private searchSubject = new Subject<string>();
   private subscription = new Subscription();
-  private sortValue: string | undefined;
+  sortValue: string = '';
+  sortLabel: string = 'Sort by';
 
   constructor(
     private productService: ProductService,
@@ -60,9 +61,21 @@ export class Home implements OnInit, OnDestroy{
     this.searchSubject.next(value);
   }
 
-  // sort
-  onSortChange(event: Event) {
-    this.sortValue = (event.target as HTMLSelectElement).value;
-    this.loadProducts(undefined, this.sortValue); // keep search optional, apply sorting
+  // sort for custom dropdown
+  selectSort(value: string) {
+    this.sortValue = value;
+    if (value === 'price_asc') {
+      this.sortLabel = 'Price: Low to High';
+    } else if (value === 'price_desc') {
+      this.sortLabel = 'Price: High to Low';
+    } else {
+      this.sortLabel = 'Sort by';
+    }
+    this.loadProducts(undefined, this.sortValue);
+    // Close the dropdown after selection (optional UX improvement)
+    const details = document.querySelector('details.group');
+    if (details && details.hasAttribute('open')) {
+      details.removeAttribute('open');
+    }
   }
 }

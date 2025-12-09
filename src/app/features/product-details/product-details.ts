@@ -22,6 +22,7 @@ export class ProductDetails implements OnInit {
   submitting = false;
   submitSuccess = false;
   submitError = false;
+  submitAttempted = false;
 
   selectTab(tab: string): void {
     this.activeTab = tab;
@@ -86,8 +87,8 @@ export class ProductDetails implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       quantity: [1, [Validators.required, Validators.min(1)]],
       models: ['', Validators.required],
-      company: [''],
-      phone: [''],
+      company: ['', Validators.required],
+      phone: ['', Validators.pattern('^\\+?[0-9]{7,15}$')],
       comments: [''],
       // If using reCAPTCHA you may add a control for token:
       // recaptchaToken: ['', Validators.required]
@@ -152,8 +153,24 @@ toggleFavorite(){
 }
 
 onSubmit(){
-  
-}
+
+      this.submitAttempted = true;
+      if (this.bulkForm.invalid) {
+        this.submitting = false;
+        this.submitSuccess = false;
+        this.submitError = false;
+        return;
+      }
+      this.submitting = true;
+      // Simulate async submit (replace with actual API call)
+      setTimeout(() => {
+        this.submitting = false;
+        this.submitSuccess = true;
+        this.submitError = false;
+        this.bulkForm.reset();
+        this.submitAttempted = false;
+      }, 1500);
+  }
 
 
 }
