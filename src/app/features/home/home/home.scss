@@ -1,3 +1,13 @@
+
+.home-banner{
+    background-position: right;
+}
+@media(max-width:1900px){
+.home-banner{
+    background-position: right;
+}
+}
+
 @media(max-width:1200px){
 .home-banner{
     background-position: 85%;
@@ -7,7 +17,7 @@
 
 @media(max-width:1500px){
         .home-banner{
-background-position: 76% ;
+background-position: 88% ;
 position:relative;
     }
     .home-banner::before{

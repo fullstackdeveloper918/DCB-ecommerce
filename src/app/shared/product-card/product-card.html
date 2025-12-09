@@ -1,7 +1,7 @@
 <div class="bg-white border border-solid border-[#8080804a] shadow hover:shadow-lg transition p-3 flex flex-col relative single-product h-auto gap-2">
   <div class="relative overflow-hidden inline-block">
     <img [routerLink]="['/home/product', product.id]" [src]="product.image" [alt]="product.name" class="productImage w-full cursor-pointer h-full object-cover  transition-transform duration-500 hover:scale-110" />
-    <span class="absolute top-3 left-3 bg-red-500 text-white text-[10px] leading-[8px] font-semibold px-[7px] py-[4px] rounded-full">NEW</span>
+    <span class="absolute top-3 left-3 bg-red-500 text-white text-[10px] leading-[8px] font-semibold px-[9px] py-[5px] rounded-full">New</span>
   </div>
   <div class="productContent">
   <h3 class="text-lg font-semibold productName">{{ product.name }}</h3>
