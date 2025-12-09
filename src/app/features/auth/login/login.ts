@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared-module';
 import {AngularFireAuth} from '@angular/fire/compat/auth'
 import { Firebase } from '../../../core/services/firebase';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ showPassword: boolean = false;
   private fb: FormBuilder, 
   private router: Router,
   private firebaseService : Firebase,
+  private userService : UserService,
   public firebaseAuth : AngularFireAuth) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -31,6 +33,7 @@ showPassword: boolean = false;
   ngOnInit(): void {}
 
   onSubmit() :any {
+    console.log('this is working')
     // Mark all fields as touched to show validation errors
     if (this.loginForm.invalid) {
       Object.keys(this.loginForm.controls).forEach(key => {
@@ -65,6 +68,7 @@ showPassword: boolean = false;
         currentUserData['validAccount'] = true;
 
         localStorage.setItem("currentUser", JSON.stringify(currentUserData));
+        this.userService.setUser(currentUserData);
         this.doClaimsNavigation();
       } else {
         this.router.navigate(['/pages/login']);
@@ -93,10 +97,15 @@ showPassword: boolean = false;
 }
 
  doClaimsNavigation() {
-   this.router.navigate(['/home'])
-  }
+  this.router.navigate(['/home'])
+}
 togglePasswordVisibility(): void {
   this.showPassword = !this.showPassword;
+}
+
+markTouched(fieldName: string): void {
+  const control = this.loginForm.get(fieldName);
+  control?.markAsTouched();
 }
 
 getFieldError(fieldName: string): string {

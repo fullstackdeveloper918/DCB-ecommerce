@@ -49,7 +49,9 @@ export class Navbar implements OnInit{
 
     
   toggleProfileMenu() {
+     console.log('this is working')
     this.showProfileMenu = !this.showProfileMenu;
+    console.log("profile menu", this.showProfileMenu)
   }
 
   // CHECK LOGGED IN USER

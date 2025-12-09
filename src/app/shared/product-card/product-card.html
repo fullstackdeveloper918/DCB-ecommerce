@@ -18,10 +18,12 @@
         }
       </div>
       <div class="flex space-x-2 justify-between w-full ml-[15px] mt-[-11px]">
+        @if(userService.user){
         <button (click)="likeProduct(product.id)" class="absolute top-5 right-4 text-gray-400 z-50 whishlist cursor-pointer">
           <!-- <i class="fas fa-heart"></i> -->
            <i class="fa-regular fa-heart hover:text-black"></i>
         </button>
+      }
         <!-- <button (click)="addToCart(product.id)" class="px-3 py-1 border border-black text-black hover:text-white hover:bg-black transition cursor-pointer rounded-md">
           Add to Cart
         </button> -->

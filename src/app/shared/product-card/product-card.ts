@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { messages } from '../../core/utils/message';
 import { Auth } from '../../core/services/auth';
 import { GuestCartService } from '../../core/services/guest-cart.service';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-product-card',
@@ -18,7 +19,8 @@ export class ProductCard {
   private productService : ProductService, 
   private toastr : ToastrService ,
   private auth : Auth,
-  private guestCart : GuestCartService
+  private guestCart : GuestCartService,
+  public userService : UserService
   ){}
 
 // addToCart(productId: number) {

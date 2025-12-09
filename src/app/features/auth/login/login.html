@@ -16,7 +16,7 @@
         <label class="block text-sm font-semibold mb-1">Email Address</label>
         <div class="flex items-center border rounded px-3 py-2" [ngClass]="{'border-red-500': isFieldInvalid('email')}">
           <i class="fas fa-user text-gray-400 mr-2"></i>
-          <input type="email" formControlName="email" placeholder="Email Address" class="w-full outline-none" />
+          <input type="email" formControlName="email" placeholder="Email Address" class="w-full outline-none" (blur)="markTouched('email')" />
         </div>
         <div *ngIf="isFieldInvalid('email')" class="text-red-500 text-xs mt-1">
           {{ getFieldError('email') }}
@@ -33,6 +33,7 @@
             formControlName="password"
             placeholder="Password"
             class="w-full outline-none"
+            (blur)="markTouched('password')"
           />
           <i
             class="fas cursor-pointer"
@@ -48,9 +49,9 @@
 
       <!-- Login Button -->
        <div class="flex items-center justify-center mt-6">
-      <span (click)="onSubmit()" class="btn big-btn" mat-raised-button >
+      <button type="submit" class="btn big-btn" mat-raised-button>
         Login
-      </span>
+      </button>
       </div>
     </form>
 

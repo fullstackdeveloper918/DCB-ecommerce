@@ -10,7 +10,9 @@
       <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Pages</a> -->
     </nav>
     <div class="socilLinks flex md:gap-4 gap-3 text-lg font-normal items-center">
+    @if(userService.user){
   <i routerLink="/home/liked-products" class="fa-regular fa-heart hover:text-black cursor-pointer"></i>
+    }
 
   <!-- Cart Icon with Item Count Badge -->
   <!-- <div class="relative">
@@ -33,20 +35,20 @@
     <i class="fa-regular fa-user cursor-pointer" (click)="toggleProfileMenu()"></i>
 
     <!-- Dropdown (Profile Menu) -->
-    <div *ngIf="showProfileMenu"
-        class="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md z-50">
-      
+    <div
+      *ngIf="showProfileMenu"
+      class="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md z-50"
+    >
       <!-- User Name -->
-       @if(userService.user){
-      <div class="px-4 py-2 border-b text-sm font-medium text-gray-700">
-        {{userService.user?.name ||  'Guest User' }}
+      <div class="px-4 py-2 border-b text-sm font-medium text-gray-700" *ngIf="userService.user?.name">
+        {{ userService.user?.name || 'Guest User' }}
       </div>
-    }
 
-      <!-- Logout -->
+      <!-- Logout / Login -->
       <button
         (click)="logOutOrLogin()"
-        class="block w-full text-left text-sm px-4 py-2 hover:bg-gray-100 cursor-pointer">
+        class="block w-full text-left text-sm px-4 py-2 hover:bg-gray-100 cursor-pointer"
+      >
         {{ isUserLoggedIn ? 'Logout' : 'Login' }}
       </button>
     </div>
