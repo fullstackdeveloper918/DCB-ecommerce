@@ -1,6 +1,6 @@
 <header class="bg-white text-black sticky top-0 z-50 border-b border-gray-200 z-[99] relative">
   <div class="px-4 max-w-[1300px] mx-auto flex justify-between items-center py-4">
-    <div class="text-4xl font-black cursor-pointer">
+    <div class="text-4xl font-black cursor-pointer logoImage">
       <img routerLink="/home" src="https://dcb-porfolio.vercel.app/DCB-logo.png" alt="logoimage" width="120" height="70" />
     </div>
     <nav class="md:flex gap-6 text-sm font-normal hidden md:block">
@@ -9,7 +9,7 @@
       <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Products</a>
       <a href="#" class="block md:inline-block hover:font-semibold transition hover:underline">Pages</a> -->
     </nav>
-    <div class="socilLinks flex md:gap-4 gap-3 text-lg font-normal items-center">
+    <div class="socilLinks flex md:gap-4 gap-3 font-normal items-center">
     <!-- @if(userService.user){
   <i routerLink="/home/liked-products" class="fa-regular fa-heart hover:text-black cursor-pointer"></i>
     } -->
@@ -25,14 +25,14 @@
 
   <!-- Mobile Menu -->
   <div class="md:hidden order-3">
-    <button id="menu-toggle" (click)="toggleMobileMenu()" class="text-xl focus:outline-none">
+    <button id="menu-toggle" (click)="toggleMobileMenu()" class="text-xl focus:outline-none align-middle leading-[0]">
       <i class="fa-solid fa-bars "></i>
     </button>
   </div>
 
   <!-- Profile (moved to the end) -->
-    <div class="relative">
-    <i class="fa-regular fa-user cursor-pointer " (click)="toggleProfileMenu()"></i>
+    <div class="relative leading-[0]">
+    <i class="fa-solid fa-circle-user cursor-pointer text-2xl" (click)="toggleProfileMenu()"></i>
 
     <!-- Dropdown (Profile Menu) -->
     <div
@@ -40,7 +40,7 @@
       class="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md z-50"
     >
       <!-- User Name -->
-      <div class="px-4 py-2 border-b text-sm font-medium text-gray-700" *ngIf="userService.user?.name">
+      <div class="px-4 py-2 border-b text-sm font-medium " *ngIf="userService.user?.name">
         {{ userService.user?.name || 'Guest User' }}
       </div>
 

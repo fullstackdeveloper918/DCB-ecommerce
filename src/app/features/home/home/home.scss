@@ -1,47 +1,31 @@
 
 .home-banner{
-    background-position: right;
-}
-@media(max-width:1900px){
-.home-banner{
-    background-position: right;
-}
-}
-
-@media(max-width:1200px){
-.home-banner{
-    background-position: 85%;
+    background-position: center center;
+    background-size: cover;
     position: relative;
-}
+    overflow: hidden;
 }
 
 @media(max-width:1500px){
-        .home-banner{
-background-position: 88% ;
-position:relative;
-    }
     .home-banner::before{
         position: absolute;
         content:"";
-        height :100%;
+        height: 101%;
         width: 100%;
         background-color: rgba(255,255,255,0.7);
         z-index:0;
+        inset: 0;
     }
 }
-@media(max-width:640px){
+@media(max-width:1400px){
     .home-banner{
-background-position:100%;
-    }
+    background-position: right;
+}
 
 }
-@media(max-width:480px){
-        .home-banner{
-background-position:96%;
-    }
-}
+
 @media(max-width:375px){
-        .home-banner{
-background-position:90%;
-    }
+    .home-banner{
+    background-position: 88%;
+}
 }

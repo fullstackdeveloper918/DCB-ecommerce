@@ -8,3 +8,8 @@
 background-color: #000;
 color: #fff;
 }
+@media(max-width:768px){
+    .logoImage img{
+        width: 100px;
+    }
+}

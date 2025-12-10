@@ -1,12 +1,12 @@
-<div class="bg-white border border-solid border-[#8080804a] shadow hover:shadow-lg transition p-3 flex flex-col relative single-product h-auto gap-2">
+<div class="bg-white border border-solid border-[#8080804a] shadow hover:shadow-lg transition flex flex-col relative single-product h-auto">
   <div class="relative overflow-hidden inline-block">
-    <img [routerLink]="['/home/product', product.id]" [src]="product.image" [alt]="product.name" class="productImage w-full cursor-pointer h-full object-cover  transition-transform duration-500 hover:scale-110" />
-    <span class="absolute top-3 left-3 bg-red-500 text-white text-[10px] leading-[8px] font-semibold px-[9px] py-[5px] rounded-full">New</span>
+    <img [routerLink]="['/home/product', product.id]" [src]="product.image" [alt]="product.name" class="productImage w-full cursor-pointer h-full object-cover transition-transform duration-500 hover:scale-110" />
+    <span class="absolute top-3 left-3 bg-red-500 text-white text-[10px] leading-[8px] font-light text-[12px] px-[9px] py-[6px] rounded-full">New</span>
   </div>
-  <div class="productContent">
+  <div class="productContent p-3 border-t-1 border-[#8080804a]">
   <h3 class="text-lg font-semibold productName">{{ product.name }}</h3>
   <!-- <p class="text-gray-500 text-sm flex-grow">{{ product.description }}</p> -->
-  <div class="mt-1 flex items-center justify-between gap[10px]">
+  <div class="mt-2 flex items-baseline justify-between gap[10px]">
     <div>
       <span class="font-[400] text-gray-400">${{ product.regular_price || '--' }}</span>
       <!-- <span class="text-gray-400 line-through ml-2">${{ product.discountPrice }}</span> -->
