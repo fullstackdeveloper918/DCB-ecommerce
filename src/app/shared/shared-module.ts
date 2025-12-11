@@ -4,11 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ProductCard } from './product-card/product-card';
 import { Spinner } from './components/spinner/spinner';
-
+import { ThankYouComponent } from '../features/product-details/Thank-you/thank-you.component';
 
 
 @NgModule({
-  declarations: [ProductCard, Spinner],
+  declarations: [ProductCard, Spinner, ThankYouComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -20,7 +20,8 @@ import { Spinner } from './components/spinner/spinner';
     ProductCard,
     CommonModule,
     Spinner,
-    FormsModule
+    FormsModule,
+    ThankYouComponent
   ]
 })
 export class SharedModule { }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../../core/services/products.service';
-import { SharedModule } from '../../shared/shared-module';
-import { UserService } from '../../core/services/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from '../../../core/services/products.service';
+import { SharedModule } from '../../../shared/shared-module';
+import { UserService } from '../../../core/services/user.service';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -60,7 +60,8 @@ export class ProductDetails implements OnInit {
   private productService : ProductService, 
   private userService : UserService,
   private location: Location,
-  private fb :FormBuilder) 
+  private fb :FormBuilder,
+  private router : Router) 
   {
   this.productId = Number(this.route.snapshot.paramMap.get('id'));
   }
@@ -86,7 +87,6 @@ export class ProductDetails implements OnInit {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       quantity: [1, [Validators.required, Validators.min(1)]],
-      models: ['', Validators.required],
       company: [''],
       phone: ['', [Validators.required, Validators.pattern('^\\+?[0-9]{7,15}$')]],
       comments: [''],
@@ -152,14 +152,14 @@ toggleFavorite(){
 
 }
 
-onSubmit(){
 
+onSubmit(){
+     debugger;
       this.submitAttempted = true;
       if (this.bulkForm.invalid) {
         this.bulkForm.markAllAsTouched();
         this.bulkForm.updateValueAndValidity();
         this.submitting = false;
-        this.submitSuccess = false;
         this.submitError = false;
         return;
       }
@@ -167,10 +167,10 @@ onSubmit(){
       // Simulate async submit (replace with actual API call)
       setTimeout(() => {
         this.submitting = false;
-        this.submitSuccess = true;
         this.submitError = false;
         this.bulkForm.reset();
         this.submitAttempted = false;
+        this.router.navigate(['/home/product/' + this.productId + '/thank-you'])
       }, 1500);
   }
 
