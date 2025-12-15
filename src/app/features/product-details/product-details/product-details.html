@@ -12,7 +12,7 @@
       <!-- Product Image -->
       <div class="w-full lg:w-1/2 bg-white xl:rounded-md rounded-md shadow md:p-4 p-2">
         <!-- Main Image with Arrows -->
-        <div class="relative">
+        <div class="relative" *ngIf="productImages && productImages.length > 0">
           <img [src]="selectedImage" [alt]="product.name"
             class="w-full 2xl:h-140 md:h-140 h-80 object-cover md:rounded-xl rounded-md" />
           <!-- Left Arrow -->
@@ -26,13 +26,29 @@
             <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
-
-        <!-- Thumbnails -->
-        <div class="flex space-x-2 md:mt-4 mt-2 overflow-y-auto">
-          <img *ngFor="let img of productImages" [src]="img" [alt]="product.name"
-            class="md:w-20 w-14 h-14 min-w-15 md:h-20 md:min-w-20 object-cover rounded-lg border-2 cursor-pointer border-transparent"
-            [ngClass]="{ 'border-black': img === selectedImage }" (click)="selectImage(img)" />
+        
+        <!-- No Main Image Placeholder -->
+        <div *ngIf="!productImages || productImages.length === 0" class="w-full 2xl:h-140 md:h-140 h-80 flex items-center justify-center bg-gray-100 rounded-xl">
+          <div class="text-center space-y-3">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white shadow-sm">
+              <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <p class="text-gray-500 font-medium">No images available</p>
+          </div>
         </div>
+
+                    <!-- Thumbnails -->
+            <div class="flex space-x-2 md:mt-4 mt-2 overflow-y-auto">
+              <ng-container *ngIf="productImages && productImages.length > 0">
+                <img *ngFor="let img of productImages" [src]="img" [alt]="product.name"
+                  class="md:w-20 w-14 h-14 min-w-15 md:h-20 md:min-w-20 object-cover rounded-lg border-2 cursor-pointer border-transparent"
+                  [ngClass]="{ 'border-black': img === selectedImage }" (click)="selectImage(img)" />
+              </ng-container>
+              
+            </div>
       </div>
 
 
@@ -300,13 +316,17 @@
         <h1 class="text-2xl md:text-4xl font-bold text-black  text-[#000]">{{ product.name }}</h1>
         <div class="flex items-center mt-4">
           <div class="flex text-yellow-400">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-half-alt"></i>
+            <ng-container *ngFor="let star of getStarArray(product.average_rating || 0)">
+              <i class="fas" 
+                 [ngClass]="{
+                   'fa-star': star === 'full',
+                   'fa-star-half-alt': star === 'half',
+                   'fa-star': star === 'empty'
+                 }"
+                 [class.text-gray-300]="star === 'empty'"></i>
+            </ng-container>
           </div>
-          <span class="ml-1 text-[#777]"><span class="mx-2">|</span> {{ product.ratings }} Ratings</span>
+          <span class="ml-1 text-[#777]"><span class="mx-2">|</span> {{ product.rating_count }} Ratings</span>
         </div>
         <div class="mt-4 flex justify-start items-center gap-2">
           <span class="text-2xl font-bold text-[#313b58]">${{ product.sale_price }}30 <span
@@ -316,27 +336,9 @@
         <div class="my-4 text-lg font-bold text-[#313b58]">SKU#: <span class="text-[#FB2C36]">{{ product.sku }}</span>
         </div>
         <div class="text-gray-800">
-          <p class="text-sm md:text-base leading-relaxed">
-            Upgrade your everyday wardrobe with the Manttu Women’s Solid Slim Fit Classic Round Neck Cotton T-Shirt.
-            Crafted from premium soft cotton fabric, this tee offers exceptional comfort, sweat absorption, and all-day
-            breathability.
-            The slim-fit silhouette gives a sleek, flattering appearance while the classic round neck adds a timeless
-            touch suitable for any occasion—casual outings, office wear, college, travel, or daily routine.
-          </p>
-          <ul class=" text-sm md:text-base list-disc pl-5 mt-4 space-y-2">
-            <li>Soft & high-quality cotton fabric</li>
-            <li>Slim fit for a flattering look</li>
-            <li>Classic round neck design</li>
-            <li>Lightweight & breathable</li>
-          </ul>
-          <p class="text-sm md:text-base leading-relaxed mt-4">
-            Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged.
-          </p>
-
+          <div class="text-sm md:text-base leading-relaxed" [innerHTML]="formatDescription(product.description)"></div>
         </div>
+
 
         <!-- <div class="mt-2 text-blue-600">IN STOCK</div> -->
         <!-- <div class="mt-4 bg-white rounded-lg shadow p-4 text-sm flex justify-between flex-col gap-3">

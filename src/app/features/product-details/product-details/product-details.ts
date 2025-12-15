@@ -23,6 +23,7 @@ export class ProductDetails implements OnInit {
   submitSuccess = false;
   submitError = false;
   submitAttempted = false;
+  productImages: string[] = [];
 
   selectTab(tab: string): void {
     this.activeTab = tab;
@@ -81,9 +82,14 @@ export class ProductDetails implements OnInit {
 
 
   ngOnInit() {
-    this.getProductById(this.productId)
-     this.getProducts();
-     this.bulkForm = this.fb.group({
+    // Subscribe to route params to detect changes when navigating between products
+    this.route.params.subscribe(params => {
+      this.productId = Number(params['id']);
+      window.scrollTo(0, 0); // Scroll to top
+      this.getProductById(this.productId);
+    });
+
+    this.bulkForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       quantity: [1, [Validators.required, Validators.min(1)]],
@@ -101,21 +107,28 @@ export class ProductDetails implements OnInit {
     this.productService.getProductById(productId, this.userService?.user?.userRole).subscribe((res:any)=>{
       if(res){
       this.product = res;
+      this.productImages = res.gallery_images || [];
+      this.selectedImage = this.productImages[0];
+      this.getRelatedProducts();
       }
     })
   }
 
-  getProducts(){
-     this.productService.getProducts().subscribe((res:any)=>{
-      this.products = res
+  getRelatedProducts(){
+     this.productService.getRelatedProducts(this.product.id).subscribe((res:any)=>{
+      console.log('res', res)
+      if(res){
+      this.products = res.products;
+      console.log('Related Products:', this.products);
+      }     
     });
   }
 
-  productImages: string[] = [
-  'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/51383/photo-camera-subject-photographer-51383.jpeg',
-  'https://images.pexels.com/photos/821749/pexels-photo-821749.jpeg',
-  ];
+  // productImages: string[] = [
+  // 'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600',
+  // 'https://images.pexels.com/photos/51383/photo-camera-subject-photographer-51383.jpeg',
+  // 'https://images.pexels.com/photos/821749/pexels-photo-821749.jpeg',
+  // ];
 
 selectedImage: any = this.productImages[0];
 
@@ -136,12 +149,30 @@ prevImage() {
     ];
 }
 
-isStarFilled(star:any, productRating:any){
-return true
+getStarArray(rating: number): string[] {
+  const stars = [];
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
+  
+  for (let i = 0; i < fullStars; i++) {
+    stars.push('full');
+  }
+  
+  if (hasHalfStar) {
+    stars.push('half');
+  }
+  
+  while (stars.length < 5) {
+    stars.push('empty');
+  }
+  
+  return stars;
 }
 
-getStars(rating :any){
-
+formatDescription(description: string): string {
+  if (!description) return '';
+  // Replace \r\n with <br> tags for line breaks
+  return description.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>');
 }
 
 goBack(){
@@ -154,7 +185,6 @@ toggleFavorite(){
 
 
 onSubmit(){
-     debugger;
       this.submitAttempted = true;
       if (this.bulkForm.invalid) {
         this.bulkForm.markAllAsTouched();
@@ -163,15 +193,42 @@ onSubmit(){
         this.submitError = false;
         return;
       }
+      
       this.submitting = true;
-      // Simulate async submit (replace with actual API call)
-      setTimeout(() => {
-        this.submitting = false;
-        this.submitError = false;
-        this.bulkForm.reset();
-        this.submitAttempted = false;
-        this.router.navigate(['/home/product/' + this.productId + '/thank-you'])
-      }, 1500);
+      this.submitError = false;
+
+      // Prepare API payload
+      const payload = {
+        name: this.bulkForm.value.name,
+        email: this.bulkForm.value.email,
+        phone: this.bulkForm.value.phone,
+        company: this.bulkForm.value.company || '',
+        products: [
+          {
+            product_name: this.product.name,
+            quantity: this.bulkForm.value.quantity
+          }
+        ],
+        message: this.bulkForm.value.comments || ''
+      };
+
+      // Call API
+      this.productService.submitBulkOrder(payload).subscribe({
+        next: (response:any) => {
+          if(response.success == true){
+          this.submitting = false;
+          this.submitError = false;
+          this.bulkForm.reset();
+          this.submitAttempted = false;
+          this.router.navigate(['/home/product/' + this.productId + '/thank-you']);
+          }
+        },
+        error: (error) => {
+          console.error('Bulk order submission error:', error);
+          this.submitting = false;
+          this.submitError = true;
+        }
+      });
   }
 
 

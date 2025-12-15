@@ -25,6 +25,14 @@ export class ProductService {
     );
   }
 
+  // GET RELATED PRODUCTS
+  getRelatedProducts(productId: number): Observable<Product[]> {
+    const params = buildHttpParams({
+      product_id: productId,
+    });
+    return this.apiService.get<Product[]>(apiRoutes.relatedProducts, params);
+  } 
+
   // 🔹 Get product by ID
   getProductById(productId: number, userRole?: string): Observable<Product> {
     return this.apiService.get<Product>(
@@ -65,6 +73,11 @@ getLikedProducts(userId: string) {
 likeProduct(productId:number){
   console.log('productId', productId)
   // return this.apiService.
+}
+
+// SUBMIT BULK ORDER
+submitBulkOrder(payload: any) {
+  return this.apiService.post(apiRoutes.bulkOrderEmail, payload);
 }
 
 }

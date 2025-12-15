@@ -13,10 +13,12 @@ import { Product } from '../../../core/interfaces/Product.interface';
 })
 export class Home implements OnInit, OnDestroy{
   products: Product[] = [];
+  limitedProducts: Product[] = [];
   private searchSubject = new Subject<string>();
   private subscription = new Subscription();
   sortValue: string = '';
   sortLabel: string = 'Sort by';
+  productLimit: number = 8;
 
   constructor(
     private productService: ProductService,
@@ -45,11 +47,13 @@ export class Home implements OnInit, OnDestroy{
         .subscribe({
           next: (res: Product[]) => {
             this.products = res || [];
+            this.limitedProducts = this.products.slice(0, this.productLimit);
             console.log('products', this.products);
           },
           error: (error) => {
             console.error('Error loading products:', error);
             this.products = [];
+            this.limitedProducts = [];
           }
         })
     );

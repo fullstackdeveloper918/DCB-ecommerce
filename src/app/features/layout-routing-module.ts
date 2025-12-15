@@ -13,6 +13,10 @@ const routes: Routes = [
         import('./home/home-module').then((m) => m.HomeModule)
       },
       {
+        path : 'all-products',
+        loadChildren: () => import('./all-products/all-products-routing-module').then((m)=>m.AllProductsRoutingModule)
+      },
+      {
         path : 'product/:id',
         loadChildren: () => import('./product-details/product-details-module').then((m)=>m.ProductDetailsModule)
       }, 
