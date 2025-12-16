@@ -1,16 +1,8 @@
 <!-- Product Grid -->
-<div class=" py-6 px-4 max-w-[1300px] mx-auto">
-
-  <div
-    class="home-banner bg-[#f9fafb]  h-[250px] md:min-h-[403px] md:p-4 px-4 py-6 flex flex-col gap-1 items-center justify-center  bg-cover bg-no-repeat bg-bottom"
-    style="background-image: url('/merchandise-banner.png');">
-    <!-- <p class="text-sm font-normal mb-0 text-center text-black z-1">Home > Our Products</p> -->
-
-    <!-- <h2 class="text-3xl md:text-[45px] font-bold text-center text-black z-1">Our Products</h2> -->
-  </div>
-
-  <!-- Breadcrumb -->
-
+<!-- Banner at the very top, just under the navbar -->
+<div class="home-banner bg-[#f9fafb] h-[100vh] md:h-[100vh] md:p-4 px-4 py-6 flex flex-col gap-1 items-center justify-center bg-cover bg-no-repeat bg-bottom" style="background-image: url('/merchandise-banner1.png');">
+  <!-- <p class="text-sm font-normal mb-0 text-center text-black z-1">Home > Our Products</p> -->
+  <!-- <h2 class="text-3xl md:text-[45px] font-bold text-center text-black z-1">Our Products</h2> -->
 </div>
 <div class="py-6 px-4 max-w-[1300px] mx-auto">
   <!-- <div class="bg-[#f9fafb] p-4 rounded-2xl border border-solid border-[#cccccc29]"> -->
@@ -123,12 +115,32 @@
 
   <div class="mt-[20px]">
     <ng-container *ngIf="limitedProducts && limitedProducts.length > 0; else noProducts">
-      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        @for (product of limitedProducts; track product) {
-          <app-product-card [product]="product" class="overflow-hidden"></app-product-card>
-        }
+      <div class="relative">
+        <!-- Left Arrow -->
+        <button type="button"
+                class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full shadow p-2 border border-gray-200 flex items-center justify-center"
+                style="transform: translateY(-50%);"
+                (click)="productScroll.scrollBy({ left: -productScroll.offsetWidth, behavior: 'smooth' })"
+                aria-label="Scroll Left">
+          <i class="fas fa-chevron-left text-xl"></i>
+        </button>
+        <!-- Product Scrollable Row -->
+        <div #productScroll class="flex gap-6 overflow-x-auto scroll-smooth pb-4 hide-scrollbar" style="scrollbar-width: none; -ms-overflow-style: none;">
+          @for (product of limitedProducts; track product) {
+            <div class="min-w-[260px] max-w-xs flex-shrink-0">
+              <app-product-card [product]="product" class="overflow-hidden"></app-product-card>
+            </div>
+          }
+        </div>
+        <!-- Right Arrow -->
+        <button type="button"
+                class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full shadow p-2 border border-gray-200 flex items-center justify-center"
+                style="transform: translateY(-50%);"
+                (click)="productScroll.scrollBy({ left: productScroll.offsetWidth, behavior: 'smooth' })"
+                aria-label="Scroll Right">
+          <i class="fas fa-chevron-right text-xl"></i>
+        </button>
       </div>
-      
       <!-- See More Button -->
       <div class="flex justify-center mt-8" >
         <button 
@@ -150,7 +162,7 @@
 
   <!-- About Us Section -->
   <section class="mt-16 py-12 bg-white rounded-xl shadow-md">
-    <div class="max-w-[1100px] mx-auto px-4">
+    <div>
       <div class="text-center mb-10">
         <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">About Us</h2>
         <div class="w-20 h-1 bg-black mx-auto"></div>
@@ -160,7 +172,7 @@
         <!-- Image Section -->
         <div class="order-2 md:order-1">
           <img 
-            src="/about-us-image.jpg" 
+            src="/about-us.png" 
             alt="About Us" 
             class="w-full h-auto rounded-lg shadow-lg object-cover"
             onerror="this.src='https://images.unsplash.com/photo-1556740758-90de374c12ad?w=600&h=400&fit=crop'">
