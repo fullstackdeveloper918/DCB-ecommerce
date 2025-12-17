@@ -10,7 +10,7 @@ export class NewsletterService {
     // Simulate API call with delay
     return of({
       success: true,
-      message: 'Thank you for subscribing to our newsletter!'
+      message: 'Thank you for contacting us!'
     }).pipe(delay(1000));
   }
 }
