@@ -1,0 +1,78 @@
+<!-- Cards -->
+<div class="grid md:grid-cols-3 gap-8" *ngIf="!loading">
+
+  <div
+    *ngFor="let review of reviews"
+    class="rounded-xl overflow-hidden hover:shadow-lg transition"
+  >
+
+    <!-- Image -->
+    <div class="relative group">
+      <img
+        [src]="review.image"
+        class="w-full h-[240px] object-cover"
+        alt="Product"
+      />
+
+      <div
+        class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100
+               flex items-center justify-center transition"
+      >
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6 space-y-4">
+
+      <!-- Rating -->
+      <div class="flex gap-1 text-[#f5a623]">
+        <i
+          class="fas fa-star"
+          *ngFor="let star of getStars(review.rating)"
+        ></i>
+      </div>
+
+      <!-- Review -->
+      <p class="text-gray-600 text-sm leading-relaxed">
+        “{{ review.review }}”
+      </p>
+
+      <!-- Author -->
+      <p class="font-medium text-black text-sm">
+        {{ review.author }}
+      </p>
+
+      <!-- <hr /> -->
+
+      <!-- Product -->
+      <!-- <div class="flex items-center gap-4">
+        <img
+          [src]="review.product.image"
+          class="w-12 h-12 rounded-full object-cover"
+        />
+
+        <div>
+          <p class="text-sm font-medium text-black">
+            {{ review.product.name }}
+          </p>
+          <p class="text-sm text-gray-600">
+            {{ review.product.price }}
+            <span
+              *ngIf="review.product.oldPrice"
+              class="line-through text-gray-400 ml-1"
+            >
+              {{ review.product.oldPrice }}
+            </span>
+          </p>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Loading State -->
+<div *ngIf="loading" class="grid md:grid-cols-3 gap-8">
+  <div *ngFor="let i of [1,2,3]" class="h-[420px] bg-gray-100 animate-pulse rounded-xl"></div>
+</div>

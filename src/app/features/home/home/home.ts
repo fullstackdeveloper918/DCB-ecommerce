@@ -4,6 +4,7 @@ import { SharedModule } from '../../../shared/shared-module';
 import { UserService } from '../../../core/services/user.service';
 import { distinctUntilChanged, Subject, Subscription } from 'rxjs';
 import { Product } from '../../../core/interfaces/Product.interface';
+import { dummyProducts } from '../../../core/utils/sample.data';
 
 @Component({
   selector: 'app-home',
@@ -12,13 +13,32 @@ import { Product } from '../../../core/interfaces/Product.interface';
   styleUrl: './home.scss'
 })
 export class Home implements OnInit, OnDestroy{
-  products: Product[] = [];
+  products!: Product[];
   limitedProducts: Product[] = [];
   private searchSubject = new Subject<string>();
   private subscription = new Subscription();
   sortValue: string = '';
   sortLabel: string = 'Sort by';
   productLimit: number = 8;
+  currentBannerIndex = 0;
+  banners = [
+  {
+    image: 'banner-1.png',
+    title: 'Premium Products for Modern Living',
+    subtitle: 'Discover high-quality merchandise curated for style and durability.'
+  },
+  {
+    image: 'banner-2.png',
+    title: 'Designed for Everyday Comfort',
+    subtitle: 'Modern essentials crafted with precision and care.'
+  },
+  {
+    image: 'banner-3.png',
+    title: 'Style That Speaks Quality',
+    subtitle: 'Upgrade your lifestyle with premium collections.'
+  }
+];
+
 
   constructor(
     private productService: ProductService,
@@ -46,9 +66,10 @@ export class Home implements OnInit, OnDestroy{
         .getProducts(this.userService.user?.userRole, searchedText, sort)
         .subscribe({
           next: (res: Product[]) => {
-            this.products = res || [];
+            this.products = res
+            // this.products = dummyProducts  // this will change later
             this.limitedProducts = this.products.slice(0, this.productLimit);
-            console.log('products', this.products);
+            this.limitedProducts = [...this.limitedProducts,...dummyProducts]
           },
           error: (error) => {
             console.error('Error loading products:', error);
@@ -82,4 +103,19 @@ export class Home implements OnInit, OnDestroy{
       details.removeAttribute('open');
     }
   }
+
+  
+    nextBanner() {
+      this.currentBannerIndex =
+        (this.currentBannerIndex + 1) % this.banners.length;
+    }
+
+    prevBanner() {
+      this.currentBannerIndex =
+        (this.currentBannerIndex - 1 + this.banners.length) % this.banners.length;
+    }
+
+    goToBanner(index: number) {
+      this.currentBannerIndex = index;
+    }
 }

@@ -1,3 +1,121 @@
-<footer class="bg-black text-white text-center p-4 mt-8">
-  <p class="text-[12px]">&copy; {{ currentYear }} E-Shop. All rights reserved.</p>
+<footer class="bg-[#111] text-gray-300 pt-20" *ngIf="footerData">
+
+  <div class="max-w-[1300px] mx-auto px-6
+              grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
+
+    <!-- STORE INFO -->
+    <div>
+      <h3 class="text-white text-lg font-semibold mb-6 tracking-wide">
+        STORE INFORMATION
+      </h3>
+
+      <ul class="space-y-4 text-sm">
+        <li class="flex gap-3">
+          <i class="fas fa-map-marker-alt mt-1"></i>
+          <span class="leading-relaxed whitespace-pre-line">
+            {{ footerData.storeInfo.address }}
+          </span>
+        </li>
+
+        <li class="flex gap-3">
+          <i class="fas fa-phone-alt mt-1"></i>
+          <span>{{ footerData.storeInfo.phone }}</span>
+        </li>
+
+        <li class="flex gap-3">
+          <i class="fas fa-envelope mt-1"></i>
+          <span>{{ footerData.storeInfo.email }}</span>
+        </li>
+      </ul>
+
+      <!-- Social Icons -->
+      <div class="flex gap-3 mt-6">
+        <ng-container *ngFor="let social of footerData.storeInfo.socials">
+          <a
+            [href]="social.link"
+            [target]="social.isEmail ? '_self' : '_blank'"
+            [attr.rel]="social.isEmail ? '' : 'noopener noreferrer'"
+            class="w-10 h-10 border border-gray-600 rounded-full
+                   flex items-center justify-center
+                   hover:bg-white hover:text-black transition"
+          >
+            <i [class]="social.icon"></i>
+          </a>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="max-w-md ml-auto w-full">
+      <h3 class="text-white text-lg font-semibold mb-6 tracking-wide">
+        {{ footerData.newsletter.title }}
+      </h3>
+
+      <!-- Subscription Form -->
+      <form [formGroup]="newsletterForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <!-- Email Input -->
+        <div class="relative">
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Enter your email address..."
+            class="w-full bg-white text-black text-sm px-4 py-3 pr-12 outline-none"
+            [class.border-red-500]="newsletterForm.get('email')?.invalid && newsletterForm.get('email')?.touched"
+          />
+          <button
+            type="submit"
+            class="absolute right-0 top-0 h-full w-12
+                   bg-black text-white
+                   flex items-center justify-center
+                   hover:bg-gray-800 transition
+                   disabled:opacity-50 disabled:cursor-not-allowed"
+            [disabled]="newsletterForm.invalid || isLoading"
+          >
+            <i *ngIf="!isLoading" class="fas fa-arrow-right"></i>
+            <i *ngIf="isLoading" class="fas fa-circle-notch fa-spin"></i>
+          </button>
+        </div>
+
+        <!-- Validation Messages -->
+        <div *ngIf="newsletterForm.get('email')?.touched && newsletterForm.get('email')?.errors" class="text-red-400 text-xs">
+          <p *ngIf="newsletterForm.get('email')?.errors?.['required']">Email is required</p>
+          <p *ngIf="newsletterForm.get('email')?.errors?.['email']">Please enter a valid email</p>
+        </div>
+
+        <!-- Success/Error Message -->
+        <div *ngIf="subscriptionStatus" 
+             class="p-3 rounded text-sm"
+             [ngClass]="{
+               'bg-green-100 text-green-700': subscriptionStatus.success,
+               'bg-red-100 text-red-700': !subscriptionStatus.success
+             }">
+          {{ subscriptionStatus.message }}
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- Divider -->
+  <div class="border-t border-gray-800 mt-16"></div>
+
+  <!-- Bottom Bar -->
+  <div
+    class="max-w-[1300px] mx-auto px-6 py-6
+           flex flex-col md:flex-row
+           justify-between items-center
+           gap-4 text-sm text-gray-400"
+  >
+    <p>{{ footerData.copyright }}</p>
+
+    <div class="flex gap-4 items-center">
+      <img
+        *ngFor="let p of footerData.payments"
+        [src]="'/' + p + '.svg'"
+        class="h-6"
+        alt="payment"
+      />
+    </div>
+  </div>
+
 </footer>

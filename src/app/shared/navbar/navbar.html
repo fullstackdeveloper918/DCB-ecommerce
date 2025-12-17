@@ -1,7 +1,7 @@
-<header class=" text-black sticky top-0 z-50 border-b border-gray-200 z-[99] relative">
+<header class="absolute top-0 left-0 right-0 z-[100] text-black">
   <div class="px-4 max-w-[1300px] mx-auto flex justify-between items-center py-4">
     <div class="text-4xl font-black cursor-pointer logoImage">
-      <img routerLink="/home" src="https://dcb-porfolio.vercel.app/DCB-logo.png" alt="logoimage" width="120" height="70" />
+      <img routerLink="/home" src="https://dcb-porfolio.vercel.app/DCB-logo.png" [ngClass]="isHomeExact ? 'invert brightness-0' : ''"  alt="logoimage" width="120" height="70" />
     </div>
     <nav class="md:flex gap-6 text-sm font-normal hidden md:block">
       <!-- <a routerLink="/home" class="block md:inline-block hover:underline hover:font-semibold transition activeteb">Home</a> -->
@@ -24,15 +24,15 @@
   </div> -->
 
   <!-- Mobile Menu -->
-  <div class="md:hidden order-3">
+  <!-- <div class="md:hidden order-3">
     <button id="menu-toggle" (click)="toggleMobileMenu()" class="text-xl focus:outline-none align-middle leading-[0]">
       <i class="fa-solid fa-bars "></i>
     </button>
-  </div>
+  </div> -->
 
   <!-- Profile (moved to the end) -->
     <div class="relative leading-[0]">
-    <i class="fa-solid fa-circle-user cursor-pointer text-2xl" (click)="toggleProfileMenu()"></i>
+    <i class="fa-solid fa-circle-user cursor-pointer text-2xl" [ngClass]="isHomeExact ? 'invert brightness-0' : ''"  (click)="toggleProfileMenu()"></i>
 
     <!-- Dropdown (Profile Menu) -->
     <div
@@ -60,10 +60,10 @@
 
   </div>
   <!-- Mobile Menu -->
-  <div id="mobile-menu" *ngIf="isMobileMenuOpen" class="md:hidden bg-white border-t border-gray-200 py-2 absolute w-full">
+  <!-- <div id="mobile-menu" *ngIf="isMobileMenuOpen" class="md:hidden bg-white border-t border-gray-200 py-2 absolute w-full">
     <a href="#" class="block px-4 py-2 text-sm font-normal">Home</a>
     <a href="#" class="block px-4 py-2 text-sm font-normal">Categories</a>
     <a href="#" class="block px-4 py-2 text-sm font-normal">Products</a>
     <a href="#" class="block px-4 py-2 text-sm font-normal">Pages</a>
-  </div>
+  </div> -->
 </header>

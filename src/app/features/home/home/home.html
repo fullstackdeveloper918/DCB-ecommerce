@@ -1,10 +1,101 @@
 <!-- Product Grid -->
 <!-- Banner at the very top, just under the navbar -->
-<div class="home-banner bg-[#f9fafb] h-[100vh] md:h-[100vh] md:p-4 px-4 py-6 flex flex-col gap-1 items-center justify-center bg-cover bg-no-repeat bg-bottom" style="background-image: url('/merchandise-banner1.png');">
-  <!-- <p class="text-sm font-normal mb-0 text-center text-black z-1">Home > Our Products</p> -->
-  <!-- <h2 class="text-3xl md:text-[45px] font-bold text-center text-black z-1">Our Products</h2> -->
+<!-- Banner at the very top, just under the navbar -->
+<!-- Banner Slider -->
+<div
+  class="home-banner relative h-[100vh] z-10 flex items-center justify-center overflow-hidden"
+>
+
+  <!-- Slides -->
+  <div
+    class="absolute inset-0 transition-all duration-700 ease-in-out bg-cover bg-bottom"
+    [ngStyle]="{
+      'background-image': 'url(' + banners[currentBannerIndex].image + ')'
+    }"
+  ></div>
+
+  <!-- Dark Overlay -->
+  <div class="absolute inset-0 bg-black/40"></div>
+
+  <!-- Banner Content -->
+  <div class="relative z-10 text-center max-w-2xl px-4">
+    <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+      {{ banners[currentBannerIndex].title }}
+    </h1>
+
+    <p class="text-base md:text-lg text-gray-200 mb-8">
+      {{ banners[currentBannerIndex].subtitle }}
+    </p>
+
+    <button
+      routerLink="/home/all-products"
+      class="inline-flex items-center gap-3
+             bg-black text-white
+             px-8 py-4 rounded-full
+             text-sm md:text-base font-semibold
+             hover:bg-gray-900
+             transition-all duration-300
+             shadow-lg hover:shadow-xl
+             cursor-pointer
+             group"
+    >
+      Shop Now
+      <i class="fas fa-arrow-right transform transition-transform duration-300 group-hover:translate-x-1"></i>
+    </button>
+  </div>
+
+  <!-- Prev Button -->
+  <button
+    type="button"
+    (click)="prevBanner()"
+    class="absolute left-6 top-1/2 -translate-y-1/2 z-20
+           w-11 h-11 rounded-full
+           bg-white/80 backdrop-blur
+           flex items-center justify-center
+           text-gray-800
+           hover:bg-black hover:text-white
+           cursor-pointer
+           transition-all duration-300"
+    aria-label="Previous Banner"
+  >
+    <i class="fas fa-chevron-left"></i>
+  </button>
+
+  <!-- Next Button -->
+  <button
+    type="button"
+    (click)="nextBanner()"
+    class="absolute right-6 top-1/2 -translate-y-1/2 z-20
+           w-11 h-11 rounded-full
+           bg-white/80 backdrop-blur
+           flex items-center justify-center
+           text-gray-800
+           hover:bg-black hover:text-white
+           cursor-pointer
+           transition-all duration-300"
+    aria-label="Next Banner"
+  >
+    <i class="fas fa-chevron-right"></i>
+  </button>
+
+  <!-- Dots -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+    <button
+      *ngFor="let banner of banners; let i = index"
+      (click)="goToBanner(i)"
+      class="w-2.5 h-2.5 rounded-full transition-all duration-300"
+      [ngClass]="
+        i === currentBannerIndex
+          ? 'bg-white w-6'
+          : 'bg-white/50 hover:bg-white'
+      "
+    ></button>
+  </div>
+
 </div>
-<div class="py-6 px-4 max-w-[1300px] mx-auto">
+
+
+<div class="py-6 px-4 max-w-[1393px]  mx-auto">
   <!-- <div class="bg-[#f9fafb] p-4 rounded-2xl border border-solid border-[#cccccc29]"> -->
 <div class="">
     <!-- Search and Filters -->
@@ -113,43 +204,112 @@
     </button>
   </div> -->
 
+  <!-- Section Heading -->
+<div class="flex items-center justify-between mb-6">
+  
+   <!-- Title Block -->
+  <div class="relative">
+    <!-- Accent line -->
+    <span
+      class="absolute -left-4 top-2 h-10 w-1 bg-black rounded-full hidden md:block">
+    </span>
+
+    <h2
+      class="text-3xl md:text-4xl font-semibold text-black tracking-tight leading-tight">
+      Today’s Top Picks
+    </h2>
+
+    <!-- Subtitle badge -->
+    <div
+      class="inline-flex items-center gap-2 mt-2
+             text-xs font-medium text-gray-600
+             bg-gray-100 px-3 py-1 rounded-full">
+      <i class="fas fa-star text-[10px] text-gray-700"></i>
+      Handpicked products just for you
+    </div>
+  </div>
+
+  <!-- View All -->
+  <a
+    routerLink="/home/all-products"
+    class="group inline-flex items-center gap-3
+           text-sm font-semibold text-black
+           border-b-2 border-transparent
+           hover:border-black
+           transition-all duration-300"
+  >
+    View All Products
+    <span
+      class="w-8 h-8 rounded-full
+             bg-black text-white
+             flex items-center justify-center
+             transform transition-transform duration-300
+             group-hover:translate-x-1"
+    >
+      <i class="fas fa-arrow-right text-xs"></i>
+    </span>
+  </a>
+
+</div>
+
+
   <div class="mt-[20px]">
     <ng-container *ngIf="limitedProducts && limitedProducts.length > 0; else noProducts">
-      <div class="relative">
+      <div class="relative group">
+  
         <!-- Left Arrow -->
-        <button type="button"
-                class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full shadow p-2 border border-gray-200 flex items-center justify-center"
-                style="transform: translateY(-50%);"
-                (click)="productScroll.scrollBy({ left: -productScroll.offsetWidth, behavior: 'smooth' })"
-                aria-label="Scroll Left">
-          <i class="fas fa-chevron-left text-xl"></i>
+        <button
+          type="button"
+          class="absolute left-[-34px] top-1/2 -translate-y-1/2 z-10
+                hidden md:flex
+                w-10 h-10
+                bg-white border border-gray-200
+                shadow-sm
+                items-center justify-center
+                text-gray-700
+                hover:bg-black hover:text-white
+                transition-all duration-300
+                group-hover:flex"
+          (click)="productScroll.scrollBy({ left: -productScroll.offsetWidth, behavior: 'smooth' })"
+          aria-label="Scroll Left"
+        >
+          <i class="fas fa-arrow-left text-sm"></i>
         </button>
+
         <!-- Product Scrollable Row -->
-        <div #productScroll class="flex gap-6 overflow-x-auto scroll-smooth pb-4 hide-scrollbar" style="scrollbar-width: none; -ms-overflow-style: none;">
+        <div
+          #productScroll
+          class="flex gap-6 overflow-x-auto scroll-smooth pb-4 hide-scrollbar"
+          style="scrollbar-width: none; -ms-overflow-style: none;"
+        >
           @for (product of limitedProducts; track product) {
             <div class="min-w-[260px] max-w-xs flex-shrink-0">
-              <app-product-card [product]="product" class="overflow-hidden"></app-product-card>
+              <app-product-card [product]="product"></app-product-card>
             </div>
           }
         </div>
+
         <!-- Right Arrow -->
-        <button type="button"
-                class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full shadow p-2 border border-gray-200 flex items-center justify-center"
-                style="transform: translateY(-50%);"
-                (click)="productScroll.scrollBy({ left: productScroll.offsetWidth, behavior: 'smooth' })"
-                aria-label="Scroll Right">
-          <i class="fas fa-chevron-right text-xl"></i>
+        <button
+          type="button"
+          class="absolute right-[-25px] top-1/2 -translate-y-1/2 z-10
+                hidden md:flex
+                w-10 h-10
+                bg-white border border-gray-200
+                shadow-sm
+                items-center justify-center
+                text-gray-700
+                hover:bg-black hover:text-white
+                transition-all duration-300
+                group-hover:flex"
+          (click)="productScroll.scrollBy({ left: productScroll.offsetWidth, behavior: 'smooth' })"
+          aria-label="Scroll Right"
+        >
+          <i class="fas fa-arrow-right text-sm"></i>
         </button>
+
       </div>
-      <!-- See More Button -->
-      <div class="flex justify-center mt-8" >
-        <button 
-          routerLink="/home/all-products"
-          class="cursor-pointer bg-black text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition duration-300 flex items-center gap-2">
-          See More Products
-          <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
+
     </ng-container>
     <ng-template #noProducts>
       <div class="flex flex-col items-center justify-center py-20 bg-white rounded-xl shadow-md border border-gray-200">
@@ -160,45 +320,10 @@
     </ng-template>
   </div>
 
-  <!-- About Us Section -->
-  <section class="mt-16 py-12 bg-white rounded-xl shadow-md">
-    <div>
-      <div class="text-center mb-10">
-        <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">About Us</h2>
-        <div class="w-20 h-1 bg-black mx-auto"></div>
-      </div>
-      
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <!-- Image Section -->
-        <div class="order-2 md:order-1">
-          <img 
-            src="/about-us.png" 
-            alt="About Us" 
-            class="w-full h-auto rounded-lg shadow-lg object-cover"
-            onerror="this.src='https://images.unsplash.com/photo-1556740758-90de374c12ad?w=600&h=400&fit=crop'">
-        </div>
-        
-        <!-- Content Section -->
-        <div class="order-1 md:order-2 space-y-4">
-          <h3 class="text-2xl font-semibold text-gray-800">Our Story</h3>
-          <p class="text-gray-600 leading-relaxed">
-            Welcome to our store! We are dedicated to providing high-quality products that meet your needs and exceed your expectations. Our journey began with a simple vision: to create a shopping experience that combines quality, affordability, and exceptional customer service.
-          </p>
-          <p class="text-gray-600 leading-relaxed">
-            With years of experience in the industry, we carefully curate our product selection to ensure that every item meets our rigorous standards. We believe in building lasting relationships with our customers through trust, transparency, and dedication to excellence.
-          </p>
-          <div class="grid grid-cols-2 gap-4 pt-4">
-            <div class="text-center p-4 bg-gray-50 rounded-lg">
-              <h4 class="text-3xl font-bold text-black">500+</h4>
-              <p class="text-gray-600 text-sm mt-1">Products</p>
-            </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg">
-              <h4 class="text-3xl font-bold text-black">10k+</h4>
-              <p class="text-gray-600 text-sm mt-1">Happy Customers</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <app-two-images></app-two-images>
+  <app-about-us></app-about-us>
+
+  <app-review></app-review>
+
+  
 </div>

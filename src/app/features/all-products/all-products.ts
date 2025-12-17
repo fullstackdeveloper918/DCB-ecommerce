@@ -4,6 +4,7 @@ import { SharedModule } from '../../shared/shared-module';
 import { UserService } from '../../core/services/user.service';
 import { distinctUntilChanged, Subject, Subscription } from 'rxjs';
 import { Product } from '../../core/interfaces/Product.interface';
+import { dummyProducts } from '../../core/utils/sample.data';
 
 @Component({
   selector: 'app-all-products',
@@ -45,6 +46,7 @@ export class AllProducts implements OnInit, OnDestroy {
         .subscribe({
           next: (res: Product[]) => {
             this.products = res || [];
+            // this.products = dummyProducts
             console.log('All products:', this.products);
           },
           error: (error) => {

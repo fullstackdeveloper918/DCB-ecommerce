@@ -1,10 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { SharedModule } from '../shared-module';
 import { GuestCartService } from '../../core/services/guest-cart.service';
 import { Cart } from '../../core/services/cart';
 import { Auth } from '../../core/services/auth';
 import { UserService } from '../../core/services/user.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -33,16 +34,35 @@ export class Navbar implements OnInit{
  cartCount: number = 0;
  showProfileMenu = false;
  isUserLoggedIn : Boolean = false;
+  isHomeExact = false;
+
 
   constructor(
   private cartService : Cart, 
   private authService : Auth,
   public userService : UserService,
-  private router : Router){}
+  private router : Router){
+            this.checkIsHomeRoute();
+  }
   ngOnInit(): void {
     this.getCartCount();
     this.checkLoggedIn();
   }
+
+  ngAfterViewInit(){
+  }
+
+ checkIsHomeRoute() {
+  this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe(() => {
+      const url = this.router.url;
+      this.isHomeExact = url === '/home' || url === '/home/';
+      console.log('is homeecxat route', this.isHomeExact)
+    });
+}
+
+
 
   // GET CART COUNT
   getCartCount(){
@@ -51,9 +71,9 @@ export class Navbar implements OnInit{
   });
   }
 
-  toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-  }
+  // toggleMobileMenu() {
+  //   this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  // }
 
    logOutOrLogin() {
     if(this.isUserLoggedIn){
