@@ -13,14 +13,14 @@
 
       <!-- Content -->
       <div class="mt-6">
-        <p class="text-sm text-gray-500 mb-2" *ngIf="getLeftProduct()?.subtitle">
+        <p class="inline-flex items-center gap-2 mt-2 text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full" *ngIf="getLeftProduct()?.subtitle">
           {{ getLeftProduct()?.subtitle }}
           <span class="font-semibold" *ngIf="getLeftProduct()?.discount">
             {{ getLeftProduct()?.discount }}
           </span>
         </p>
 
-        <h3 class="text-2xl md:text-3xl font-serif text-black mb-6 leading-tight">
+        <h3 class="text-2xl md:text-3xl font-semibold leading-snug line-clamp-2">
           {{ getLeftProduct()?.title }}
         </h3>
 
@@ -48,14 +48,14 @@
 
       <!-- Content -->
       <div class="mt-6">
-        <p class="text-sm text-gray-500 mb-2" *ngIf="getRightProduct()?.subtitle">
+        <p class="inline-flex items-center gap-2 mt-2 text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full" *ngIf="getRightProduct()?.subtitle">
           {{ getRightProduct()?.subtitle }}
           <span class="font-semibold" *ngIf="getRightProduct()?.discount">
             {{ getRightProduct()?.discount }}
           </span>
         </p>
 
-        <h3 class="text-2xl md:text-3xl font-serif text-black mb-6 leading-tight">
+        <h3 class="text-2xl md:text-3xl font-semibold leading-snug line-clamp-2">
           {{ getRightProduct()?.title }}
         </h3>
 
