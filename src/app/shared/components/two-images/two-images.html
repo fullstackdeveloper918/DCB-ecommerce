@@ -13,7 +13,7 @@
 
       <!-- Content -->
       <div class="mt-6">
-        <p class="inline-flex items-center gap-2 mt-2 text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full" *ngIf="getLeftProduct()?.subtitle">
+        <p class=" mb-2 text-gray-600 leading-relaxed text-base" *ngIf="getLeftProduct()?.subtitle">
           {{ getLeftProduct()?.subtitle }}
           <span class="font-semibold" *ngIf="getLeftProduct()?.discount">
             {{ getLeftProduct()?.discount }}
@@ -27,8 +27,8 @@
         <button
           [routerLink]="['/home/all-products']"
           [queryParams]="{ category: getLeftProduct()?.category }"
-          class="px-6 py-2 md:px-8 md:py-3 border border-black text-sm font-semibold tracking-wide
-                 hover:bg-black hover:text-white transition-all duration-300"
+          class="px-6 py-2 md:px-8 md:py-3 border border-black text-sm  tracking-wide
+                 hover:bg-black hover:text-white transition-all duration-300 cursor-pointer"
         >
           {{ getLeftProduct()?.buttonText || 'SHOP NOW' }}
         </button>
@@ -48,7 +48,7 @@
 
       <!-- Content -->
       <div class="mt-6">
-        <p class="inline-flex items-center gap-2 mt-2 text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full" *ngIf="getRightProduct()?.subtitle">
+        <p class="mb-2 text-gray-600 leading-relaxed text-base" *ngIf="getRightProduct()?.subtitle">
           {{ getRightProduct()?.subtitle }}
           <span class="font-semibold" *ngIf="getRightProduct()?.discount">
             {{ getRightProduct()?.discount }}
@@ -62,8 +62,8 @@
         <button
           [routerLink]="['/home/all-products']"
           [queryParams]="{ category: getRightProduct()?.category }"
-          class="px-6 py-2 md:px-8 md:py-3 border border-black text-sm font-semibold tracking-wide
-                 hover:bg-black hover:text-white transition-all duration-300"
+          class="px-6 py-2 md:px-8 md:py-3 border border-black text-sm tracking-wide
+                 hover:bg-black hover:text-white transition-all duration-300 cursor-pointer"
         >
           {{ getRightProduct()?.buttonText || 'SHOP NOW' }}
         </button>
