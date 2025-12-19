@@ -8,14 +8,16 @@ import { ThankYouComponent } from '../features/product-details/Thank-you/thank-y
 import { AboutUs } from './components/about-us/about-us';
 import { Review } from './components/review/review';
 import { TwoImages } from './components/two-images/two-images';
+import { Feature } from './components/feature/feature';
 
 
 @NgModule({
-  declarations: [ProductCard, Spinner, ThankYouComponent,AboutUs, Review, TwoImages],
+  declarations: [ProductCard, Spinner, ThankYouComponent,AboutUs, Review, TwoImages, Feature],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
+    
   ],
   exports : [
     ReactiveFormsModule,
@@ -27,7 +29,8 @@ import { TwoImages } from './components/two-images/two-images';
     ThankYouComponent,
     AboutUs,
     Review,
-    TwoImages
+    TwoImages,
+    Feature
   ]
 })
 export class SharedModule { }

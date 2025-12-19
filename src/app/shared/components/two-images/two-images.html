@@ -7,17 +7,17 @@
         <img
           [src]="getLeftProduct()?.image"
           [alt]="getLeftProduct()?.title"
-          class="w-full h-[520px] object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+          class="w-full h-[60vh] object-cover transition-transform duration-500 group-hover:scale-105"
+        />  
       </div>
 
       <!-- Content -->
       <div class="mt-6">
         <p class=" mb-2 text-gray-600 leading-relaxed text-base" *ngIf="getLeftProduct()?.subtitle">
           {{ getLeftProduct()?.subtitle }}
-          <span class="font-semibold" *ngIf="getLeftProduct()?.discount">
+          <!-- <span class="font-semibold" *ngIf="getLeftProduct()?.discount">
             {{ getLeftProduct()?.discount }}
-          </span>
+          </span> -->
         </p>
 
         <h3 class="text-2xl md:text-3xl font-semibold leading-snug line-clamp-2">
@@ -42,7 +42,7 @@
         <img
           [src]="getRightProduct()?.image"
           [alt]="getRightProduct()?.title"
-          class="w-full h-[520px] object-cover transition-transform duration-500 group-hover:scale-105"
+          class="w-full h-[60vh] object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
@@ -50,9 +50,9 @@
       <div class="mt-6">
         <p class="mb-2 text-gray-600 leading-relaxed text-base" *ngIf="getRightProduct()?.subtitle">
           {{ getRightProduct()?.subtitle }}
-          <span class="font-semibold" *ngIf="getRightProduct()?.discount">
+          <!-- <span class="font-semibold" *ngIf="getRightProduct()?.discount">
             {{ getRightProduct()?.discount }}
-          </span>
+          </span> -->
         </p>
 
         <h3 class="text-2xl md:text-3xl font-semibold leading-snug line-clamp-2">

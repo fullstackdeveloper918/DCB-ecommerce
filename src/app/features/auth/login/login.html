@@ -34,6 +34,7 @@
             placeholder="Password"
             class="w-full outline-none"
             (blur)="markTouched('password')"
+            (keydown.enter)="onSubmit()"
           />
           <i
             class="fas cursor-pointer"

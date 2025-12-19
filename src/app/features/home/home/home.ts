@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../../../core/services/products.service';
 import { SharedModule } from '../../../shared/shared-module';
 import { UserService } from '../../../core/services/user.service';
@@ -13,6 +13,8 @@ import { dummyProducts } from '../../../core/utils/sample.data';
   styleUrl: './home.scss'
 })
 export class Home implements OnInit, OnDestroy{
+  @ViewChild('productScroll', { static: false })
+  productScroll!: ElementRef<HTMLDivElement>;
   products!: Product[];
   limitedProducts: Product[] = [];
   private searchSubject = new Subject<string>();
@@ -80,6 +82,10 @@ export class Home implements OnInit, OnDestroy{
     );
   }
 
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
   // search
   searchProducts(event: Event) {
     const value = (event.target as HTMLInputElement).value;
@@ -118,4 +124,16 @@ export class Home implements OnInit, OnDestroy{
     goToBanner(index: number) {
       this.currentBannerIndex = index;
     }
+
+   scrollProducts(direction: 1 | -1) {
+    const container = this.productScroll.nativeElement;
+    const cardWidth = 320; // min-w-[260px]
+    const gap = 24;
+
+    container.scrollBy({
+      left: (cardWidth + gap) * direction,
+      behavior: 'smooth'
+    });
+}
+
 }

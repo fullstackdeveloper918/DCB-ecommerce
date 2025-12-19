@@ -48,14 +48,15 @@
   <button
     type="button"
     (click)="prevBanner()"
-    class="absolute left-6 top-1/2 -translate-y-1/2 z-20
-           w-11 h-11 rounded-full
-           bg-white/80 backdrop-blur
-           flex items-center justify-center
-           text-gray-800
-           hover:bg-black hover:text-white
-           cursor-pointer
-           transition-all duration-300"
+        class="absolute left-6 top-1/2 -translate-y-1/2 z-20
+          w-11 h-11 rounded-full
+          bg-white/80 backdrop-blur
+          flex items-center justify-center
+          text-gray-800
+          hover:bg-black hover:text-white
+          cursor-pointer
+          transition-all duration-300
+          p-0"
     aria-label="Previous Banner"
   >
     <i class="fas fa-chevron-left"></i>
@@ -65,14 +66,15 @@
   <button
     type="button"
     (click)="nextBanner()"
-    class="absolute right-6 top-1/2 -translate-y-1/2 z-20
-           w-11 h-11 rounded-full
-           bg-white/80 backdrop-blur
-           flex items-center justify-center
-           text-gray-800
-           hover:bg-black hover:text-white
-           cursor-pointer
-           transition-all duration-300"
+        class="absolute right-6 top-1/2 -translate-y-1/2 z-20
+          w-11 h-11 rounded-full
+          bg-white/80 backdrop-blur
+          flex items-center justify-center
+          text-gray-800
+          hover:bg-black hover:text-white
+          cursor-pointer
+          transition-all duration-300
+          p-0"
     aria-label="Next Banner"
   >
     <i class="fas fa-chevron-right"></i>
@@ -95,114 +97,16 @@
 </div>
 
 
-<div class="py-6 px-4 max-w-[1393px] mx-auto px-8">
+<div class="py-6 px-4 max-w-[1417px] mx-auto px-8">
   <!-- <div class="bg-[#f9fafb] p-4 rounded-2xl border border-solid border-[#cccccc29]"> -->
 <div class="">
     <!-- Search and Filters -->
     <div class="flex flex-col md:flex-row justify-between items-center gap-4 w-full ">
-      <!-- Search Input -->
-      <!-- <div class="flex items-center w-full md:w-auto border border-[#8080804a] bg-white rounded-[20px] focus:outline-none">
-        <button class=" p-2 pl-[15px]">
-          <i class="fas fa-search text-gray-600"></i>
-        </button>
-        <input type="text" placeholder="Search" class="w-full md:w-64 focus:outline-none text-sm"
-          (input)="searchProducts($event)" />
-        <button class="p-2 pr-[15px] leading-[0]">
-          <i class="fas fa-filter text-gray-600"></i>
-        </button>
-      </div> -->
 
-      <!-- Sort Dropdown -->
-      <!-- <div class="relative w-full md:w-auto">
-        <select
-          class="w-full md:w-40 p-2 pr-10 border border-gray-200 rounded-[20px] bg-white focus:outline-none text-sm appearance-none pl-[15px]">
-          <option>Sort by</option>
-          <option value="price_asc">Price: Low to High</option>
-          <option value="price_desc">Price: High to Low</option>
-        </select>
-
-
-        <span class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9L12 15L18 9" stroke="#1A2A49" stroke-width="3" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </span>
-      </div>  -->
-<!-- <div class="relative w-full md:w-3xs">
-  <details class="group relative w-full" #sortDropdown>
-    <summary
-      class="w-full p-2 pl-4 pr-[12px] border border-[#8080804a] rounded-[20px] bg-white text-sm cursor-pointer list-none flex items-center justify-between focus:outline-none"
-    >
-      <span>{{ sortLabel }}</span>
-      <svg
-        class="w-5 h-5 ml-2 transition-transform duration-200 group-open:rotate-180"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path d="M6 9L12 15L18 9" stroke="#1A2A49" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
-    </summary>
-
-    <ul
-      class="absolute z-50 w-full bg-white border border-gray-200 rounded shadow mt-1 max-h-60 overflow-auto"
-    >
-      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer" (click)="selectSort('')">Sort by</li>
-      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer" (click)="selectSort('price_asc')">Price: Low to High</li>
-      <li class="text-sm p-2 hover:bg-gray-100 cursor-pointer" (click)="selectSort('price_desc')">Price: High to Low</li>
-    </ul>
-  </details>
-</div> -->
 
     </div>
 
-    <!-- Sort Dropdown -->
-    <!-- <div class="relative w-full md:w-auto">
-  <select
-    class="w-full md:w-40 p-2 pr-10 border border-gray-200 rounded-[20px] bg-white focus:outline-none text-sm appearance-none pl-[15px]"
-    [(ngModel)]="sortValue"
-    name="sortValue"
-    (change)="onSortChange($event)"
-  >
-    <option value="">Sort by</option>
-    <option value="price_asc">Price: Low to High</option>
-    <option value="price_desc">Price: High to Low</option>
-  </select>
-
-  <span class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <path d="M6 9L12 15L18 9"
-            stroke="#1A2A49" stroke-width="3" 
-            stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </span>
-</div> -->
-
   </div>
-  <!-- Category Filters -->
-  <!-- <div class="flex flex-wrap gap-2 mt-4">
-    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
-      Clothes <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
-    </button>
-    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
-      Fruits <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
-    </button>
-    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
-      Snacks <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
-    </button>
-    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
-      Dairy <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
-    </button>
-    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
-      Perfume <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
-    </button>
-    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center">
-      Jewelry <span class="ml-1 text-red-500 cursor-pointer">&times;</span>
-    </button>
-    <button class="bg-blue-500 text-white px-4 py-1 rounded-full">
-      Clear All
-    </button>
-  </div> -->
 
   <!-- Section Heading -->
 <div class="flex items-center justify-between mb-6">
@@ -232,6 +136,7 @@
   <!-- View All -->
   <a
     routerLink="/home/all-products"
+    (click)="scrollToTop()"
     class="group inline-flex items-center gap-3
            text-sm  text-black
            border-b-2 border-transparent
@@ -260,7 +165,7 @@
         <!-- Left Arrow -->
         <button
           type="button"
-          class="absolute left-[-34px] top-1/2 -translate-y-1/2 z-10
+          class="absolute left-[-39px] top-1/2 -translate-y-1/2 z-10
                 hidden md:flex
                 w-10 h-10
                 bg-white border border-gray-200
@@ -269,8 +174,9 @@
                 text-gray-700
                 hover:bg-black hover:text-white
                 transition-all duration-300
-                group-hover:flex"
-          (click)="productScroll.scrollBy({ left: -productScroll.offsetWidth, behavior: 'smooth' })"
+                group-hover:flex
+                cursor-pointer"
+           (click)="scrollProducts(-1)"
           aria-label="Scroll Left"
         >
           <i class="fas fa-arrow-left text-sm"></i>
@@ -292,7 +198,7 @@
         <!-- Right Arrow -->
         <button
           type="button"
-          class="absolute right-[-25px] top-1/2 -translate-y-1/2 z-10
+          class="absolute right-[-39px] top-1/2 -translate-y-1/2 z-10
                 hidden md:flex
                 w-10 h-10
                 bg-white border border-gray-200
@@ -301,8 +207,9 @@
                 text-gray-700
                 hover:bg-black hover:text-white
                 transition-all duration-300
-                group-hover:flex"
-          (click)="productScroll.scrollBy({ left: productScroll.offsetWidth, behavior: 'smooth' })"
+                group-hover:flex
+                cursor-pointer"
+          (click)="scrollProducts(1)"
           aria-label="Scroll Right"
         >
           <i class="fas fa-arrow-right text-sm"></i>
@@ -321,6 +228,7 @@
   </div>
 
   <app-two-images></app-two-images>
+  <app-feature></app-feature>
   <app-about-us></app-about-us>
 
   <app-review></app-review>

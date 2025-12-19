@@ -1,18 +1,17 @@
 <div
-  class="bg-white border border-[#8080804a]
-         shadow hover:shadow-lg transition
+  class="bg-white
+          transition
          flex flex-col relative
          single-product h-full
-         rounded-lg overflow-hidden"
+         overflow-hidden
+         cursor-pointer" [routerLink]="['/home/product', product.id]"
 >
   <!-- Image -->
-  <div class="relative overflow-hidden aspect-[3/4] sm:aspect-[4/5]">
+  <div class="relative overflow-hidden aspect-[3/4] sm:aspect-[4/5] border border-[#f3f4f6] ">
     <img
-      [routerLink]="['/home/product', product.id]"
       [src]="product.image"
       [alt]="product.name"
       class="w-full h-full object-contain
-             cursor-pointer
              transition-transform duration-500
              hover:scale-110"
     />
@@ -50,7 +49,7 @@
       </div>
 
       <!-- View Button -->
-      <a
+      <!-- <a
         [routerLink]="['/home/product', product.id]"
         class="flex items-center justify-center
                w-8 h-8 sm:w-9 sm:h-9
@@ -61,7 +60,7 @@
         aria-label="View Product"
       >
         <i class="fa-regular fa-eye text-xs sm:text-sm"></i>
-      </a>
+      </a> -->
 
     </div>
   </div>
