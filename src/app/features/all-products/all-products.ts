@@ -45,7 +45,7 @@ export class AllProducts implements OnInit, OnDestroy {
         .getProducts(this.userService.user?.userRole, searchedText, sort)
         .subscribe({
           next: (res: Product[]) => {
-            this.products = res || [];
+            // this.products = res || [];
             // this.products = dummyProducts
             console.log('All products:', this.products);
           },
