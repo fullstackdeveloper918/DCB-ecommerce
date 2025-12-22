@@ -1,8 +1,6 @@
-<!-- About Us Section -->
-<section class="pb-7" *ngIf="aboutData && !loading">
+ <!-- <section class="pb-7" *ngIf="aboutData && !loading">
   <div class="max-w-[1393px] mx-auto">
 
-    <!-- Section Header -->
     <div class="text-center mb-14">
       <p class="text-gray-600 leading-relaxed text-base">
         {{ aboutData.header.subtitle }}
@@ -13,10 +11,8 @@
       <div class="w-14 h-[2px] bg-black mx-auto mt-4"></div>
     </div>
 
-    <!-- Content -->
     <div class="grid md:grid-cols-2 gap-14 items-center">
 
-      <!-- Image -->
       <div class="relative">
         <img
           [src]="aboutData.image"
@@ -31,7 +27,6 @@
         </div>
       </div>
 
-      <!-- Text Content -->
       <div class="space-y-6">
 
         <h3 class="text-2xl md:text-3xl font-serif mb-6 leading-tight text-gray-900">
@@ -45,7 +40,6 @@
           {{ text }}
         </p>
 
-        <!-- Stats -->
         <div class="grid grid-cols-3 gap-6 pt-6 border-t border-gray-200">
           <div *ngFor="let stat of aboutData.stats">
             <h4 class="text-3xl text-black">
@@ -56,19 +50,112 @@
             </p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section> -->
 
-        <!-- CTA -->
-        <!-- <div class="pt-4">
-          <a
-            [routerLink]="aboutData.cta.link"
-            class="inline-flex items-center gap-2 text-sm font-medium text-black border-b border-black hover:opacity-70 transition"
-          >
-            {{ aboutData.cta.label }}
-            <i class="fas fa-arrow-right text-xs"></i>
-          </a>
-        </div> -->
+<!-- About Our Brand -->
+ <section class="pb-7" *ngIf="aboutData && !loading">
+  <div class="max-w-[1393px] mx-auto">
 
+    <div class="text-center mb-14">
+      <p class="text-gray-600 leading-relaxed text-base">
+        {{ aboutData.header.subtitle }}
+      </p>
+      <h2 class="text-3xl md:text-4xl text-black tracking-tight leading-tight">
+        {{ aboutData.header.title }}
+      </h2>
+      <div class="w-14 h-[2px] bg-black mx-auto mt-4"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-14">
+
+      <div class="space-y-6">
+
+        <h3 class="text-2xl md:text-3xl font-serif mb-6 leading-tight text-gray-900">
+          {{ aboutData.sectionTitle }}
+        </h3>
+        <p
+          *ngFor="let text of aboutData.description"
+          class="text-gray-600 leading-relaxed text-base"
+        >
+          {{ text }}
+        </p>
+        <div class="our-brand flex">
+          <div class="brand-icon w-1/2">
+         <img src="/discount.png" alt="">
+          </div>
+          <div class="brand-heading w-1/2">
+            <h5 class="text-2xl md:text-3xl font-serif mb-6 leading-tight text-gray-900">Quality Products</h5>
+            <p class="text-gray-600 leading-relaxed text-base">High-quality products designed for durability and reliable performance.</p>
+          </div>
+        </div>
+          <div class="our-brand flex">
+          <div class="brand-icon w-1/2">
+             <svg
+    width="48"
+    height="48"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <!-- Shield -->
+    <path
+      d="M12 2L4 5V11C4 16.55 7.84 21.74 12 22C16.16 21.74 20 16.55 20 11V5L12 2Z"
+      fill="#4CAF50"
+    />
+
+    <!-- Checkmark -->
+    <path
+      d="M9.5 12.5L11 14L15 10"
+      fill="none"
+      stroke="#ffffff"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+          </div>
+          <div class="brand-heading w-1/2">
+            <h5 class="text-2xl md:text-3xl font-serif mb-6 leading-tight text-gray-900">Quality Products</h5>
+            <p class="text-gray-600 leading-relaxed text-base">High-quality products designed for durability and reliable performance.</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <img
+          [src]="aboutData.image"
+          alt="About Us"
+          class="w-full h-[420px] object-cover rounded-xl shadow-md"
+        />
+
+        <div class="absolute bottom-[20%] left-6 bg-white px-5 py-3 rounded-lg shadow-md">
+          <p class="text-sm text-black">
+            {{ aboutData.badge }}
+          </p>
+        </div>
+         <div class="grid grid-cols-3 gap-6 pt-6 border-t border-gray-200">
+          <div *ngFor="let stat of aboutData.stats">
+            <h4 class="text-3xl text-black">
+              {{ stat.value }}
+            </h4>
+            <p class="text-sm text-gray-500 mt-1">
+              {{ stat.label }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
