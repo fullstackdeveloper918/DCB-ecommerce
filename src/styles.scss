@@ -96,3 +96,52 @@ body, h1, h2, h3, h4, h5, h6, span, li, a, p{
 .main-section {
     margin-top: 45px;
 }
+
+
+// 23-dec-2025
+
+.trusted-text { background: #fff; border-radius: 10px; display: flex; align-items: center; padding: 0 10px; color: #fff; min-height: 46px; }
+.trusted-text img {
+    filter: invert(1);
+}
+img.icon-about-listing {
+    filter: brightness(0);
+    max-height: 50px;
+}
+.trusted-text svg { margin-right: 5px; }
+.about-listing .flex h5 { font-size: 20px; font-weight: 500; color: #000000; }
+.space-y-6.about-box-shadow { box-shadow: 0 0 13px 0 rgba(0, 0, 0, 10%); padding: 40px; border-radius: 15px; }
+.happy-customer-shadow { box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.1); padding: 30px; margin-top: 17px; border-radius: 15px; border: 0; }
+.happy-customer-shadow h4 { font-weight: 500; font-size: 28px; line-height: normal; }
+.happy-customer-shadow  p { font-size: 16px; margin-top: 0; }
+.trusted-text p { font-size: 16px; font-weight: 500; }
+.review-box { box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.1); padding: 20px 18px; }
+.happy-customer-shadow .inner-about-items { position: relative; }
+.happy-customer-shadow .inner-about-items:last-child::before{display: none;}
+.happy-customer-shadow .inner-about-items::before { content: ""; position: absolute; top: 0; background: #D8D8D8; width: 1px; height: 35px; right: -70px; top: 50%; transform: translateY(-50%); }
+// 23-dec-2025
+
+@media screen and (min-width:1201px) and (max-width:1380px){
+.trusted-text{bottom: 200px;}
+}
+@media screen and (min-width:768px) and (max-width:1200px){
+  .about-listing {
+    grid-template-columns: 1fr;
+}
+}
+@media screen and (max-width:767px){
+  .trusted-text p { font-size: 14px; }
+.happy-customer-shadow p{font-size: 12px;text-align: center;}
+.happy-customer-shadow { padding: 15px 15px; gap: 0; }
+.happy-customer-shadow h4 { font-size: 24px; text-align: center; }
+.about-box-shadow .flex.items-center { flex-wrap: wrap; justify-content: center; text-align: center; }
+.space-y-6.about-box-shadow { padding: 30px 20px 10px; border-radius: 15px; }
+.about-box-shadow h3, .about-box-shadow p { text-align: center; }
+.trusted-text{bottom: 110px;}
+.about-box-shadow .flex.items-center div { width: 100%; }
+.about-box-shadow .flex.items-center .flex-shrink-0 svg { margin: 0 auto; }
+.happy-customer-shadow .inner-about-items::before{display: none;}
+button.slider-arrow-btn { top: 60%; width: 40px; height: 40px; }
+.banner-bottom-sec { flex-wrap: wrap; row-gap: 20px; }
+img.icon-about-listing{margin: 0 auto;}
+}

@@ -13,16 +13,15 @@ export class AboutService {
         subtitle: 'WHO WE ARE',
         title: 'About Our Brand'
       },
-      badge: 'Trusted by 10k+ Customers',
+      badge: 'Trusted by 10k+ Happy Customers',
       sectionTitle: 'Crafted with Purpose',
       description: [
         'We believe great products are created at the intersection of design, quality, and functionality. Every item we offer is carefully curated to bring timeless style and lasting value into your everyday life.',
-        'Our mission is to deliver a seamless shopping experience built on trust, transparency, and exceptional service—so you can shop with confidence every time.'
       ],
       stats: [
         { value: '500+', label: 'Products' },
         { value: '10k+', label: 'Happy Clients' },
-        { value: '5★', label: 'Average Rating' }
+        { value: '5', label: 'Average Rating' }
       ],
       image: '/about-us.png',
       cta: {
