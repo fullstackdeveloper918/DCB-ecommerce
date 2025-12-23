@@ -71,7 +71,7 @@ export class Home implements OnInit, OnDestroy{
             this.products = res
             // this.products = dummyProducts  // this will change later
             this.limitedProducts = this.products.slice(0, this.productLimit);
-            this.limitedProducts = [...this.limitedProducts,...dummyProducts]
+            // this.limitedProducts = [...this.limitedProducts,...dummyProducts]
           },
           error: (error) => {
             console.error('Error loading products:', error);

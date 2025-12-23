@@ -5,10 +5,11 @@ import { SharedModule } from '../../../shared/shared-module';
 import {AngularFireAuth} from '@angular/fire/compat/auth'
 import { Firebase } from '../../../core/services/firebase';
 import { UserService } from '../../../core/services/user.service';
+import { Navbar } from "../../../shared/navbar/navbar";
 
 @Component({
   selector: 'app-login',
-  imports: [SharedModule],
+  imports: [SharedModule, Navbar],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -98,6 +99,9 @@ showPassword: boolean = false;
 
  doClaimsNavigation() {
   this.router.navigate(['/home'])
+  setTimeout(() => {
+    window.location.reload();
+  }, 0);
 }
 togglePasswordVisibility(): void {
   this.showPassword = !this.showPassword;
