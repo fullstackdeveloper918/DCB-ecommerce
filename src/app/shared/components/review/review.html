@@ -26,10 +26,10 @@
   >
 
     <!-- Image -->
-    <div class="relative group overflow-hidden">
+    <div class="relative overflow-hidden border border-[#f3f4f6]" style="height: 400px;">
       <img
         [src]="review.image"
-        class="rounded-[15px] w-full h-[240px] object-cover mb-[23px] transition-transform duration-500 group-hover:scale-105"
+        class="w-full h-full transition-transform duration-500 hover:scale-110"
         alt="Product"
       />
 
@@ -66,7 +66,7 @@
 
       <!-- Author -->
       <p class="font-medium text-black text-md flex items-center gap-[8px]">
-        <img src="./review-user.png" />
+        <img [src]="review.authorImage" />
         <span class="font-medium">{{ review.author }}</span>
       </p>
       <!-- <hr /> -->

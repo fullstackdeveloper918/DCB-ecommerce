@@ -19,12 +19,12 @@ export class TwoImagesService {
     },
     {
       id: 2,
-      title: 'Stylish Sneaker Collection',
+      title: 'Classic Cap Collection',
       subtitle: 'Sale Up To 30% Discount',
       discount: '30%',
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1600&auto=format&fit=crop',
-      category: 'shoes',
-      buttonText: 'SHOP SNEAKERS',
+      image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // baseball caps
+      category: 'caps',
+      buttonText: 'SHOP CAPS',
       position: 'right'
     },
     {
@@ -55,8 +55,17 @@ export class TwoImagesService {
   }
 
   getRandomProducts(count: number = 2): Observable<any[]> {
-    // Shuffle array and get random products
-    const shuffled = [...this.featuredProducts].sort(() => 0.5 - Math.random());
-    return of(shuffled.slice(0, count)).pipe(delay(300));
+    // Ensure we get one left and one right product
+    if (count === 2) {
+      const leftProducts = this.featuredProducts.filter(p => p.position === 'left');
+      const rightProducts = this.featuredProducts.filter(p => p.position === 'right');
+      const left = leftProducts[Math.floor(Math.random() * leftProducts.length)];
+      const right = rightProducts[Math.floor(Math.random() * rightProducts.length)];
+      return of([left, right]).pipe(delay(300));
+    } else {
+      // fallback to random selection for other counts
+      const shuffled = [...this.featuredProducts].sort(() => 0.5 - Math.random());
+      return of(shuffled.slice(0, count)).pipe(delay(300));
+    }
   }
 }

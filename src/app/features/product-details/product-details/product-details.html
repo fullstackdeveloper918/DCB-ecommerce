@@ -316,7 +316,7 @@
         <h1 class="text-sm sm:text-base md:text-lg leading-snug line-clamp-2">{{ product.name }}</h1>
         <div class="flex items-center mt-4">
           <div class="flex text-yellow-400">
-            <ng-container *ngFor="let star of getStarArray(product.average_rating || 0)">
+            <ng-container *ngFor="let star of getStarArray(product.average_rating || 5)">
               <i class="fas" 
             [ngClass]="{
               'fa-star': star === 'full',
@@ -326,10 +326,10 @@
             [class.text-gray-300]="star === 'empty'"></i>
             </ng-container>
           </div>
-          <span class="ml-1 text-[#777]"><span class="mx-2">|</span> {{ product.rating_count }} Ratings</span>
+          <span class="ml-1 text-[#777]"><span class="mx-2">|</span> {{ product.rating_count || 5 }} Ratings</span>
         </div>
         <div class="mt-4 flex justify-start items-center gap-2">
-          <span class="text-2xl font-bold text-[#313b58]">${{ product.sale_price }}30 <span
+          <span class="text-2xl font-bold text-[#313b58]">${{ product.sale_price }} <span
               class="text-gray-400 line-through ml-1 font-medium text-lg">${{ product.regular_price }}</span></span>
           <!-- <span class="text-green-900 ml-3 font-medium bg-green-200 px-2 py-1 rounded">{{ product.discount }}% Off</span> -->
         </div>

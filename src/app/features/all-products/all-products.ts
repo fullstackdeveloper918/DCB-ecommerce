@@ -14,6 +14,8 @@ import { dummyProducts } from '../../core/utils/sample.data';
 })
 export class AllProducts implements OnInit, OnDestroy {
   products: Product[] = [];
+  filteredProducts: Product[] = [];
+  loading: boolean = false;
   private searchSubject = new Subject<string>();
   private subscription = new Subscription();
   sortValue: string = '';
@@ -33,6 +35,7 @@ export class AllProducts implements OnInit, OnDestroy {
         })
     );
     this.loadProducts();
+    this.filterByCategoryFromQuery();
   }
 
   ngOnDestroy(): void {
@@ -40,27 +43,43 @@ export class AllProducts implements OnInit, OnDestroy {
   }
 
   private loadProducts(searchedText?: string, sort?: string) {
+    this.loading = true;
     this.subscription.add(
       this.productService
         .getProducts(this.userService.user?.userRole, searchedText, sort)
         .subscribe({
           next: (res: Product[]) => {
             this.products = res || [];
-            // this.products = dummyProducts
+            this.filterByCategoryFromQuery();
+            this.loading = false;
             console.log('All products:', this.products);
           },
           error: (error) => {
             console.error('Error loading products:', error);
             this.products = [];
+            this.filteredProducts = [];
+            this.loading = false;
           }
         })
     );
+  }
+
+  private filterByCategoryFromQuery() {
+    const url = window.location.href;
+    const params = new URLSearchParams(url.split('?')[1] || '');
+    const category = params.get('category');
+    if (category) {
+      this.filteredProducts = this.products.filter(product => product.categories && product.categories.includes(category));
+    } else {
+      this.filteredProducts = this.products;
+    }
   }
 
   // search
   searchProducts(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.searchSubject.next(value);
+    this.filterByCategoryFromQuery();
   }
 
   // sort for custom dropdown
@@ -74,6 +93,7 @@ export class AllProducts implements OnInit, OnDestroy {
       this.sortLabel = 'Sort by';
     }
     this.loadProducts(undefined, this.sortValue);
+    this.filterByCategoryFromQuery();
     // Close the dropdown after selection
     const details = document.querySelector('details.group');
     if (details && details.hasAttribute('open')) {

@@ -11,27 +11,30 @@ export class CustomerReviewService {
     return of([
       {
         id: 1,
-        image: 'https://images.unsplash.com/photo-1520975916090-3105956dac38?w=800&fit=crop',
+        image: '/Grey hoodie.jpeg',
         rating: 5,
         review:
           'The hoodie is incredibly soft and warm. The fabric feels premium, and the fit is perfect for everyday wear. Definitely one of my favorite purchases!',
         author: 'Alex Johnson',
+        authorImage: 'https://www.gravatar.com/avatar/?d=mp'
       },
       {
         id: 2,
-        image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&fit=crop',
+        image: '/Light pink pink hat.jpeg',
         rating: 5,
         review:
-          'These sneakers are stylish, lightweight, and extremely comfortable. I’ve been wearing them daily and they still look brand new.',
+          'This cap is comfortable, fits perfectly, and looks great with every outfit. The material is high quality and it keeps its shape even after daily use. Highly recommended!',
         author: 'Sophia Miller',
+        authorImage: 'https://www.gravatar.com/avatar/?d=mp'
       },
       {
         id: 3,
-image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&fit=crop',
+        image: '/White Polo.jpeg',
         rating: 5,
         review:
-          'I love this purse! It’s elegant, spacious, and matches perfectly with both casual and formal outfits. The quality is outstanding.',
+          'This t-shirt is soft, comfortable, and fits perfectly. The fabric feels premium and the design is stylish. It’s great for both casual and active wear. Highly recommended!',
         author: 'Emily Carter',
+        authorImage: 'https://www.gravatar.com/avatar/?d=mp'
       }
     ]).pipe(delay(700)); // simulate API call
   }
