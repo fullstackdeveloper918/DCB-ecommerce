@@ -10,11 +10,11 @@
     <!-- Product Content -->
     <div class="flex flex-col lg:flex-row gap-6">
       <!-- Product Image -->
-      <div class="w-full lg:w-1/2 bg-white xl:rounded-md rounded-md shadow md:p-4 p-2">
+      <div class="w-full lg:w-1/2 bg-white xl:rounded-md rounded-md border border-gray-300 md:p-4 p-2">
         <!-- Main Image with Arrows -->
         <div class="relative" *ngIf="productImages && productImages.length > 0">
           <img [src]="selectedImage" [alt]="product.name"
-            class="w-full 2xl:h-140 md:h-140 h-80 object-cover md:rounded-xl rounded-md" />
+            class="w-full h-full  md:rounded-xl rounded-md" />
           <!-- Left Arrow -->
           <button (click)="prevImage()"
             class="absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 md:px-2 md:py-1 md:w-10 md:h-10 h-6 w-6 cursor-pointer rounded-full shadow hover:bg-gray-200 border border-transparent border-gray-200 ease-in-out duration-300">
@@ -41,10 +41,10 @@
         </div>
 
                     <!-- Thumbnails -->
-            <div class="flex space-x-2 md:mt-4 mt-2 overflow-y-auto">
+            <div class="flex space-x-2 md:mt-4 mt-2 overflow-y-auto md:w-20 w-14 h-14 min-w-15 border border-gray-300 rounded-lg p-1">          
               <ng-container *ngIf="productImages && productImages.length > 0">
                 <img *ngFor="let img of productImages" [src]="img" [alt]="product.name"
-                  class="md:w-20 w-14 h-14 min-w-15 md:h-20 md:min-w-20 object-cover rounded-lg border-2 cursor-pointer border-transparent"
+                  class="w-full h-full rounded-lg border-2 cursor-pointer border-transparent"
                   [ngClass]="{ 'border-black': img === selectedImage }" (click)="selectImage(img)" />
               </ng-container>
               
@@ -92,6 +92,31 @@
               Quantity is required and must be at least 1.
             </div>
           </div>
+
+          <!-- Size -->
+        @if(product.categories[0].name != "wallets" || product.categories[0].name != "uncategorized"){
+        <div class="mt-4">
+          <label class="text-gray-600 leading-relaxed text-base">Size</label>
+
+          <select
+            formControlName="size"
+            class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent
+                  focus:outline-none focus:ring-2 focus:ring-grey-300"
+            style="color:#808080b3">
+
+            <option value="" disabled selected>Select size</option>
+            <option *ngFor="let size of getProudctSizes(product) || productSizes" [value]="size">
+              {{ size }}
+            </option>
+          </select>
+
+          <div *ngIf="(bulkForm.get('size')?.invalid && (bulkForm.get('size')?.touched || submitAttempted))"
+              class="text-xs text-red-500 mt-1">
+            Size is required.
+          </div>
+        </div>
+      }
+
 
           <!-- Models & Condition -->
           <!-- <div class="mt-4">
@@ -328,13 +353,13 @@
           </div>
           <span class="ml-1 text-[#777]"><span class="mx-2">|</span> {{ product.rating_count || 4 }} Ratings</span>
         </div>
-        <div class="mt-4 flex justify-start items-center gap-2">
+        <!-- <div class="mt-4 flex justify-start items-center gap-2">
           <span class="text-2xl font-bold text-[#313b58]">${{ product.sale_price }} <span
               class="text-gray-400 line-through ml-1 font-medium text-lg">${{ product.regular_price }}</span></span>
-          <!-- <span class="text-green-900 ml-3 font-medium bg-green-200 px-2 py-1 rounded">{{ product.discount }}% Off</span> -->
-        </div>
-        <div class="my-4 text-lg font-bold text-[#313b58]">SKU#: <span class="text-[#FB2C36]">{{ product.sku }}</span>
-        </div>
+        </div> -->
+        
+        <!-- <div class="my-4 text-lg font-bold text-[#313b58]">SKU#: <span class="text-[#FB2C36]">{{ product.sku }}</span>
+        </div> -->
         <div class="text-gray-800">
           <div class="text-gray-600 leading-relaxed text-base" [innerHTML]="formatDescription(product.description)"></div>
         </div>

@@ -18,10 +18,10 @@ export class ProductService {
   private auth : Auth,
   private guestCart : GuestCartService){}
 
-  getProducts(userRole?: string, searchValue?: string, sort?: string): Observable<Product[]> {
-  return this.apiService.get<Product[]>(
-    apiRoutes.products,
-    buildParams(userRole, searchValue, sort)
+  getProducts(userRole?: string, searchValue?: string, sort?: string, category?: string): Observable<Product[]> {
+    return this.apiService.get<Product[]>(
+      apiRoutes.products,
+      buildParams(userRole, searchValue, sort, category)
     );
   }
 

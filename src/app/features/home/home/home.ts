@@ -17,6 +17,7 @@ export class Home implements OnInit, OnDestroy{
   productScroll!: ElementRef<HTMLDivElement>;
   products!: Product[];
   limitedProducts: Product[] = [];
+  isLoading: boolean = true;
   private searchSubject = new Subject<string>();
   private subscription = new Subscription();
   sortValue: string = '';
@@ -63,6 +64,7 @@ export class Home implements OnInit, OnDestroy{
   }
 
   private loadProducts(searchedText?: string, sort?: string) {
+    this.isLoading = true;
     this.subscription.add(
       this.productService
         .getProducts(this.userService.user?.userRole, searchedText, sort)
@@ -72,11 +74,13 @@ export class Home implements OnInit, OnDestroy{
             // this.products = dummyProducts  // this will change later
             this.limitedProducts = this.products.slice(0, this.productLimit);
             // this.limitedProducts = [...this.limitedProducts,...dummyProducts]
+            this.isLoading = false;
           },
           error: (error) => {
             console.error('Error loading products:', error);
             this.products = [];
             this.limitedProducts = [];
+            this.isLoading = false;
           }
         })
     );

@@ -31,26 +31,27 @@ export class AllProducts implements OnInit, OnDestroy {
       this.searchSubject
         .pipe(distinctUntilChanged())
         .subscribe(searchText => {
-          this.loadProducts(searchText, this.sortValue);
+          const category = this.getCategoryFromUrl();
+          this.loadProducts(searchText, this.sortValue, category);
         })
     );
-    this.loadProducts();
-    this.filterByCategoryFromQuery();
+    const category = this.getCategoryFromUrl();
+    this.loadProducts(undefined, this.sortValue, category);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  private loadProducts(searchedText?: string, sort?: string) {
+  private loadProducts(searchedText?: string, sort?: string, category?: any) {
     this.loading = true;
     this.subscription.add(
       this.productService
-        .getProducts(this.userService.user?.userRole, searchedText, sort)
+        .getProducts(this.userService.user?.userRole, searchedText, sort, category)
         .subscribe({
           next: (res: Product[]) => {
             this.products = res || [];
-            this.filterByCategoryFromQuery();
+            this.filteredProducts = this.products;
             this.loading = false;
             console.log('All products:', this.products);
           },
@@ -64,22 +65,16 @@ export class AllProducts implements OnInit, OnDestroy {
     );
   }
 
-  private filterByCategoryFromQuery() {
+  private getCategoryFromUrl(): string | null {
     const url = window.location.href;
     const params = new URLSearchParams(url.split('?')[1] || '');
-    const category = params.get('category');
-    if (category) {
-      this.filteredProducts = this.products.filter(product => product.categories && product.categories.includes(category));
-    } else {
-      this.filteredProducts = this.products;
-    }
+    return params.get('category');
   }
 
   // search
   searchProducts(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.searchSubject.next(value);
-    this.filterByCategoryFromQuery();
   }
 
   // sort for custom dropdown
@@ -92,8 +87,8 @@ export class AllProducts implements OnInit, OnDestroy {
     } else {
       this.sortLabel = 'Sort by';
     }
-    this.loadProducts(undefined, this.sortValue);
-    this.filterByCategoryFromQuery();
+    const category = this.getCategoryFromUrl();
+    this.loadProducts(undefined, this.sortValue, category);
     // Close the dropdown after selection
     const details = document.querySelector('details.group');
     if (details && details.hasAttribute('open')) {

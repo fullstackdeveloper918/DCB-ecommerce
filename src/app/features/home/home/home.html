@@ -2,11 +2,10 @@
 <!-- Banner at the very top, just under the navbar -->
 <!-- Banner at the very top, just under the navbar -->
 <!-- Banner Slider -->
-<div
+<!-- <div
   class="home-banner relative h-[100vh] z-10 flex items-center justify-center overflow-hidden"
 >
 
-  <!-- Slides -->
   <div
     class="absolute inset-0 transition-all duration-700 ease-in-out bg-cover bg-bottom"
     [ngStyle]="{
@@ -14,10 +13,8 @@
     }"
   ></div>
 
-  <!-- Dark Overlay -->
   <div class="absolute inset-0 bg-black/40"></div>
 
-  <!-- Banner Content -->
   <div class="relative z-10 text-center max-w-2xl px-4">
     <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
       {{ banners[currentBannerIndex].title }}
@@ -44,7 +41,6 @@
     </button>
   </div>
 
-  <!-- Prev Button -->
   <button
     type="button"
     (click)="prevBanner()"
@@ -62,7 +58,6 @@
     <i class="fas fa-chevron-left"></i>
   </button>
 
-  <!-- Next Button -->
   <button
     type="button"
     (click)="nextBanner()"
@@ -80,7 +75,6 @@
     <i class="fas fa-chevron-right"></i>
   </button>
 
-  <!-- Dots -->
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
     <button
       *ngFor="let banner of banners; let i = index"
@@ -94,7 +88,7 @@
     ></button>
   </div>
 
-</div>
+</div> -->
 
 
 <div class="py-6 px-4 max-w-[1417px] mx-auto px-4">
@@ -159,71 +153,149 @@
 
 
   <div class="mt-[20px]">
-    <ng-container *ngIf="limitedProducts && limitedProducts.length > 0; else noProducts">
-      <div class="relative group">
-  
-        <!-- Left Arrow -->
-        <button
-          type="button"
-          class="absolute left-[-39px] top-1/2 -translate-y-1/2 z-10
-                hidden md:flex
-                w-10 h-10
-                bg-white border border-gray-200
-                shadow-sm
-                items-center justify-center
-                text-gray-700
-                hover:bg-black hover:text-white
-                transition-all duration-300
-                group-hover:flex
-                cursor-pointer"
-           (click)="scrollProducts(-1)"
-          aria-label="Scroll Left"
-        >
-          <i class="fas fa-arrow-left text-sm"></i>
-        </button>
+    <!-- Show skeletons while loading -->
+    <div *ngIf="isLoading; else productContent" class="relative group">
+      <!-- Left Arrow (disabled during loading) -->
+      <button
+        type="button"
+        disabled
+        class="absolute left-[-39px] top-1/2 -translate-y-1/2 z-10
+              hidden md:flex
+              w-10 h-10
+              bg-gray-100 border border-gray-200
+              shadow-sm
+              items-center justify-center
+              text-gray-400
+              cursor-not-allowed
+              opacity-50"
+        aria-label="Scroll Left"
+      >
+        <i class="fas fa-arrow-left text-sm"></i>
+      </button>
 
-        <!-- Product Scrollable Row -->
-        <div
-          #productScroll
-          class="flex gap-6 overflow-x-auto scroll-smooth pb-4 hide-scrollbar"
-          style="scrollbar-width: none; -ms-overflow-style: none;"
-        >
-          @for (product of limitedProducts; track product) {
-            <div class="min-w-[260px] max-w-xs flex-shrink-0">
-              <app-product-card [product]="product"></app-product-card>
+      <!-- Skeleton Scrollable Row -->
+      <div
+        class="flex gap-6 overflow-x-auto scroll-smooth pb-4 hide-scrollbar"
+        style="scrollbar-width: none; -ms-overflow-style: none;"
+      >
+        @for (i of [1,2,3,4,5,6,7,8]; track i) {
+          <div class="min-w-[260px] max-w-xs flex-shrink-0">
+            <!-- Skeleton Card -->
+            <div class="bg-white flex flex-col h-full overflow-hidden animate-pulse">
+              <!-- Skeleton Image -->
+              <div class="relative overflow-hidden border border-gray-200 bg-gray-200" style="height: 325px;">
+                <div class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 bg-[length:200%_100%] animate-shimmer"></div>
+              </div>
+
+              <!-- Skeleton Content -->
+              <div class="p-3 sm:p-4 flex flex-col flex-grow border-t border-gray-200">
+                <!-- Skeleton Title -->
+                <div class="space-y-2">
+                  <div class="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>
+                  <div class="h-4 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+                </div>
+
+                <!-- Skeleton Bottom Section -->
+                <div class="mt-auto pt-3 flex items-center justify-between gap-2">
+                  <!-- Skeleton Colors -->
+                  <div class="flex space-x-1">
+                    <div class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gray-200 animate-pulse"></div>
+                    <div class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gray-200 animate-pulse"></div>
+                    <div class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gray-200 animate-pulse"></div>
+                  </div>
+                </div>
+              </div>
             </div>
-          }
+          </div>
+        }
+      </div>
+
+      <!-- Right Arrow (disabled during loading) -->
+      <button
+        type="button"
+        disabled
+        class="absolute right-[-39px] top-1/2 -translate-y-1/2 z-10
+              hidden md:flex
+              w-10 h-10
+              bg-gray-100 border border-gray-200
+              shadow-sm
+              items-center justify-center
+              text-gray-400
+              cursor-not-allowed
+              opacity-50"
+        aria-label="Scroll Right"
+      >
+        <i class="fas fa-arrow-right text-sm"></i>
+      </button>
+    </div>
+
+    <ng-template #productContent>
+      <ng-container *ngIf="limitedProducts && limitedProducts.length > 0; else noProducts">
+        <div class="relative group">
+  
+          <!-- Left Arrow -->
+          <button
+            type="button"
+            class="absolute left-[-39px] top-1/2 -translate-y-1/2 z-10
+                  hidden md:flex
+                  w-10 h-10
+                  bg-white border border-gray-200
+                  shadow-sm
+                  items-center justify-center
+                  text-gray-700
+                  hover:bg-black hover:text-white
+                  transition-all duration-300
+                  group-hover:flex
+                  cursor-pointer"
+             (click)="scrollProducts(-1)"
+            aria-label="Scroll Left"
+          >
+            <i class="fas fa-arrow-left text-sm"></i>
+          </button>
+
+          <!-- Product Scrollable Row -->
+          <div
+            #productScroll
+            class="flex gap-6 overflow-x-auto scroll-smooth pb-4 hide-scrollbar"
+            style="scrollbar-width: none; -ms-overflow-style: none;"
+          >
+            @for (product of limitedProducts; track product) {
+              <div class="min-w-[260px] max-w-xs flex-shrink-0">
+                <app-product-card [product]="product"></app-product-card>
+              </div>
+            }
+          </div>
+
+          <!-- Right Arrow -->
+          <button
+            type="button"
+            class="absolute right-[-39px] top-1/2 -translate-y-1/2 z-10
+                  hidden md:flex
+                  w-10 h-10
+                  bg-white border border-gray-200
+                  shadow-sm
+                  items-center justify-center
+                  text-gray-700
+                  hover:bg-black hover:text-white
+                  transition-all duration-300
+                  group-hover:flex
+                  cursor-pointer"
+            (click)="scrollProducts(1)"
+            aria-label="Scroll Right"
+          >
+            <i class="fas fa-arrow-right text-sm"></i>
+          </button>
+
         </div>
 
-        <!-- Right Arrow -->
-        <button
-          type="button"
-          class="absolute right-[-39px] top-1/2 -translate-y-1/2 z-10
-                hidden md:flex
-                w-10 h-10
-                bg-white border border-gray-200
-                shadow-sm
-                items-center justify-center
-                text-gray-700
-                hover:bg-black hover:text-white
-                transition-all duration-300
-                group-hover:flex
-                cursor-pointer"
-          (click)="scrollProducts(1)"
-          aria-label="Scroll Right"
-        >
-          <i class="fas fa-arrow-right text-sm"></i>
-        </button>
-
-      </div>
-
-    </ng-container>
-    <ng-template #noProducts>
-      <div class="flex flex-col items-center justify-center py-20 bg-white rounded-xl shadow-md border border-gray-200">
-        <img src="/no-products.webp" alt="No Products" class="w-32 h-32 mb-4 opacity-80" />
-        <h3 class="text-2xl font-bold text-gray-700 mb-2">No Products Found</h3>
-        <p class="text-gray-500 text-base mb-4">We couldn't find any products matching your search or filters.</p>
-      </div>
+      </ng-container>
+      <ng-template #noProducts>
+        <div class="flex flex-col items-center justify-center py-20 bg-white rounded-xl shadow-md border border-gray-200">
+          <img src="/no-products.webp" alt="No Products" class="w-32 h-32 mb-4 opacity-80" />
+          <h3 class="text-2xl font-bold text-gray-700 mb-2">No Products Found</h3>
+          <p class="text-gray-500 text-base mb-4">We couldn't find any products matching your search or filters.</p>
+        </div>
+      </ng-template>
     </ng-template>
   </div>
 

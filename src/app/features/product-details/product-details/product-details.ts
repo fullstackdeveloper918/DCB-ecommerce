@@ -24,6 +24,7 @@ export class ProductDetails implements OnInit {
   submitError = false;
   submitAttempted = false;
   productImages: string[] = [];
+productSizes: string[] = ['S', 'M', 'L', 'XL', 'XXL', '3XL'];
 
   selectTab(tab: string): void {
     this.activeTab = tab;
@@ -93,6 +94,7 @@ export class ProductDetails implements OnInit {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       quantity: [1, [Validators.required, Validators.min(1)]],
+      size: ['', Validators.required],
       company: [''],
       phone: ['', [Validators.required, Validators.pattern('^\\+?[0-9]{7,15}$')]],
       comments: [''],
@@ -229,6 +231,10 @@ onSubmit(){
           this.submitError = true;
         }
       });
+  }
+
+  getProudctSizes(product:any){
+    return product.sizes.map((sizes:any) => sizes.name)
   }
 
 
