@@ -4,5 +4,6 @@ export const apiRoutes = {
     getCart : 'get-cart',
     getLikedProducts : 'liked-products',
     bulkOrderEmail : 'bulk-order-email',
-    relatedProducts : 'related-products'
+    relatedProducts : 'related-products',
+    allReviews : 'all-product-reviews'
 }   

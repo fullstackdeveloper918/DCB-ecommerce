@@ -15,12 +15,16 @@ export class Review {
 
   ngOnInit(): void {
     this.reviewService.getCustomerReviews().subscribe(data => {
+      console.log('Received reviews:', data);
+      if(data){
       this.reviews = data;
       this.loading = false;
+      }
     });
   }
 
   getStars(count: number): number[] {
+    console.log('Generating stars for count:', count);
     return Array(count).fill(0);
   }
 }

@@ -151,25 +151,28 @@ prevImage() {
     ];
 }
 
-getStarArray(rating: number): string[] {
-  const stars = [];
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 >= 0.5;
-  
+getStarArray(rating: number | string): string[] {
+  const numericRating = Number(rating) || 0;
+
+  const stars: string[] = [];
+  const fullStars = Math.floor(numericRating);
+  const hasHalfStar = numericRating % 1 >= 0.5;
+
   for (let i = 0; i < fullStars; i++) {
     stars.push('full');
   }
-  
+
   if (hasHalfStar) {
     stars.push('half');
   }
-  
+
   while (stars.length < 5) {
     stars.push('empty');
   }
-  
+
   return stars;
 }
+
 
 formatDescription(description: string): string {
   if (!description) return '';
@@ -205,6 +208,7 @@ onSubmit(){
         email: this.bulkForm.value.email,
         phone: this.bulkForm.value.phone,
         company: this.bulkForm.value.company || '',
+        size : this.bulkForm.value.size,
         products: [
           {
             product_name: this.product.name,

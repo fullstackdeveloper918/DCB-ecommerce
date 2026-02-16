@@ -78,21 +78,21 @@ export class AllProducts implements OnInit, OnDestroy {
   }
 
   // sort for custom dropdown
-  selectSort(value: string) {
-    this.sortValue = value;
-    if (value === 'price_asc') {
-      this.sortLabel = 'Price: Low to High';
-    } else if (value === 'price_desc') {
-      this.sortLabel = 'Price: High to Low';
-    } else {
-      this.sortLabel = 'Sort by';
-    }
-    const category = this.getCategoryFromUrl();
-    this.loadProducts(undefined, this.sortValue, category);
-    // Close the dropdown after selection
-    const details = document.querySelector('details.group');
-    if (details && details.hasAttribute('open')) {
-      details.removeAttribute('open');
-    }
-  }
+  // selectSort(value: string) {
+  //   this.sortValue = value;
+  //   if (value === 'price_asc') {
+  //     this.sortLabel = 'Price: Low to High';
+  //   } else if (value === 'price_desc') {
+  //     this.sortLabel = 'Price: High to Low';
+  //   } else {
+  //     this.sortLabel = 'Sort by';
+  //   }
+  //   const category = this.getCategoryFromUrl();
+  //   this.loadProducts(undefined, this.sortValue, category);
+  //   // Close the dropdown after selection
+  //   const details = document.querySelector('details.group');
+  //   if (details && details.hasAttribute('open')) {
+  //     details.removeAttribute('open');
+  //   }
+  // }
 }
