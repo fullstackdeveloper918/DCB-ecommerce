@@ -14,23 +14,23 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ProductDetails implements OnInit {
   productId!: number;
-  products:any
-  isFavorite:any
+  products: any
+  isFavorite: any
   activeTab: string = 'detail';
-  formData:any
+  formData: any
   bulkForm!: FormGroup;
   submitting = false;
   submitSuccess = false;
   submitError = false;
   submitAttempted = false;
   productImages: string[] = [];
-productSizes: string[] = ['S', 'M', 'L', 'XL', 'XXL', '3XL'];
+  productSizes: string[] = ['S', 'M', 'L', 'XL', 'XXL', '3XL'];
 
   selectTab(tab: string): void {
     this.activeTab = tab;
   }
-  
-  product :any = {
+
+  product: any = {
     image: 'https://via.placeholder.com/400',
     name: "Manttu Women's Solid Slim Fit Classic Round Neck Cotton Fabric T-Shirt",
     ratings: 992,
@@ -58,17 +58,16 @@ productSizes: string[] = ['S', 'M', 'L', 'XL', 'XXL', '3XL'];
   selectedColor: string = '';
 
   constructor(
-  private route: ActivatedRoute, 
-  private productService : ProductService, 
-  private userService : UserService,
-  private location: Location,
-  private fb :FormBuilder,
-  private router : Router) 
-  {
-  this.productId = Number(this.route.snapshot.paramMap.get('id'));
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private userService: UserService,
+    private location: Location,
+    private fb: FormBuilder,
+    private router: Router) {
+    this.productId = Number(this.route.snapshot.paramMap.get('id'));
   }
 
-  
+
   selectSize(size: string) {
     this.selectedSize = size;
   }
@@ -94,8 +93,23 @@ productSizes: string[] = ['S', 'M', 'L', 'XL', 'XXL', '3XL'];
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       quantity: [1, [Validators.required, Validators.min(1)]],
+      employeeNo: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\d{3}$/)
+        ]
+      ],
+
+      clientNo: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\d{3}$/)
+        ]
+      ],
       size: ['', Validators.required],
-      company: [''],
+      // company: [''],
       phone: ['', [Validators.required, Validators.pattern('^\\+?[0-9]{7,15}$')]],
       comments: [''],
       // If using reCAPTCHA you may add a control for token:
@@ -105,24 +119,41 @@ productSizes: string[] = ['S', 'M', 'L', 'XL', 'XXL', '3XL'];
   }
 
   // GET PRODUCT BY ID
-  getProductById(productId:number){
-    this.productService.getProductById(productId, this.userService?.user?.userRole).subscribe((res:any)=>{
-      if(res){
-      this.product = res;
-      this.productImages = res.gallery_images || [];
-      this.selectedImage = this.productImages[0];
-      this.getRelatedProducts();
+  getProductById(productId: number) {
+    this.productService.getProductById(productId, this.userService?.user?.userRole).subscribe((res: any) => {
+      if (res) {
+        this.product = res;
+        this.productImages = res.gallery_images || [];
+        this.selectedImage = this.productImages[0];
+        const categoryName = res.categories[0]?.name?.toLowerCase();
+
+        const sizeControl = this.bulkForm.get('size');
+
+        if (
+          categoryName === 'wallets' ||
+          categoryName === 'caps' ||
+          categoryName === 'uncategorized'
+        ) {
+          // remove required validation
+          sizeControl?.clearValidators();
+        } else {
+          // add required validation
+          sizeControl?.setValidators([Validators.required]);
+        }
+
+        sizeControl?.updateValueAndValidity();
+        this.getRelatedProducts();
       }
     })
   }
 
-  getRelatedProducts(){
-     this.productService.getRelatedProducts(this.product.id).subscribe((res:any)=>{
+  getRelatedProducts() {
+    this.productService.getRelatedProducts(this.product.id).subscribe((res: any) => {
       console.log('res', res)
-      if(res){
-      this.products = res.products;
-      console.log('Related Products:', this.products);
-      }     
+      if (res) {
+        this.products = res.products;
+        console.log('Related Products:', this.products);
+      }
     });
   }
 
@@ -132,113 +163,115 @@ productSizes: string[] = ['S', 'M', 'L', 'XL', 'XXL', '3XL'];
   // 'https://images.pexels.com/photos/821749/pexels-photo-821749.jpeg',
   // ];
 
-selectedImage: any = this.productImages[0];
+  selectedImage: any = this.productImages[0];
 
-selectImage(img: any) {
-  this.selectedImage = img;
-}
+  selectImage(img: any) {
+    this.selectedImage = img;
+  }
 
-nextImage() {
-  const index = this.productImages.indexOf(this.selectedImage);
-  this.selectedImage = this.productImages[(index + 1) % this.productImages.length];
-}
+  nextImage() {
+    const index = this.productImages.indexOf(this.selectedImage);
+    this.selectedImage = this.productImages[(index + 1) % this.productImages.length];
+  }
 
-prevImage() {
-  const index = this.productImages.indexOf(this.selectedImage);
-  this.selectedImage =
-    this.productImages[
+  prevImage() {
+    const index = this.productImages.indexOf(this.selectedImage);
+    this.selectedImage =
+      this.productImages[
       (index - 1 + this.productImages.length) % this.productImages.length
-    ];
-}
-
-getStarArray(rating: number | string): string[] {
-  const numericRating = Number(rating) || 0;
-
-  const stars: string[] = [];
-  const fullStars = Math.floor(numericRating);
-  const hasHalfStar = numericRating % 1 >= 0.5;
-
-  for (let i = 0; i < fullStars; i++) {
-    stars.push('full');
+      ];
   }
 
-  if (hasHalfStar) {
-    stars.push('half');
+  getStarArray(rating: number | string): string[] {
+    const numericRating = Number(rating) || 0;
+
+    const stars: string[] = [];
+    const fullStars = Math.floor(numericRating);
+    const hasHalfStar = numericRating % 1 >= 0.5;
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push('full');
+    }
+
+    if (hasHalfStar) {
+      stars.push('half');
+    }
+
+    while (stars.length < 5) {
+      stars.push('empty');
+    }
+
+    return stars;
   }
 
-  while (stars.length < 5) {
-    stars.push('empty');
+
+  formatDescription(description: string): string {
+    if (!description) return '';
+    // Replace \r\n with <br> tags for line breaks
+    return description.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>');
   }
 
-  return stars;
-}
+  goBack() {
+    this.location.back();
+  }
+
+  toggleFavorite() {
+
+  }
 
 
-formatDescription(description: string): string {
-  if (!description) return '';
-  // Replace \r\n with <br> tags for line breaks
-  return description.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>');
-}
-
-goBack(){
-  this.location.back();
-}
-
-toggleFavorite(){
-
-}
-
-
-onSubmit(){
-      this.submitAttempted = true;
-      if (this.bulkForm.invalid) {
-        this.bulkForm.markAllAsTouched();
-        this.bulkForm.updateValueAndValidity();
-        this.submitting = false;
-        this.submitError = false;
-        return;
-      }
-      
-      this.submitting = true;
+  onSubmit() {
+    this.submitAttempted = true;
+    if (this.bulkForm.invalid) {
+      this.bulkForm.markAllAsTouched();
+      this.bulkForm.updateValueAndValidity();
+      this.submitting = false;
       this.submitError = false;
+      return;
+    }
 
-      // Prepare API payload
-      const payload = {
-        name: this.bulkForm.value.name,
-        email: this.bulkForm.value.email,
-        phone: this.bulkForm.value.phone,
-        company: this.bulkForm.value.company || '',
-        size : this.bulkForm.value.size,
-        products: [
-          {
-            product_name: this.product.name,
-            quantity: this.bulkForm.value.quantity
-          }
-        ],
-        message: this.bulkForm.value.comments || ''
-      };
+    this.submitting = true;
+    this.submitError = false;
 
-      // Call API
-      this.productService.submitBulkOrder(payload).subscribe({
-        next: (response:any) => {
-          if(response.success == true){
+    // Prepare API payload
+    const payload = {
+      name: this.bulkForm.value.name,
+      email: this.bulkForm.value.email,
+      phone: this.bulkForm.value.phone,
+      // company: this.bulkForm.value.company || '',
+      employeeNo: this.bulkForm.value.employeeNo,
+      clientNo: this.bulkForm.value.clientNo,
+      size: this.bulkForm.value.size,
+      products: [
+        {
+          product_name: this.product.name,
+          quantity: this.bulkForm.value.quantity
+        }
+      ],
+      message: this.bulkForm.value.comments || ''
+    };
+
+    // Call API
+    this.productService.submitBulkOrder(payload).subscribe({
+      next: (response: any) => {
+        if (response.success == true) {
           this.submitting = false;
           this.submitError = false;
           this.bulkForm.reset();
           this.submitAttempted = false;
           this.router.navigate(['/home/product/' + this.productId + '/thank-you']);
-          }
-        },
-        error: (error) => {
-          console.error('Bulk order submission error:', error);
-          this.submitting = false;
-          this.submitError = true;
         }
-      });
+      },
+      error: (error) => {
+        console.error('Bulk order submission error:', error);
+        this.submitting = false;
+        this.submitError = true;
+      }
+    });
   }
 
-  getProudctSizes(product:any){
-    return product.sizes.map((sizes:any) => sizes.name)
+  getProudctSizes(product: any) {
+    return product.sizes.map((sizes: any) => sizes.name)
   }
 
 

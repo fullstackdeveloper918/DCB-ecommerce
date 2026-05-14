@@ -13,8 +13,7 @@
       <div class="w-full lg:w-1/2 bg-white xl:rounded-md rounded-md border border-gray-300 md:p-4 p-2">
         <!-- Main Image with Arrows -->
         <div class="relative" *ngIf="productImages && productImages.length > 0">
-          <img [src]="selectedImage" [alt]="product.name"
-            class="w-full h-full  md:rounded-xl rounded-md" />
+          <img [src]="selectedImage" [alt]="product.name" class="w-full h-full  md:rounded-xl rounded-md" />
           <!-- Left Arrow -->
           <button (click)="prevImage()"
             class="absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 md:px-2 md:py-1 md:w-10 md:h-10 h-6 w-6 cursor-pointer rounded-full shadow hover:bg-gray-200 border border-transparent border-gray-200 ease-in-out duration-300">
@@ -26,13 +25,14 @@
             <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
-        
+
         <!-- No Main Image Placeholder -->
-        <div *ngIf="!productImages || productImages.length === 0" class="w-full 2xl:h-140 md:h-140 h-80 flex items-center justify-center bg-gray-100 rounded-xl">
+        <div *ngIf="!productImages || productImages.length === 0"
+          class="w-full 2xl:h-140 md:h-140 h-80 flex items-center justify-center bg-gray-100 rounded-xl">
           <div class="text-center space-y-3">
             <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white shadow-sm">
               <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
@@ -40,141 +40,204 @@
           </div>
         </div>
 
-                    <!-- Thumbnails -->
-            <div class="flex space-x-2 md:mt-4 mt-2 overflow-y-auto md:w-20 w-14 h-14 min-w-15 border border-gray-300 rounded-lg p-1">          
-              <ng-container *ngIf="productImages && productImages.length > 0">
-                <img *ngFor="let img of productImages" [src]="img" [alt]="product.name"
-                  class="w-full h-full rounded-lg border-2 cursor-pointer border-transparent"
-                  [ngClass]="{ 'border-black': img === selectedImage }" (click)="selectImage(img)" />
-              </ng-container>
-              
-            </div>
+        <!-- Thumbnails -->
+        <div
+          class="flex space-x-2 md:mt-4 mt-2 overflow-y-auto md:w-20 w-14 h-14 min-w-15 border border-gray-300 rounded-lg p-1">
+          <ng-container *ngIf="productImages && productImages.length > 0">
+            <img *ngFor="let img of productImages" [src]="img" [alt]="product.name"
+              class="w-full h-full rounded-lg border-2 cursor-pointer border-transparent"
+              [ngClass]="{ 'border-black': img === selectedImage }" (click)="selectImage(img)" />
+          </ng-container>
+
+        </div>
       </div>
 
 
-          <!-- Bulk BuyBack Form -->
-    <div class="w-full lg:w-1/2">
-      <h1 class="text-3xl md:text-4xl text-black md:mb-8 mt-4 text-center mt-8 md:mt-14 mb-8">Bulk Order Request</h1>
-      <div class="bg-white rounded-md shadow-md p-6">
-        <!-- <h2 class="text-2xl font-semibold text-center mb-6">Bulk BuyBack Program</h2> -->
+      <!-- Bulk BuyBack Form -->
+      <div class="w-full lg:w-1/2">
+        <h1 class="text-3xl md:text-4xl text-black md:mb-8 mt-4 text-center mt-8 md:mt-14 mb-8">Order Request</h1>
+        <div class="bg-white rounded-md shadow-md p-6">
+          <!-- <h2 class="text-2xl font-semibold text-center mb-6">Bulk BuyBack Program</h2> -->
 
-        <form [formGroup]="bulkForm" (ngSubmit)="onSubmit()" novalidate>
-          <!-- Name / Email -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="text-gray-600 leading-relaxed text-base">Your Name</label>
-              <input formControlName="name" type="text" placeholder="Enter your name"
-                class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300 input-text"style="color:#808080b3" />
-              <div *ngIf="(bulkForm.get('name')?.invalid && (bulkForm.get('name')?.touched || submitAttempted))"
-                class="text-xs text-red-500 mt-1 ">
-                Name is required.
+          <form [formGroup]="bulkForm" (ngSubmit)="onSubmit()" novalidate>
+            <!-- Name / Email -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="text-gray-600 leading-relaxed text-base">Your Name</label>
+                <input formControlName="name" type="text" placeholder="Enter your name"
+                  class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300 input-text"
+                  style="color:#808080b3" />
+                <div *ngIf="(bulkForm.get('name')?.invalid && (bulkForm.get('name')?.touched || submitAttempted))"
+                  class="text-xs text-red-500 mt-1 ">
+                  Name is required.
+                </div>
+              </div>
+
+              <div class="">
+                <label class="text-gray-600 leading-relaxed text-base">Employee No</label>
+                <input formControlName="employeeNo" type="number" maxlength="3" placeholder="Enter employee no"
+                  class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
+                  style="color:#808080b3" />
+                <div
+                  *ngIf="(bulkForm.get('employeeNo')?.invalid && (bulkForm.get('employeeNo')?.touched || submitAttempted))"
+                  class="text-xs text-red-500 mt-1">
+                  <span *ngIf="bulkForm.get('employeeNo')?.errors?.['required']">
+                    Employee No is required.
+                  </span>
+
+                  <span *ngIf="bulkForm.get('employeeNo')?.errors?.['pattern']">
+                    Employee No must be exactly 3 digits.
+                  </span>
+                </div>
+              </div>
+
+              <div class="">
+                <label class="text-gray-600 leading-relaxed text-base">Client No</label>
+                <input formControlName="clientNo" type="number" maxlength="3" placeholder="Enter client no"
+                  class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
+                  style="color:#808080b3" />
+                <div
+                  *ngIf="(bulkForm.get('clientNo')?.invalid && (bulkForm.get('clientNo')?.touched || submitAttempted))"
+                  class="text-xs text-red-500 mt-1">
+                  <span *ngIf="bulkForm.get('clientNo')?.errors?.['required']">
+                    Client No is required.
+                  </span>
+
+                  <span *ngIf="bulkForm.get('clientNo')?.errors?.['pattern']">
+                    Client No must be exactly 3 digits.
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label class="text-gray-600 leading-relaxed text-base">Email</label>
+                <input formControlName="email" type="email" placeholder="Enter your email"
+                  class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-100"
+                  style="color:#808080b3" />
+                <div *ngIf="(bulkForm.get('email')?.invalid && (bulkForm.get('email')?.touched || submitAttempted))"
+                  class="text-xs text-red-500 mt-1">
+                  Enter a valid email.
+                </div>
+              </div>
+              <div>
+                <label class="text-gray-600 leading-relaxed text-base">Phone</label>
+                <input formControlName="phone" type="tel" placeholder="Enter your phone number"
+                  class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
+                  style="color:#808080b3" />
+                <div *ngIf="(bulkForm.get('phone')?.invalid && (bulkForm.get('phone')?.touched || submitAttempted))"
+                  class="text-xs text-red-500 mt-1">
+                  Enter a valid phone number (7-15 digits).
+                </div>
+              </div>
+              <div class="">
+                <label class="text-gray-600 leading-relaxed text-base">Quantity</label>
+                <input formControlName="quantity" type="number" min="1" placeholder="Enter quantity"
+                  class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
+                  style="color:#808080b3" />
+                <div
+                  *ngIf="(bulkForm.get('quantity')?.invalid && (bulkForm.get('quantity')?.touched || submitAttempted))"
+                  class="text-xs text-red-500 mt-1">
+                  Quantity is required and must be at least 1.
+                </div>
               </div>
             </div>
 
-            <div>
-              <label class="text-gray-600 leading-relaxed text-base">Email</label>
-              <input formControlName="email" type="email" placeholder="Enter your email"
-                class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-100"style="color:#808080b3"  />
-              <div *ngIf="(bulkForm.get('email')?.invalid && (bulkForm.get('email')?.touched || submitAttempted))"
+            <!-- Quantity -->
+            <!-- <div class="mt-4">
+              <label class="text-gray-600 leading-relaxed text-base">Quantity</label>
+              <input formControlName="quantity" type="number" min="1" placeholder="Enter quantity"
+                class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
+                style="color:#808080b3" />
+              <div *ngIf="(bulkForm.get('quantity')?.invalid && (bulkForm.get('quantity')?.touched || submitAttempted))"
                 class="text-xs text-red-500 mt-1">
-                Enter a valid email.
+                Quantity is required and must be at least 1.
+              </div>
+            </div> -->
+
+            <!-- Size -->
+            @if(product.categories[0]?.name != "wallets" &&product.categories[0]?.name != "uncategorized" &&
+            product.categories[0]?.name != "caps" ){
+            <div class="mt-4">
+              <label class="text-gray-600 leading-relaxed text-base">Size</label>
+
+              <select formControlName="size" class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent
+                  focus:outline-none focus:ring-2 focus:ring-grey-300" style="color:#808080b3">
+
+                <option value="" disabled selected>Select size</option>
+                <option *ngFor="let size of getProudctSizes(product) || productSizes" [value]="size">
+                  {{ size }}
+                </option>
+              </select>
+
+              <div *ngIf="(bulkForm.get('size')?.invalid && (bulkForm.get('size')?.touched || submitAttempted))"
+                class="text-xs text-red-500 mt-1">
+                Size is required.
               </div>
             </div>
-          </div>
-
-          <!-- Quantity -->
-          <div class="mt-4">
-            <label class="text-gray-600 leading-relaxed text-base">Quantity</label>
-            <input formControlName="quantity" type="number" min="1" placeholder="Enter quantity"
-              class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300" style="color:#808080b3" />
-            <div *ngIf="(bulkForm.get('quantity')?.invalid && (bulkForm.get('quantity')?.touched || submitAttempted))"
-              class="text-xs text-red-500 mt-1">
-              Quantity is required and must be at least 1.
-            </div>
-          </div>
-
-          <!-- Size -->
-        @if(product.categories[0].name != "wallets" || product.categories[0].name != "uncategorized"){
-        <div class="mt-4">
-          <label class="text-gray-600 leading-relaxed text-base">Size</label>
-
-          <select
-            formControlName="size"
-            class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent
-                  focus:outline-none focus:ring-2 focus:ring-grey-300"
-            style="color:#808080b3">
-
-            <option value="" disabled selected>Select size</option>
-            <option *ngFor="let size of getProudctSizes(product) || productSizes" [value]="size">
-              {{ size }}
-            </option>
-          </select>
-
-          <div *ngIf="(bulkForm.get('size')?.invalid && (bulkForm.get('size')?.touched || submitAttempted))"
-              class="text-xs text-red-500 mt-1">
-            Size is required.
-          </div>
-        </div>
-      }
+            }
 
 
-          <!-- Models & Condition -->
-          <!-- <div class="mt-4">
+            <!-- Models & Condition -->
+            <!-- <div class="mt-4">
           <label class="text-sm font-medium text-gray-700">Models & Condition</label>
           <textarea formControlName="models" rows="3" placeholder="Describe the models and condition of your Macs"
                     class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300"></textarea>
         </div> -->
 
-          <!-- Company / Phone -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <div>
-              <label class="text-gray-600 leading-relaxed text-base">Company</label>
-              <input formControlName="company" type="text" placeholder="Enter your company name (optional)"
-                class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"style="color:#808080b3"  />
-              <div *ngIf="(bulkForm.get('company')?.invalid && (bulkForm.get('company')?.touched || submitAttempted))"
+            <!-- Company / Phone -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <!-- <div>
+                <label class="text-gray-600 leading-relaxed text-base">Company</label>
+                <input formControlName="company" type="text" placeholder="Enter your company name (optional)"
+                  class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
+                  style="color:#808080b3" />
+                <div *ngIf="(bulkForm.get('company')?.invalid && (bulkForm.get('company')?.touched || submitAttempted))"
+                  class="text-xs text-red-500 mt-1">
+                  Company is required.
+                </div>
+              </div> -->
+              <!-- <div>
+                <label class="text-gray-600 leading-relaxed text-base">Phone</label>
+                <input formControlName="phone" type="tel" placeholder="Enter your phone number"
+                  class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
+                  style="color:#808080b3" />
+                <div *ngIf="(bulkForm.get('phone')?.invalid && (bulkForm.get('phone')?.touched || submitAttempted))"
+                  class="text-xs text-red-500 mt-1">
+                  Enter a valid phone number (7-15 digits).
+                </div>
+              </div> -->
+            </div>
+
+            <!-- Comments -->
+            <div class="mt-4">
+              <label class="text-gray-600 leading-relaxed text-base">Comments</label>
+              <textarea formControlName="comments" rows="3" placeholder="Enter any additional comments"
+                class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
+                style="color:#808080b3"></textarea>
+              <div *ngIf="(bulkForm.get('comments')?.invalid && (bulkForm.get('comments')?.touched || submitAttempted))"
                 class="text-xs text-red-500 mt-1">
-                Company is required.
+                Comments are required.
               </div>
             </div>
-            <div>
-              <label class="text-gray-600 leading-relaxed text-base">Phone</label>
-              <input formControlName="phone" type="tel" placeholder="Enter your phone number"
-                class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300" style="color:#808080b3"  />
-              <div *ngIf="(bulkForm.get('phone')?.invalid && (bulkForm.get('phone')?.touched || submitAttempted))"
-                class="text-xs text-red-500 mt-1">
-                Enter a valid phone number (7-15 digits).
-              </div>
+
+            <!-- Submit -->
+            <div class="mt-6">
+              <button type="submit"
+                class="w-full bg-[#000] text-white font-medium py-3 rounded-lg shadow disabled:opacity-60 cursor-pointer">
+                <span *ngIf="!submitting">Send Now</span>
+                <span *ngIf="submitting">Sending...</span>
+              </button>
             </div>
-          </div>
 
-          <!-- Comments -->
-          <div class="mt-4">
-            <label class="text-gray-600 leading-relaxed text-base">Comments</label>
-            <textarea formControlName="comments" rows="3" placeholder="Enter any additional comments"
-              class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300" style="color:#808080b3" ></textarea>
-            <div *ngIf="(bulkForm.get('comments')?.invalid && (bulkForm.get('comments')?.touched || submitAttempted))"
-              class="text-xs text-red-500 mt-1">
-              Comments are required.
+            <!-- error -->
+            <div *ngIf="submitError" class="mt-4 text-center text-sm text-red-600">Something went wrong. Try again
+              later.
             </div>
-          </div>
-
-          <!-- Submit -->
-          <div class="mt-6">
-            <button type="submit"
-              class="w-full bg-[#000] text-white font-medium py-3 rounded-lg shadow disabled:opacity-60 cursor-pointer">
-              <span *ngIf="!submitting">Send Now</span>
-              <span *ngIf="submitting">Sending...</span>
-            </button>
-          </div>
-
-          <!-- error -->
-          <div *ngIf="submitError" class="mt-4 text-center text-sm text-red-600">Something went wrong. Try again later.
-          </div>
-        </form>
+          </form>
 
 
+        </div>
       </div>
-    </div>
     </div>
 
 
@@ -286,7 +349,7 @@
       remaining essentially unchanged.
     </p>
   </div> -->
-<!-- 
+    <!-- 
     <div *ngIf="activeTab === 'reviews'" class="p-6 bg-white rounded-md shadow-md text-gray-800">
      <div class="mb-6">
       <div class="flex items-center space-x-4">
@@ -337,45 +400,39 @@
   </div> -->
 
 
-   <div class="w-full mt-6 mb-2">
-        <h1 class="text-sm sm:text-base md:text-lg leading-snug line-clamp-2">{{ product.name }}</h1>
-         <div class="flex gap-1 mb-[6px]">
-        <svg
-          *ngFor="let star of [1,2,3,4,5]; let i = index"
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+    <div class="w-full mt-6 mb-2">
+      <h1 class="text-sm sm:text-base md:text-lg leading-snug line-clamp-2">{{ product.name }}</h1>
+      <!-- <div class="flex gap-1 mb-[6px]">
+        <svg *ngFor="let star of [1,2,3,4,5]; let i = index" width="16" height="16" viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M8 1.5L10.09 5.76L14.78 6.45L11.39 9.75L12.18 14.42L8 12.2L3.82 14.42L4.61 9.75L1.22 6.45L5.91 5.76L8 1.5Z"
-            [attr.fill]="i < product.average_rating ? '#FFD700' : '#E5E7EB'"
-          />
+            [attr.fill]="i < product.average_rating ? '#FFD700' : '#E5E7EB'" />
         </svg>
-      </div>
+      </div> -->
 
-        <!-- <div class="mt-4 flex justify-start items-center gap-2">
+      <!-- <div class="mt-4 flex justify-start items-center gap-2">
           <span class="text-2xl font-bold text-[#313b58]">${{ product.sale_price }} <span
               class="text-gray-400 line-through ml-1 font-medium text-lg">${{ product.regular_price }}</span></span>
         </div> -->
-        
-        <!-- <div class="my-4 text-lg font-bold text-[#313b58]">SKU#: <span class="text-[#FB2C36]">{{ product.sku }}</span>
+
+      <!-- <div class="my-4 text-lg font-bold text-[#313b58]">SKU#: <span class="text-[#FB2C36]">{{ product.sku }}</span>
         </div> -->
-        <div class="text-gray-800">
-          <div class="text-gray-600 leading-relaxed text-base" [innerHTML]="formatDescription(product.description)"></div>
-        </div>
+      <!-- <div class="text-gray-800">
+        <div class="text-gray-600 leading-relaxed text-base" [innerHTML]="formatDescription(product.description)"></div>
+      </div> -->
 
 
-        <!-- <div class="mt-2 text-blue-600">IN STOCK</div> -->
-        <!-- <div class="mt-4 bg-white rounded-lg shadow p-4 text-sm flex justify-between flex-col gap-3">
+      <!-- <div class="mt-2 text-blue-600">IN STOCK</div> -->
+      <!-- <div class="mt-4 bg-white rounded-lg shadow p-4 text-sm flex justify-between flex-col gap-3">
           <span class="text-[#212529] font-medium">Real time <span class="bg-[#ffdb56] rounded text-sm p-1 font-semibold">{{ product.visitors }}</span> visitor right now!</span>
           <div class="flex justify-between  md:gap-2 items-center flex-wrap gap-0">
             <span class="text-[#313850] text-xl font-semibold">{{ product.timeRemaining }}</span>
             <span class="text-red-600 text-sm font-light">Time is Running Out!</span>
           </div>
         </div> -->
-        <!-- <p class="mt-4 text-gray-600">{{ product.description }}</p> -->
-        <!-- <div class="mt-6">
+      <!-- <p class="mt-4 text-gray-600">{{ product.description }}</p> -->
+      <!-- <div class="mt-6">
           <h3 class="font-semibold">SIZE</h3>
           <div class="flex space-x-2 mt-2">
             @for (size of product.sizes; track size) {
@@ -393,7 +450,7 @@
             }
           </div>
         </div> -->
-        <!-- <div class="mt-6 flex space-x-2 flex-wrap md:flex-nowrap gap-y-3 md:gap-y-0">
+      <!-- <div class="mt-6 flex space-x-2 flex-wrap md:flex-nowrap gap-y-3 md:gap-y-0">
           <button class="bg-white rounded-lg shadow text-gray-700 px-4 py-2 rounded flex items-center max-w-[120px] w-full justify-between gap-1">
             <i class="fas fa-minus mr-2 cursor-pointer"></i> 1 <i class="fas fa-plus ml-2 cursor-pointer"></i>
           </button>
@@ -407,14 +464,14 @@
             <i class="fas fa-sync-alt"></i>
           </button>
         </div> -->
-      </div>
+    </div>
 
     <!-- Related Products Section -->
     <div class="mt-8 lg:mt-15">
       <h2 class=" text-center text-3xl md:text-4xl text-black tracking-tight">Related Products</h2>
       <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 ">
         @for (product of products; track product) {
-        <app-product-card class="overflow-hidden" [product]="product" ></app-product-card>
+        <app-product-card class="overflow-hidden" [product]="product"></app-product-card>
         }
       </div>
     </div>
