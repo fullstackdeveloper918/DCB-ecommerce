@@ -1,30 +1,24 @@
-<div
-  class="bg-white
+<div class="bg-white
           transition
          flex flex-col relative
          single-product h-full
          overflow-hidden
-         cursor-pointer" [routerLink]="['/product', product.id]"
->
+         cursor-pointer" [routerLink]="['/product', product?.id]">
   <!-- Image -->
   <div class="relative overflow-hidden border border-[#f3f4f6] " style="height: 325px;">
-    <img
-      [src]="product.image"
-      [alt]="product.name"
-      class="w-full h-full  transition-transform duration-500 hover:scale-110"
-    />
+    <img [src]="product?.image || ''" [alt]="product?.name"
+      class="w-full h-full  transition-transform duration-500 hover:scale-110" />
+
   </div>
 
   <!-- Content -->
   <div class="productContent p-3 sm:p-4 flex flex-col flex-grow border-t border-[#8080804a]">
 
     <!-- Product Name -->
-    <h3
-      class="text-sm sm:text-base md:text-lg
+    <h3 class="text-sm sm:text-base md:text-lg
              leading-snug
-             line-clamp-2"
-    >
-      {{ product.name }}
+             line-clamp-2">
+      {{ product?.name }}
     </h3>
 
     <!-- Price -->
@@ -37,12 +31,9 @@
 
       <!-- Colors -->
       <div class="flex space-x-1">
-        @for (color of product.colors; track color) {
-          <span
-            class="w-3.5 h-3.5 sm:w-4 sm:h-4
-                   rounded-full border border-gray-300"
-            [style.backgroundColor]="color"
-          ></span>
+        @for (color of product?.colors; track color) {
+        <span class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full border border-gray-300"
+          [style.backgroundColor]="color"></span>
         }
       </div>
 

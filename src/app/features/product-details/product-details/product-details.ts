@@ -132,7 +132,7 @@ export class ProductDetails implements OnInit {
         if (
           categoryName === 'wallets' ||
           categoryName === 'caps' ||
-          categoryName === 'uncategorized'
+          categoryName === 'uncategorized' || categoryName === 'Uncategorized'
         ) {
           // remove required validation
           sizeControl?.clearValidators();
@@ -274,5 +274,32 @@ export class ProductDetails implements OnInit {
     return product.sizes.map((sizes: any) => sizes.name)
   }
 
+
+  sizeOrder = [
+    'XS',
+    'S',
+    'M',
+    'L',
+    'XL',
+    'XXL',
+    '2XL',
+    '3XL',
+    '4XL',
+    '5XL',
+    '6XL',
+    '7XL',
+    '8XL'
+  ];
+
+  getSortedSizes(sizes: string[]): string[] {
+
+    if (!sizes) return [];
+
+    return [...sizes].sort(
+      (a, b) =>
+        this.sizeOrder.indexOf(a.toUpperCase()) -
+        this.sizeOrder.indexOf(b.toUpperCase())
+    );
+  }
 
 }

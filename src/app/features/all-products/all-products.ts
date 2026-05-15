@@ -24,7 +24,7 @@ export class AllProducts implements OnInit, OnDestroy {
   constructor(
     private productService: ProductService,
     private userService: UserService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.subscription.add(
@@ -49,8 +49,9 @@ export class AllProducts implements OnInit, OnDestroy {
       this.productService
         .getProducts(this.userService.user?.userRole, searchedText, sort, category)
         .subscribe({
-          next: (res: Product[]) => {
-            this.products = res || [];
+          next: (res: any) => {
+
+            this.products = res?.products || [];
             this.filteredProducts = this.products;
             this.loading = false;
             console.log('All products:', this.products);

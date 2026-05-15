@@ -155,8 +155,9 @@
             </div> -->
 
             <!-- Size -->
-            @if(product.categories[0]?.name != "wallets" &&product.categories[0]?.name != "uncategorized" &&
-            product.categories[0]?.name != "caps" ){
+            @if(product?.categories[0]?.name != "wallets" && product?.categories[0]?.name != "uncategorized" &&
+            product?.categories[0]?.name != "Uncategorized" &&
+            product?.categories[0]?.name != "caps" ){
             <div class="mt-4">
               <label class="text-gray-600 leading-relaxed text-base">Size</label>
 
@@ -164,9 +165,13 @@
                   focus:outline-none focus:ring-2 focus:ring-grey-300" style="color:#808080b3">
 
                 <option value="" disabled selected>Select size</option>
-                <option *ngFor="let size of getProudctSizes(product) || productSizes" [value]="size">
+                <!-- <option *ngFor="let size of getProudctSizes(product) || productSizes" [value]="size">
+                  {{ size }}
+                </option> -->
+                <option *ngFor="let size of getSortedSizes(getProudctSizes(product) || productSizes)" [value]="size">
                   {{ size }}
                 </option>
+
               </select>
 
               <div *ngIf="(bulkForm.get('size')?.invalid && (bulkForm.get('size')?.touched || submitAttempted))"

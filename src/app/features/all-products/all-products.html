@@ -3,11 +3,12 @@
 
 </div>
 <div class="py-6 px-4 max-w-[1300px] mx-auto">
-<div class="">
+  <div class="">
     <!-- Search and Filters -->
     <div class="flex flex-col md:flex-row justify-between items-center gap-4 w-full ">
       <!-- Search Input -->
-      <div class="flex items-center w-full md:w-auto border border-[#8080804a] bg-white rounded-[20px] focus:outline-none">
+      <div
+        class="flex items-center w-full md:w-auto border border-[#8080804a] bg-white rounded-[20px] focus:outline-none">
         <button class=" p-2 pl-[15px]">
           <i class="fas fa-search text-gray-600"></i>
         </button>
@@ -49,15 +50,41 @@
   </div>
 
   <div class="mt-[20px]">
-    <ng-container *ngIf="loading">
+    <!-- <ng-container *ngIf="loading">
       <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <app-product-card *ngFor="let skeleton of [1,2,3,4,5,6,7,8]"></app-product-card>
+      </div>
+    </ng-container> -->
+    <ng-container *ngIf="loading">
+      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
+        <div *ngFor="let item of [1,2,3,4,5,6,7,8]" class="bg-white rounded-xl shadow-sm overflow-hidden animate-pulse">
+
+          <!-- Image Skeleton -->
+          <div class="w-full h-64 bg-gray-200"></div>
+
+          <!-- Content -->
+          <div class="p-4 space-y-3">
+
+            <!-- Title -->
+            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+
+            <!-- Price -->
+            <!-- <div class="h-4 bg-gray-200 rounded w-1/2"></div> -->
+
+            <!-- Button -->
+            <!-- <div class="h-10 bg-gray-200 rounded w-full mt-4"></div> -->
+
+          </div>
+
+        </div>
+
       </div>
     </ng-container>
     <ng-container *ngIf="!loading && filteredProducts && filteredProducts.length > 0; else noProducts">
       <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         @for (product of filteredProducts; track product) {
-          <app-product-card [product]="product" class="overflow-hidden"></app-product-card>
+        <app-product-card [product]="product" class="overflow-hidden"></app-product-card>
         }
       </div>
     </ng-container>
