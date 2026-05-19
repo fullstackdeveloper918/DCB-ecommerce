@@ -78,19 +78,20 @@
               </div>
 
               <div class="">
-                <label class="text-gray-600 leading-relaxed text-base">Employee No/Clinet No</label>
-                <input formControlName="employeeNo" type="number" maxlength="3" placeholder="Enter Employee/Client No"
+                <label class="text-gray-600 leading-relaxed text-base">Employee No/Client No</label>
+                <input formControlName="employeeNo" type="number" maxlength="3"
+                  placeholder="Enter Employee No/Client No"
                   class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
                   style="color:#808080b3" />
                 <div
                   *ngIf="(bulkForm.get('employeeNo')?.invalid && (bulkForm.get('employeeNo')?.touched || submitAttempted))"
                   class="text-xs text-red-500 mt-1">
                   <span *ngIf="bulkForm.get('employeeNo')?.errors?.['required']">
-                    Employee No is required.
+                    Employee No/Client No is required.
                   </span>
 
                   <span *ngIf="bulkForm.get('employeeNo')?.errors?.['pattern']">
-                    Employee No must be exactly 3 digits.
+                    Employee No/Client No must be exactly 3 digits.
                   </span>
                 </div>
               </div>
