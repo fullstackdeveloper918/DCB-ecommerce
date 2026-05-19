@@ -39,7 +39,7 @@ Australia`,
         title: "LET’S GET IN TOUCH"
       },
       copyright:
-        'DCB David Campbell Building Pty Ltd. © 2024'
+        `DCB David Campbell Building Pty Ltd. © ${new Date().getFullYear()}`
     }).pipe(delay(600)); // simulate API
   }
 }

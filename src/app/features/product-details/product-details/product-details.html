@@ -15,15 +15,19 @@
         <div class="relative" *ngIf="productImages && productImages.length > 0">
           <img [src]="selectedImage" [alt]="product.name" class="w-full h-full  md:rounded-xl rounded-md" />
           <!-- Left Arrow -->
+          @if(productImages.length > 1){
           <button (click)="prevImage()"
             class="absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 md:px-2 md:py-1 md:w-10 md:h-10 h-6 w-6 cursor-pointer rounded-full shadow hover:bg-gray-200 border border-transparent border-gray-200 ease-in-out duration-300">
             <i class="fa-solid fa-arrow-left"></i>
           </button>
+          }
           <!-- Right Arrow -->
+          @if(productImages.length > 1){
           <button (click)="nextImage()"
             class="absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 md:px-2 md:py-1 md:w-10 md:h-10 h-6 w-6 cursor-pointer rounded-full shadow hover:bg-gray-200 border border-gray-200 ease-in-out duration-300">
             <i class="fa-solid fa-arrow-right"></i>
           </button>
+          }
         </div>
 
         <!-- No Main Image Placeholder -->
@@ -74,8 +78,8 @@
               </div>
 
               <div class="">
-                <label class="text-gray-600 leading-relaxed text-base">Employee No</label>
-                <input formControlName="employeeNo" type="number" maxlength="3" placeholder="Enter employee no"
+                <label class="text-gray-600 leading-relaxed text-base">Employee No/Clinet No</label>
+                <input formControlName="employeeNo" type="number" maxlength="3" placeholder="Enter Employee/Client No"
                   class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
                   style="color:#808080b3" />
                 <div
@@ -91,7 +95,7 @@
                 </div>
               </div>
 
-              <div class="">
+              <!-- <div class="">
                 <label class="text-gray-600 leading-relaxed text-base">Client No</label>
                 <input formControlName="clientNo" type="number" maxlength="3" placeholder="Enter client no"
                   class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
@@ -107,7 +111,7 @@
                     Client No must be exactly 3 digits.
                   </span>
                 </div>
-              </div>
+              </div> -->
 
               <div>
                 <label class="text-gray-600 leading-relaxed text-base">Email</label>
@@ -129,7 +133,7 @@
                   Enter a valid phone number (7-15 digits).
                 </div>
               </div>
-              <div class="">
+              <div class="col-span-2">
                 <label class="text-gray-600 leading-relaxed text-base">Quantity</label>
                 <input formControlName="quantity" type="number" min="1" placeholder="Enter quantity"
                   class="w-full mt-1 p-3 bg-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-grey-300"
@@ -472,13 +476,13 @@
     </div>
 
     <!-- Related Products Section -->
-    <div class="mt-8 lg:mt-15">
+    <!-- <div class="mt-8 lg:mt-15">
       <h2 class=" text-center text-3xl md:text-4xl text-black tracking-tight">Related Products</h2>
       <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 ">
         @for (product of products; track product) {
         <app-product-card class="overflow-hidden" [product]="product"></app-product-card>
         }
       </div>
-    </div>
+    </div> -->
   </div>
 </section>

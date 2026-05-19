@@ -101,13 +101,13 @@ export class ProductDetails implements OnInit {
         ]
       ],
 
-      clientNo: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^\d{3}$/)
-        ]
-      ],
+      // clientNo: [
+      //   '',
+      //   [
+      //     Validators.required,
+      //     Validators.pattern(/^\d{3}$/)
+      //   ]
+      // ],
       size: ['', Validators.required],
       // company: [''],
       phone: ['', [Validators.required, Validators.pattern('^\\+?[0-9]{7,15}$')]],
@@ -240,7 +240,7 @@ export class ProductDetails implements OnInit {
       phone: this.bulkForm.value.phone,
       // company: this.bulkForm.value.company || '',
       employeeNo: this.bulkForm.value.employeeNo,
-      clientNo: this.bulkForm.value.clientNo,
+      // clientNo: this.bulkForm.value.clientNo,
       size: this.bulkForm.value.size,
       products: [
         {
