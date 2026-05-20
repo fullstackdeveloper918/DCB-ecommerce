@@ -43,14 +43,14 @@
 
     <!-- NEWSLETTER -->
     <div class="max-w-md ml-auto w-full">
-      <h3 class="text-white text-lg font-semibold mb-6 tracking-wide">
-        {{ footerData.newsletter.title }}
-      </h3>
+      <!-- <h3 class="text-white text-lg font-semibold mb-6 tracking-wide">
+        {{ footerData.newsletter.title }} 
+      </h3> -->
 
       <!-- Subscription Form -->
       <form [formGroup]="newsletterForm" (ngSubmit)="onSubmit()" class="space-y-4">
         <!-- Email Input -->
-        <div class="relative">
+        <!-- <div class="relative">
           <input type="email" formControlName="email" placeholder="Enter your email address..."
             class="w-full bg-white text-black text-sm px-4 py-3 pr-12 outline-none"
             [class.border-red-500]="newsletterForm.get('email')?.invalid && newsletterForm.get('email')?.touched" />
@@ -62,7 +62,7 @@
             <i *ngIf="!isLoading" class="fas fa-arrow-right"></i>
             <i *ngIf="isLoading" class="fas fa-circle-notch fa-spin"></i>
           </button>
-        </div>
+        </div> -->
 
         <!-- Validation Messages -->
         <div *ngIf="newsletterForm.get('email')?.touched && newsletterForm.get('email')?.errors"
