@@ -160,7 +160,8 @@
             </div> -->
 
             <!-- Size -->
-            @if(product?.categories[0]?.name != "wallets" && product?.categories[0]?.name != "uncategorized" &&
+            @if(product?.categories?.length && product?.categories[0]?.name != "wallets" && product?.categories[0]?.name
+            != "uncategorized" &&
             product?.categories[0]?.name != "Uncategorized" &&
             product?.categories[0]?.name != "caps" ){
             <div class="mt-4">
